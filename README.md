@@ -42,14 +42,14 @@
         <img style= "width: 115px; height: 115px; display: flex; align-items: center; justify-content: center;" src="https://i.imgur.com/IkLCEzz.jpeg">
         </a>
         <br/>
-        Lunna de Aguiar
+        Lunna de A.
       </td> 
     <td align="center">
       <a href="https://github.com/matheuspinheirol">
         <img style= "width: 115px; height: 115px; display: flex; align-items: center; justify-content: center;" src="https://i.imgur.com/IkLCEzz.jpeg">
         </a>
         <br/>
-        Matheus Pinheiro
+        Matheus P.
       </td>
     <td align="center"><a href="https://github.com/algaerithm">
       <img style= "width: 115px; height: 115px; display: flex; align-items: center; justify-content: center;" src="https://i.imgur.com/IkLCEzz.jpeg">
