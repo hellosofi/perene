@@ -86,17 +86,29 @@ A plataforma ajuda a eliminar divergências de dados e reduzir a perda de produt
 #### 2.5.4 Pontos fracos 
 &emsp;&emsp;Soluções baseadas unicamente em relatórios não resolvem o gargalo da coleta primária de dados estruturados diretamente da operação física dos supermercados.
 
+### 2.6 Produto F: Ororo
 
+#### 2.6.1 Visão geral
+&emsp;&emsp;É uma empresa brasileira que funciona no modelo B2B, desenvolvendo softwares para para outras empresas, dos mais variados ramos, com o objetivo de centralizar, organizar e acompanhar informações relacionadas a ESG, sustentabilidade e gestão.
+
+#### 2.6.2 Funcionamento
+&emsp;&emsp;A empresa cadastra suas informações na plataforma, e a Ororo organiza, relaciona e acompanha as metas e atualizações, gerando relatorios sobre sustentabilidade e ESG. 
+
+#### 2.6.3 Pontos fortes
+&emsp;&emsp;Centraliza , organiza e automatiza o controle de dados ESG, deixando mais fácil a leitura e compreensão dos relatórios.
+
+#### 2.6.4 Pontos fracos 
+&emsp;&emsp;Não é possivel saber o preço previamente, sendo necessário negociar diretamente com a empresa para saber e depende totalmente das informações disponibilizadas pelo cliente.
 
 ## 3. Benchmark
 
-| Funcionalidade / Característica | TOTVS | EloVerde | Infineat | Enablon | QuikESG | **Nosso Projeto** |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Foco em PMEs (Baixo Custo/Acessibilidade)** | Não | Média | Sim | Não | Média | **Sim** |
-| **Gestão e Combate ao Desperdício (Validade)** | Sim | Não | Sim | Não | Não | **Sim** |
-| **Integração/Automação de Relatórios ESG** | Não | Sim | Não | Sim | Sim | **Sim** |
-| **Baixa Complexidade/Carga Cognitiva (UX)** | Não | Não | Sim | Não | Média | **Sim** |
-| **Foco em Conexão Social (Ex: ONGs)** | Não | Não | Sim | Não | Não | **Sim (Potencial)** |
+| Funcionalidade / Característica | TOTVS | EloVerde | Infineat | Enablon | QuikESG | Ororo | **Nosso Projeto** |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Foco em PMEs (Baixo Custo/Acessibilidade)** | Não | Média | Sim | Não | Média | Não |**Sim** |
+| **Gestão e Combate ao Desperdício (Validade)** | Sim | Não | Sim | Não | Não | Sim | **Sim** |
+| **Integração/Automação de Relatórios ESG** | Não | Sim | Não | Sim | Sim | Sim | **Sim** |
+| **Baixa Complexidade/Carga Cognitiva (UX)** | Não | Não | Sim | Não | Média | Média | **Sim** |
+| **Foco em Conexão Social (Ex: ONGs)** | Não | Não | Sim | Não | Não | Não | **Sim (Potencial)** |
 
 ## 4. Requisitos obtidos
 
