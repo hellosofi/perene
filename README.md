@@ -1,5 +1,4 @@
-<!-- # $${\color{darkseagreen}Perene}$$ -->
-## Perene
+# $${\color{darkseagreen}Perene}$$
 ##### Soluções ESG para pequenas e médias empresas 
 ###### Fundamentos de Desenvolvimento de Software
 
