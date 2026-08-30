@@ -10,7 +10,7 @@
 
 ## ⭐ Entrega 01
 
-![Nosso quadro - Jira](entregas\entrega-01\media\backlog.png)
+![Nosso quadro - Jira](https://github.com/hellosofi/perene/blob/71fd324143486688519e1614335a83528809c977/entregas/entrega-01/media/backlog.png)
 <!-- ![alt text](https://github.com/hellosofi/perene/blob/main/entregas/entrega-01/image.jpg?raw=true) -->
 
 
