@@ -1,4 +1,5 @@
-# $${\color{darkseagreen}Perene}$$
+<!-- # $${\color{darkseagreen}Perene}$$ -->
+## Perene
 ##### Soluções ESG para pequenas e médias empresas 
 ###### Fundamentos de Desenvolvimento de Software
 
@@ -7,13 +8,10 @@
 
 <div align="center"><a href="https://grupo-perene.atlassian.net"><img src="https://img.shields.io/badge/Jira-0052CC?style=for-the-badge&logo=Jira&logoColor=white"/></a></div>
 
-## ☘︎ Entrega 01
+## ⭐ Entrega 01
 
-![foto provisória](https://external-content.duckduckgo.com/iu/?u=https://tse1.mm.bing.net/th/id/OIP.V8YqHho4NXzm5hLHdai7MQHaFj%253Fpid=Api&f=1&ipt=f54b29d22e06a7b57ded7c2baaa30de5c6168bf664a6f8a3689d94b991d1ada2)
+![Nosso quadro - Jira](entregas\entrega-01\media\backlog.png)
 <!-- ![alt text](https://github.com/hellosofi/perene/blob/main/entregas/entrega-01/image.jpg?raw=true) -->
-
-    em processo...
-
 
 
 <br/>
