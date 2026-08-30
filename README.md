@@ -64,7 +64,7 @@
 
 | Nome Completo | E-mail da School |
 | :--- | :--- |
-| João Gustavo  | [inserir e-mail] |
+| João Gustavo Vieira Fernandes Pedrosa |jgvfp@cesar.school |
 | Kauã Cardoso de Melo | kcm2@cesar.school |
 | Lunna de Aguiar Mendonça Morelato Moreno | lammm@cesar.school |
 | Matheus Pinheiro Laurentino | mpl2@cesar.school |
