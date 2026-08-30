@@ -59,3 +59,14 @@
       <br/>
       Sofia Carolina
     </td>
+  </tr>
+</table>
+
+| Nome Completo | E-mail da School |
+| :--- | :--- |
+| João Gustavo  | [inserir e-mail] |
+| Kauã Cardoso de Melo | kcm2@cesar.school |
+| Lunna de Aguiar Mendonça Morelato Moreno | lammm@cesar.school |
+| Matheus Pinheiro Laurentino | mpl2@cesar.school |
+| Nara de Melo Santos | nms2@cesar.school |
+| Sofia Carolina Santos Bezerra | scsb@cesar.school |
