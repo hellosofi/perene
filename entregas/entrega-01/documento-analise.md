@@ -100,15 +100,30 @@ A plataforma ajuda a eliminar divergências de dados e reduzir a perda de produt
 #### 2.6.4 Pontos fracos 
 &emsp;&emsp;Não é possivel saber o preço previamente, sendo necessário negociar diretamente com a empresa para saber e depende totalmente das informações disponibilizadas pelo cliente.
 
+### 2.7 Produto G: Pulsora
+
+#### 2.7.1 Visão geral
+&emsp;&emsp;A Pulsora densenvolve um software B2B, que substitui processos manuais fragmentados por um ecossistema digital que realiza contabilidade de carbono, consolida métricas não financeiras e gera relatórios de conformidade.
+
+#### 2.7.2 Funcionamento
+&emsp;&emsp;O software atua como o sistema nervoso central do ESG da empresa e opera em quatro etapas, na coleta integrada e automatizada de dados, se conectando a sistemas de coleta já existentes, no tratamento e validação desses dados utilizando IA, na trilha de auditoria contínua por meio de um change log e facilitando a visualização desses dados, por meio de gráficos e relatórios gerados automaticamente.
+
+#### 2.7.3 Pontos fortes
+&emsp;&emsp; Adaptação constante a novas leis climáticas, centralização e tratamento de dados, além de uma facilitar a vizualição desses, e transparência na proveniência desses.
+
+#### 2.7.4 Pontos fracos
+&emsp;&emsp; O preço é muito caro para as PMEs brasileiras, sendo esse entre US$ 15k a US$ 40k, podendo ultrapassar US$ 250k anualmente, dependência da qualidade do dado base, depende muito da qualidade da tecnologia usada para conseguir o dado por mais que a IA consiga identificar anomalias e complexidade de implementação.
+
+
 ## 3. Benchmark
 
-| Funcionalidade / Característica | TOTVS | EloVerde | Infineat | Enablon | QuikESG | Ororo | **Nosso Projeto** |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Foco em PMEs (Baixo Custo/Acessibilidade)** | Não | Média | Sim | Não | Média | Não |**Sim** |
-| **Gestão e Combate ao Desperdício (Validade)** | Sim | Não | Sim | Não | Não | Sim | **Sim** |
-| **Integração/Automação de Relatórios ESG** | Não | Sim | Não | Sim | Sim | Sim | **Sim** |
-| **Baixa Complexidade/Carga Cognitiva (UX)** | Não | Não | Sim | Não | Média | Média | **Sim** |
-| **Foco em Conexão Social (Ex: ONGs)** | Não | Não | Sim | Não | Não | Não | **Sim (Potencial)** |
+| Funcionalidade / Característica | TOTVS | EloVerde | Infineat | Enablon | QuikESG | Ororo | Pulsora | **Nosso Projeto** |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Foco em PMEs (Baixo Custo/Acessibilidade)** | Não | Média | Sim | Não | Média | Não | Não | **Sim** |
+| **Gestão e Combate ao Desperdício (Validade)** | Sim | Não | Sim | Não | Não | Sim | Não | **Sim** |
+| **Integração/Automação de Relatórios ESG** | Não | Sim | Não | Sim | Sim | Sim | Sim | **Sim** |
+| **Baixa Complexidade/Carga Cognitiva (UX)** | Não | Não | Sim | Não | Média | Média | Não | **Sim** |
+| **Foco em Conexão Social (Ex: ONGs)** | Não | Não | Sim | Não | Não | Não | Não | **Sim (Potencial)** |
 
 ## 4. Requisitos obtidos
 
