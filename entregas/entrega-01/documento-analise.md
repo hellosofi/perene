@@ -1,6 +1,6 @@
 ## 1. Introdução
 
-&emsp;&emsp;O propósito deste documento é realizar um levantamento mercadológico e de tecnologias similares para identificar oportunidades de inovação e evitar "reinventar a roda" no setor varejista. O escopo abrange a análise de soluções que lidam com a adoção de práticas ESG (Ambiental, Social e Governança). O projeto sendo desenvolvido visa auxiliar pequenos e médios supermercados (PMEs) a superarem obstáculos como a falta de conhecimento sobre ESG, escassez de recursos e coleta manual de dados. Os produtos analisados foram: TOTVS (Minha gestão de lojas), EloVerde, Infineat, Enablon e QuikESG.
+&emsp;&emsp;O propósito deste documento é realizar um levantamento mercadológico e de tecnologias similares para identificar oportunidades de inovação e evitar "reinventar a roda" no setor varejista. O escopo abrange a análise de soluções que lidam com a adoção de práticas ESG (Ambiental, Social e Governança). O projeto sendo desenvolvido visa auxiliar pequenos e médios supermercados (PMEs) a superarem obstáculos como a falta de conhecimento sobre ESG, escassez de recursos e coleta manual de dados. Os produtos analisados foram: TOTVS (Minha gestão de lojas), EloVerde, Infineat, Enablon, QuikESG, Ororo, Pulsora, Comida Invisível e Connecting Food.
 
 ## 2. Produtos analisados
 
