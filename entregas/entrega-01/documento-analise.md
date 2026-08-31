@@ -114,29 +114,45 @@ A plataforma ajuda a eliminar divergências de dados e reduzir a perda de produt
 #### 2.7.4 Pontos fracos
 &emsp;&emsp; O preço é muito caro para as PMEs brasileiras, sendo esse entre US$ 15k a US$ 40k, podendo ultrapassar US$ 250k anualmente, dependência da qualidade do dado base, depende muito da qualidade da tecnologia usada para conseguir o dado por mais que a IA consiga identificar anomalias e complexidade de implementação.
 
-### 2.8 Produto H: Ambipar
+### 2.8 Produto H: Comida Invisível
 
 #### 2.8.1 Visão geral
-&emsp;&emsp;A Ambipar é uma empresa brasileira que atua com soluções ambientais e consultoria ESG, ajudando outras empresas a desenvolver e acompanhar práticas de sustentabilidade, gestão de riscos e conformidade.
+&emsp;&emsp;A Comida Invisível é uma startup brasileira que atua como um hub de impacto social, conectando pequenos e médios supermercados que possuem alimentos próximos ao vencimento diretamente a ONGs, gerando métricas ESG no processo.
 
 #### 2.8.2 Funcionamento
-&emsp;&emsp;A empresa realiza diagnósticos para identificar problemas e oportunidades, define metas e indicadores ESG e auxilia na implementação e acompanhamento das ações. Também trabalha com relatórios de sustentabilidade, inventário de emissões, gestão ambiental, compliance e estratégias climáticas.
+&emsp;&emsp;O funcionário do varejo utiliza a plataforma para cadastrar produtos perto da validade, com avarias na embalagem ou fora do padrão estético. O sistema usa geolocalização para notificar ONGs parceiras locais, que fazem a reserva e a coleta. As doações são automaticamente convertidas em dados e relatórios de impacto ambiental e social (ESG) para a empresa.
 
 #### 2.8.3 Pontos fortes
-&emsp;&emsp;Possui experiência na área ambiental, grande variedade de soluções e atuação em diferentes setores. Também facilita o acompanhamento de indicadores, metas e relatórios, reunindo diferentes áreas relacionadas ao ESG.
+&emsp;&emsp;Possui foco total em PMEs (baixo custo/acessibilidade) e uma interface de uso muito simples (baixa carga cognitiva). Combate o desperdício de forma prática, automatiza a geração de relatórios ESG (como refeições geradas e carbono evitado) e possui forte conexão com causas sociais.
 
 #### 2.8.4 Pontos fracos
-&emsp;&emsp;A implementação pode ter custo elevado, principalmente para empresas menores, além de exigir mudanças internas e participação dos funcionários e gestores. Os resultados também dependem da qualidade das informações fornecidas pela empresa contratante.
+&emsp;&emsp;Atua exclusivamente com foco em doação (repasse filantrópico). Diferente do "Nosso Projeto", não oferece uma esteira prévia de recuperação financeira (como colocar o item em promoção nos dias anteriores) para ajudar o varejista a recuperar parte do custo do produto antes de doá-lo.
+
+
+### 2.9 Produto I: Connecting Food
+
+#### 2.9.1 Visão geral
+&emsp;&emsp;A Connecting Food é uma foodtech brasileira de impacto social que conecta alimentos excedentes do varejo (que perderiam valor comercial) a organizações sociais, gerando dados ESG de forma automatizada.
+
+#### 2.9.2 Funcionamento
+&emsp;&emsp;O supermercado utiliza a plataforma para cadastrar produtos próximos ao vencimento, com avarias ou fora do padrão estético. A tecnologia da Connecting Food orquestra a logística, direcionando esses alimentos para ONGs validadas na região. Todo o volume doado é convertido em dashboards com métricas de impacto (refeições complementadas, emissões de CO2 evitadas).
+
+#### 2.9.3 Pontos fortes
+&emsp;&emsp;Democratiza o ESG para o varejo, possui interface simplificada e combate o desperdício na prática. A automação da geração de relatórios de impacto e a forte conexão com causas sociais são seus maiores destaques, atendendo muito bem às demandas de compliance.
+
+#### 2.9.4 Pontos fracos
+&emsp;&emsp;Assim como a Comida Invisível, o modelo é focado 100% no repasse filantrópico (doação), sem um módulo focado em ajudar o pequeno lojista a vender o produto com desconto primeiro. Além disso, costuma focar um pouco mais no grande varejo (grandes redes supermercadistas) do que nos pequenos mercados de bairro.
+
 
 ## 3. Benchmark
 
-| Funcionalidade / Característica | TOTVS | EloVerde | Infineat | Enablon | QuikESG | Ororo | Pulsora | **Nosso Projeto** |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Foco em PMEs (Baixo Custo/Acessibilidade)** | Não | Média | Sim | Não | Média | Não | Não | **Sim** |
-| **Gestão e Combate ao Desperdício (Validade)** | Sim | Não | Sim | Não | Não | Sim | Não | **Sim** |
-| **Integração/Automação de Relatórios ESG** | Não | Sim | Não | Sim | Sim | Sim | Sim | **Sim** |
-| **Baixa Complexidade/Carga Cognitiva (UX)** | Não | Não | Sim | Não | Média | Média | Não | **Sim** |
-| **Foco em Conexão Social (Ex: ONGs)** | Não | Não | Sim | Não | Não | Não | Não | **Sim (Potencial)** |
+| Funcionalidade / Característica | TOTVS | EloVerde | Infineat | Enablon | QuikESG | Ororo | Pulsora | Ambipar | Comida Invisível | Connecting Food | **Nosso Projeto** |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Foco em PMEs (Baixo Custo/Acessibilidade)** | Não | Média | Sim | Não | Média | Não | Não | Não | Sim | Sim | Sim |
+| **Gestão e Combate ao Desperdício (Validade)** | Sim | Não | Sim | Não | Não | Sim | Não | Não | Sim | Sim | Sim |
+| **Integração/Automação de Relatórios ESG** | Não | Sim | Não | Sim | Sim | Sim | Sim | Sim | Sim | Sim | Sim |
+| **Baixa Complexidade/Carga Cognitiva (UX)** | Não | Não | Sim | Não | Média | Média | Não | Não | Sim | Sim | Sim |
+| **Foco em Conexão Social (Ex: ONGs)** | Não | Não | Sim | Não | Não | Não | Não | Não | Sim | Sim | Sim  |
 
 ## 4. Requisitos obtidos
 
