@@ -114,6 +114,19 @@ A plataforma ajuda a eliminar divergências de dados e reduzir a perda de produt
 #### 2.7.4 Pontos fracos
 &emsp;&emsp; O preço é muito caro para as PMEs brasileiras, sendo esse entre US$ 15k a US$ 40k, podendo ultrapassar US$ 250k anualmente, dependência da qualidade do dado base, depende muito da qualidade da tecnologia usada para conseguir o dado por mais que a IA consiga identificar anomalias e complexidade de implementação.
 
+### 2.8 Produto H: Ambipar
+
+#### 2.8.1 Visão geral
+&emsp;&emsp;A Ambipar é uma empresa brasileira que atua com soluções ambientais e consultoria ESG, ajudando outras empresas a desenvolver e acompanhar práticas de sustentabilidade, gestão de riscos e conformidade.
+
+#### 2.8.2 Funcionamento
+&emsp;&emsp;A empresa realiza diagnósticos para identificar problemas e oportunidades, define metas e indicadores ESG e auxilia na implementação e acompanhamento das ações. Também trabalha com relatórios de sustentabilidade, inventário de emissões, gestão ambiental, compliance e estratégias climáticas.
+
+#### 2.8.3 Pontos fortes
+&emsp;&emsp;Possui experiência na área ambiental, grande variedade de soluções e atuação em diferentes setores. Também facilita o acompanhamento de indicadores, metas e relatórios, reunindo diferentes áreas relacionadas ao ESG.
+
+#### 2.8.4 Pontos fracos
+&emsp;&emsp;A implementação pode ter custo elevado, principalmente para empresas menores, além de exigir mudanças internas e participação dos funcionários e gestores. Os resultados também dependem da qualidade das informações fornecidas pela empresa contratante.
 
 ## 3. Benchmark
 
