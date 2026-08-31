@@ -6,6 +6,7 @@
 
 ### 2.1 Produto A: TOTVS (Minha gestão de lojas)
 
+![Site TOTVS](./media/totvs.png)
 
 ####	2.1.1 Visão geral
 &emsp;&emsp;É uma aplicação que atua como facilitadora na digitalização da gestão das empresas, seu público-alvo inclui o setor varejista supermercadista. O propósito inclui o gerenciamento de estoque, perdas, tarefas e gestão de compras.
@@ -24,6 +25,7 @@ A plataforma ajuda a eliminar divergências de dados e reduzir a perda de produt
 
 ###    2.2 Produto B: EloVerde
 
+![Site EloVerde](./media/eloverde.png)
 
 ####	2.2.1 Visão geral
 &emsp;&emsp;Trata-se de uma plataforma que integra as áreas de sustentabilidade em um único ecossistema. Seu propósito é criar soluções especializadas para cada setor, auxiliando desde a aprendizagem sobre ESG até o gerenciamento prático.
@@ -43,6 +45,8 @@ A plataforma ajuda a eliminar divergências de dados e reduzir a perda de produt
 
 ### 2.3 Produto C: Infineat
 
+![Site Infineat](./media/infineat.png)
+
 ####	2.3.1 Visão geral
 &emsp;&emsp;É uma plataforma simples que atua como um conector entre supermercados e ONGs. Seu público-alvo direto são negócios que lidam com alimentos e instituições de caridade. O propósito é promover a doação de comidas que seriam descartadas devido à validade.
 
@@ -60,6 +64,9 @@ A plataforma ajuda a eliminar divergências de dados e reduzir a perda de produt
 
 ### 2.4 Produto D: Enablon
 
+<!-- ![Site Enablon](./media/enablon.png) -->
+![Site Enablon](./media/enablon-esg.png)
+
 #### 2.4.1 Visão geral
 &emsp;&emsp;É uma plataforma de software voltada para consultoria de métricas e normas ESG. Seu público-alvo são, em geral, grandes empresas e corporações contratantes. O propósito é fornecer um acompanhamento profundo sobre as normas ESG.
 
@@ -73,6 +80,8 @@ A plataforma ajuda a eliminar divergências de dados e reduzir a perda de produt
 &emsp;&emsp;Apresenta uma interface com termos técnicos e jargões de difícil entendimento. O modelo de consultoria é muito caro e estruturalmente distante da realidade tecnológica e financeira de pequenos negócios.
 
 ### 2.5 Produto E: QuikESG
+
+![Site QuikESG](./media/quikesg.png)
 
 #### 2.5.1 Visão geral
 &emsp;&emsp;É uma aplicação web projetada para automatizar e agilizar a elaboração de relatórios de ESG.
@@ -88,6 +97,8 @@ A plataforma ajuda a eliminar divergências de dados e reduzir a perda de produt
 
 ### 2.6 Produto F: Ororo
 
+![Site Ororo](./media/ororo.png)
+
 #### 2.6.1 Visão geral
 &emsp;&emsp;É uma empresa brasileira que funciona no modelo B2B, desenvolvendo softwares para para outras empresas, dos mais variados ramos, com o objetivo de centralizar, organizar e acompanhar informações relacionadas a ESG, sustentabilidade e gestão.
 
@@ -102,6 +113,8 @@ A plataforma ajuda a eliminar divergências de dados e reduzir a perda de produt
 
 ### 2.7 Produto G: Pulsora
 
+![Site Pulsora](./media/pulsora.png)
+
 #### 2.7.1 Visão geral
 &emsp;&emsp;A Pulsora densenvolve um software B2B, que substitui processos manuais fragmentados por um ecossistema digital que realiza contabilidade de carbono, consolida métricas não financeiras e gera relatórios de conformidade.
 
@@ -115,6 +128,8 @@ A plataforma ajuda a eliminar divergências de dados e reduzir a perda de produt
 &emsp;&emsp; O preço é muito caro para as PMEs brasileiras, sendo esse entre US$ 15k a US$ 40k, podendo ultrapassar US$ 250k anualmente, dependência da qualidade do dado base, depende muito da qualidade da tecnologia usada para conseguir o dado por mais que a IA consiga identificar anomalias e complexidade de implementação.
 
 ### 2.8 Produto H: Comida Invisível
+
+![Site Comida Invisível](./media/comida-invisivel.png)
 
 #### 2.8.1 Visão geral
 &emsp;&emsp;A Comida Invisível é uma startup brasileira que atua como um hub de impacto social, conectando pequenos e médios supermercados que possuem alimentos próximos ao vencimento diretamente a ONGs, gerando métricas ESG no processo.
@@ -131,6 +146,8 @@ A plataforma ajuda a eliminar divergências de dados e reduzir a perda de produt
 
 ### 2.9 Produto I: Connecting Food
 
+![Site Connecting Food](./media/connecting-food-brasil.png)
+
 #### 2.9.1 Visão geral
 &emsp;&emsp;A Connecting Food é uma foodtech brasileira de impacto social que conecta alimentos excedentes do varejo (que perderiam valor comercial) a organizações sociais, gerando dados ESG de forma automatizada.
 
@@ -146,13 +163,13 @@ A plataforma ajuda a eliminar divergências de dados e reduzir a perda de produt
 
 ## 3. Benchmark
 
-| Funcionalidade / Característica | TOTVS | EloVerde | Infineat | Enablon | QuikESG | Ororo | Pulsora | Ambipar | Comida Invisível | Connecting Food | **Nosso Projeto** |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Foco em PMEs (Baixo Custo/Acessibilidade)** | Não | Média | Sim | Não | Média | Não | Não | Não | Sim | Sim | Sim |
-| **Gestão e Combate ao Desperdício (Validade)** | Sim | Não | Sim | Não | Não | Sim | Não | Não | Sim | Sim | Sim |
-| **Integração/Automação de Relatórios ESG** | Não | Sim | Não | Sim | Sim | Sim | Sim | Sim | Sim | Sim | Sim |
-| **Baixa Complexidade/Carga Cognitiva (UX)** | Não | Não | Sim | Não | Média | Média | Não | Não | Sim | Sim | Sim |
-| **Foco em Conexão Social (Ex: ONGs)** | Não | Não | Sim | Não | Não | Não | Não | Não | Sim | Sim | Sim  |
+| Funcionalidade / Característica | TOTVS | EloVerde | Infineat | Enablon | QuikESG | Ororo | Pulsora | Comida Invisível | Connecting Food | **Nosso Projeto** |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Foco em PMEs (Baixo Custo/Acessibilidade)** | Não | Média | Sim | Não | Média | Não | Não | Sim | Sim | Sim |
+| **Gestão e Combate ao Desperdício (Validade)** | Sim | Não | Sim | Não | Não | Sim | Não | Sim | Sim | Sim |
+| **Integração/Automação de Relatórios ESG** | Não | Sim | Não | Sim | Sim | Sim | Sim | Sim | Sim | Sim |
+| **Baixa Complexidade/Carga Cognitiva (UX)** | Não | Não | Sim | Não | Média | Média | Não | Sim | Sim | Sim |
+| **Foco em Conexão Social (Ex: ONGs)** | Não | Não | Sim | Não | Não | Não | Não | Sim | Sim | Sim  |
 
 ## 4. Requisitos obtidos
 

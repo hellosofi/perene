@@ -5,7 +5,9 @@
 ---
 <h4 align="center">𖥸</h4>
 
-<div align="center"><a href="https://grupo-perene.atlassian.net"><img src="https://img.shields.io/badge/Jira-0052CC?style=for-the-badge&logo=Jira&logoColor=white"/></a></div>
+<div align="center"><a href="https://grupo-perene.atlassian.net"><img src="https://img.shields.io/badge/Jira-0052CC?style=for-the-badge&logo=Jira&logoColor=white"/></a>
+<img alt="Static Badge" src="https://img.shields.io/badge/DOCUMENTO-A?style=for-the-badge&logo=readme&logoColor=darkseagreen&labelColor=33473B&color=darkseagreen&link=https%3A%2F%2Fgithub.com%2Fhellosofi%2Fperene%2Fblob%2Fmain%2Fentregas%2Fentrega-01%2Fdocumento-analise.md">
+</div>
 
 ## ⭐ Entrega 01
 
