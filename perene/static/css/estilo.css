@@ -1,0 +1,61 @@
+:root{
+    --cor1: #fffcf6;
+    --cor2: #ff7f34;
+    --cor3: #a8216a;
+    --cor4: #ec2e5e;
+}
+
+body {
+    background-color: var(--cor1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 100px;
+    outline: 1px solid blue;
+
+    font-family: "Montserrat", sans-serif;
+
+}
+
+
+h1 {
+    font-size: 140px;
+    color: var(--cor3);
+    margin: 0;
+    font-family: "Montserrat", sans-serif;
+}
+
+main{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.construcao{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 130px;
+
+    margin: 10px
+
+    /* outline: 1px solid orange;     */
+}
+
+.construcao p{
+    margin: 0;
+    width: 100%;
+    font-size: 66%;
+    text-align: center;
+    font-weight: 700;
+    color: var(--cor2);
+
+    /* outline: 1px solid yellow; */
+}
+
+.construcao img{
+    width: 100%;
+    /* outline: 1px solid #a8216a; */
+}

@@ -1,0 +1,29 @@
+{% load static %}
+<html lang="en">
+  <head>
+    {% block title %}<title>Local Library</title>{% endblock %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+  </head>
+
+
+  <body>
+    <main>
+        <h1><em>Perene</em></h1>
+        
+        <div class="construcao">
+            <img src="{% static 'images/construcao.svg' %}" alt="Logo do site">
+            <p>Em desenvolvimento...</p>
+        </div>
+
+        <div>
+            <p>Conheça...</p>
+            {% comment %} <button><a href="{% url '' %}">NOSSA EQUIPE</a></button>
+            <button><a href="{% url '' %}">NOSSO PROJETO</a></button> {% endcomment %}
+        </div>
+    </main>
+  </body>
+
+  </html>
