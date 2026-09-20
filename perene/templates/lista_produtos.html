@@ -1,0 +1,50 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Estoque de produtos</title>
+
+    {% comment %} <style>
+        body { font-family: Arial, sans-serif; max-width: 700px; margin: 40px auto; }
+        h1 { color: #333; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 8px 12px; text-align: left; }
+        th { background-color: #f0f0f0; }
+        .status-pendente { color: #b8860b; }
+        .status-em_andamento { color: #1e6fd9; }
+        .status-concluida { color: #2e8b57; }
+        .btn-nova { display: inline-block; margin-top: 12px; padding: 8px 16px; background: #2e6fd9; color: white; text-decoration: none; border-radius: 4px; }
+    </style> {% endcomment %}
+
+</head>
+<body class='lista-de-produtos'>
+{% comment %} {% block content %} {% endcomment %}
+    <p>- simulação -</p>
+    <h1>Estoque</h1>
+    <a class="btn-nova" href="{% url 'inserir_produto' %}"><button>+ Novo produto</button></a>
+
+    {% if produto %}
+    <table>
+        <tr>
+            <th>Produto</th>
+            <th>Detalhes</th>
+            <th>Validade</th>
+        </tr>
+
+        {% for produto in produto %}
+        <tr>
+            <td>{{ produto.nome }}</td>
+            <td>{{ produto.detalhe }}</td>
+            <td>{{ produto.validade|date:"d/m/Y" }}</td>
+        </tr>
+        {% endfor %}
+        
+    </table>
+    {% else %}
+    <p>Nenhum produto cadastrado ainda.</p>
+    {% endif %}
+{% comment %} {% endblock %} {% endcomment %}
+</body>
+</html>

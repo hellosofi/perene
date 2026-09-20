@@ -24,7 +24,7 @@
 
 <div align="center">
 
-<table style="">
+<!-- <table style="">
   <tr>
     <td align="center"><a href="https://github.com/joaogpedrosa">
       <img style= "width: 115px; height: 115px; display: flex; align-items: center; justify-content: center;" src="https://i.imgur.com/IkLCEzz.jpeg">
@@ -65,7 +65,7 @@
       Sofia Carolina
     </td>
   </tr>
-</table>
+</table> -->
 
 
 

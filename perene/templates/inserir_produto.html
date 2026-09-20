@@ -1,0 +1,29 @@
+{% comment %} {% extends "forum/base.html" %} {% endcomment %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+
+{% block content %}
+<div class="tela-novo-produto">
+
+        <h1>Novo produto</h1>
+        <form name="form" method="post">
+            {% csrf_token %}
+            <div class='nome'>
+                <label>Nome</label><br>
+                <input type="text" name="nome" id="nome" required>
+            </div>
+
+            <div class='detalhe'>
+                <label>Detalhes</label><br>
+                <textarea name="detalhe" id="detalhe" rows="3"></textarea>    
+            </div>
+
+            <div class='validade'>
+                <label>Data de validade</label><br>
+                <input type="date" id="validade" name="validade">
+            </div>
+            <button type="submit" name="botao_inserir_produto">SALVAR</button>
+        </form>
+    </div>
+    <a href="{% url 'lista_produtos' %}"><button class="voltar">Voltar para a lista de produtos</button></a>
+{% endblock %}
