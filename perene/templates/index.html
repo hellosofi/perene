@@ -10,7 +10,7 @@
 
 
   <body>
-    <main>
+    <main class="home">
         <h1><em>Perene</em></h1>
         
         <div class="construcao">
@@ -18,10 +18,14 @@
             <p>Em desenvolvimento...</p>
         </div>
 
-        <div>
+        <div class="links-home">
             <p>Conheça...</p>
-            {% comment %} <button><a href="{% url '' %}">NOSSA EQUIPE</a></button>
-            <button><a href="{% url '' %}">NOSSO PROJETO</a></button> {% endcomment %}
+            
+            <button><a>NOSSA EQUIPE</a></button>
+            <button><a>NOSSO PROJETO</a></button> 
+            <a href="{% url 'inserir_produto' %}"><button class="btn-destaque">TESTE NOSSO SISTEMA</button></a>
+            {% comment %} <button class="btn-destaque"><a href="{% url 'inserir_produto' %}">TESTE NOSSO SISTEMA</a></button> {% endcomment %}
+
         </div>
     </main>
   </body>
