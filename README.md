@@ -17,6 +17,13 @@
 
 
 <br/>
+---
+
+## Entrega 02
+
+### A url do nosso projeto já está disponível, acesse o link abaixo e veja nossa plataforma desenvolvida para a implementação de ESG no ramo de varejo alimentar!
+
+<h4 align="center">https://perene.onrender.com</h4>
 
 ---
 
@@ -66,7 +73,6 @@
     </td>
   </tr>
 </table> -->
-
 
 
 | Nome Completo | E-mail da School |
