@@ -30,7 +30,7 @@
 A url do nosso projeto já está disponível, acesse o link abaixo e veja nossa plataforma desenvolvida para a implementação de ESG no ramo de varejo alimentar! 
 <h4 align="center">https://perene.onrender.com</h4>
 
-Veja o projeto funcionando: [Acesse o vídeo no Youtube](https://youtu.be/EpsZ5v47rjs)
+<h4 Veja o projeto funcionando: [Acesse o vídeo no Youtube](https://youtu.be/EpsZ5v47rjs) </h4>
 ---
 
 ### $${\color{darkseagreen}Nossa \space equipe \space :}$$
