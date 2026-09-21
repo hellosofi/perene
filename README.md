@@ -31,6 +31,7 @@ A url do nosso projeto já está disponível, acesse o link abaixo e veja nossa 
 <h4 align="center">https://perene.onrender.com</h4>
 
 Veja o projeto funcionando: [Acesse o vídeo no Youtube](https://youtu.be/EpsZ5v47rjs)
+<br/>
 Explicação do código inicial (W.I.P): [Youtube](https://youtu.be/7_4VonwUPlg?si=UQOuGa8QSrvDRjkZ)
 
 
