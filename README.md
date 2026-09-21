@@ -15,6 +15,11 @@
 
 ![Nosso quadro - Jira](./entregas/entrega-01/media/backlog.png)
 
+<div align="center">
+
+📄 **[Análise de Competidores](entregas/entrega-01/documento-analise.md)**
+
+</div>
 
 <br/>
 
