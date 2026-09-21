@@ -28,6 +28,13 @@
 ![Quadro da Sprint 02 - Jira](entregas/entrega-01/media/Sprint02.png)
 
 <br/>
+---
+
+## Entrega 02
+
+### A url do nosso projeto já está disponível, acesse o link abaixo e veja nossa plataforma desenvolvida para a implementação de ESG no ramo de varejo alimentar!
+
+<h4 align="center">https://perene.onrender.com</h4>
 
 ### $${\color{darkseagreen}Acesso \space ao \space Deploy \space :}$$
 O projeto encontra-se em produção e pode ser acessado publicamente através do link:
@@ -81,8 +88,6 @@ O projeto encontra-se em produção e pode ser acessado publicamente através do
     </td>
   </tr>
 </table> -->
-
-
 
 
 | Nome Completo | E-mail da School |
