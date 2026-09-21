@@ -1,0 +1,250 @@
+:root{
+    --cor1: #fffcf6;
+    --cor2: #ff7f34;
+    --cor3: #a8216a;
+    --cor4: #ec2e5e;
+}
+
+body {
+    background-color: var(--cor1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 100px;
+    /* outline: 1px solid blue; */
+
+    font-family: "Montserrat", sans-serif;
+
+}
+
+
+.home h1 {
+    font-size: 140px;
+    color: var(--cor3);
+    margin: 0;
+    font-family: "Montserrat", sans-serif;
+}
+
+main{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    /* outline: 1px solid red */
+}
+
+.construcao{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 130px;
+
+    margin: 10px
+
+    /* outline: 1px solid orange;     */
+}
+
+.construcao p{
+    margin: 0;
+    width: 100%;
+    font-size: 66%;
+    text-align: center;
+    font-weight: 700;
+    color: var(--cor2);
+
+    /* outline: 1px solid yellow; */
+}
+
+.construcao img{
+    width: 100%;
+    /* outline: 1px solid #a8216a; */
+}
+
+/* botões principais */
+.links-home{
+    width: 410px;
+    display: flex;
+    /* flex-basis: auto; */
+    /* flex: 1 2 auto; */
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 10px;
+    column-gap: 10px;
+
+}
+
+.links-home p{
+    color: #863a0f;
+    margin: 0;
+    flex: 100%;
+    /* outline: 1px solid purple; */
+}
+
+.links-home button{
+    /* margin: 0 0 0 0; */
+    height: 40px;
+    width: 200px;
+    border-radius: 0;
+    border-color: transparent;
+
+    background-color: var(--cor2);
+    font-size: 11px;
+    font-weight: 300;
+
+    transition: ease-in 60ms;
+    /* outline: 1px solid orange; */
+}
+
+button {
+    border-radius: 0;
+    border-color: transparent;
+}
+
+button:hover{
+
+    cursor: pointer;
+    transform: scale(1.02);
+}
+
+
+.links-home a{
+    text-decoration: none;
+    color: var(--cor1);
+
+    /* background-color: aqua; */
+    /* outline: 1px solid red; */
+
+}
+
+
+
+button.btn-destaque{
+    background-color: var(--cor4);
+    color: white;
+
+    /* outline: 1px solid blue */
+}
+
+.btn-destaque a{
+    color: var(--cor1);
+}
+
+/* add produto */
+
+.tela-novo-produto{
+    display: grid;
+    grid-template-rows: 1;
+    gap: 40px;
+    /* padding: 60px; */
+    /* flex-direction: row; */
+    /* width: 40%;
+    height: 40vh; */
+
+    background-color: #f2c9d3c9;
+    border-radius: 1px;
+    padding: 80px
+}
+
+.tela-novo-produto>div{
+    height: max-content;
+}
+
+.tela-novo-produto h1{
+    font-size: 60px;
+    grid-area: span;
+    color: #a8216a;
+    margin: 0;
+    font-weight: 800;
+    /* outline: 1px solid yellow; */
+}
+
+.tela-novo-produto form{
+    display: grid;
+    gap: 20px;
+    /* margin-left: 40px; */
+}
+.tela-novo-produto button{
+    height: 50px;
+    width: 20%;
+    background-color: var(--cor4);
+    color: var(--cor1);
+
+}
+
+
+.tela-novo-produto label{
+    background-color: var(--cor3);
+    border-radius: 10%;
+    padding: 0.5%;
+    font-size: 10px;
+    color: var(--cor1);
+        
+}
+.nome{
+    flex: AUTO;
+
+    /* outline: 1PX SOLID BLUE; */
+}
+
+.tela-novo-produto textarea {
+    resize: none;
+    width: 100%;
+}
+
+.tela-novo-produto input{
+    height: 40px;
+    width: 100%;
+}
+
+.validade{
+    width: 40%;
+}
+
+.voltar {
+    font-size: 9px;
+    background-color: #ff7e3449;
+    color: #5c3740;
+    margin-top: 10px;
+}
+
+/* lista de produtos */
+
+.lista-de-produtos button{
+    height: 25px;
+    /* width: 20%; */
+    background-color: var(--cor4);
+    color: var(--cor1);    
+    margin-bottom: 30px;
+}
+
+.lista-de-produtos h1{
+    margin: 0;
+    margin-bottom: 26px;
+    color: #5c3740;
+}
+
+.lista-de-produtos p{
+    color: #5c37406a;
+    font-size: 10px;
+    margin: 0;
+}
+
+.lista-de-produtos table {
+    width: 60%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    color: #5c3740;
+}
+
+ .lista-de-produtos th, td {
+    border: 1px solid var(--cor2);
+    padding: 8px 12px;
+    text-align: left;
+}
+
+.lista-de-produtos th {
+    background-color: #ff7e3456;
+}
+
