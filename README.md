@@ -23,7 +23,7 @@
 ![Quadro da Sprint 02 - Jira](entregas/entrega-01/media/Sprint02.png)
 
 <br/>
----
+
 
 
 ### $${\color{darkseagreen}Acesso \space ao \space Deploy \space :}$$
