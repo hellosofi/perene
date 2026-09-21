@@ -18,6 +18,16 @@
 
 <br/>
 
+## ⭐ Entrega 02
+
+![Quadro da Sprint 02 - Jira](entregas/entrega-01/media/Sprint02.png)
+
+<br/>
+
+### $${\color{darkseagreen}Acesso \space ao \space Deploy \space :}$$
+O projeto encontra-se em produção e pode ser acessado publicamente através do link:
+**[Acessar Perene no Render](https://perene.onrender.com/)**
+
 ---
 
 ### $${\color{darkseagreen}Nossa \space equipe \space :}$$
@@ -66,6 +76,7 @@
     </td>
   </tr>
 </table> -->
+
 
 
 
