@@ -24,7 +24,7 @@
 
 <br/>
 
-![Print Bug Tracker](Print_BugTracker.png)
+![Print Bug Tracker](entregas/entrega-01/media/Print_BugTracker.png)
 
 <br/>
 
