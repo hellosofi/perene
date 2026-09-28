@@ -24,7 +24,9 @@
 
 <br/>
 
+![Print Bug Tracker](Print_BugTracker.png)
 
+<br/>
 
 ### $${\color{darkseagreen}Acesso \space ao \space Deploy \space :}$$
 A url do nosso projeto já está disponível, acesse o link abaixo e veja nossa plataforma desenvolvida para a implementação de ESG no ramo de varejo alimentar! 
