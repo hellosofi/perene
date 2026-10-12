@@ -2,7 +2,7 @@
 <h3> Soluções ESG para pequenas e médias empresas no setor de varejo alimentar </h3>
 <h4><em>Fundamentos de Desenvolvimento de Software</em></h4>
 
-# Sobre o Projeto Perene
+## Sobre o Projeto Perene
 O projeto Perene surge da necessidade dos mercados de pequeno e médio porte (no setor varejista supermercadista), evoluírem para não ficar para trás quando se trata das medidas cada vez mais presentes de ESG em suas funções.
 
 ## Nossa solução
