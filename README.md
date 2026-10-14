@@ -8,7 +8,7 @@ O projeto Perene surge da necessidade dos mercados de pequeno e médio porte (no
 ## Nossa solução
 Propomos um site e aplicativo que possibilita de maneira simples donos ou gerentes de mercados de médio e pequeno porte nas medidas ambientais, sociais e de governança. dentre nossas várias funcionalidades, as que mais se destacam são: consultoria automática, cardápio de empresas alinhadas a ESG.
 
-### $${\color{darkseagreen}Acesso \space ao \space Deploy \space :}$$
+## $${\color{darkseagreen}Acesso \space ao \space Deploy \space :}$$
 A url do nosso projeto já está disponível, acesse o link abaixo e veja nossa plataforma desenvolvida para a implementação de ESG no ramo de varejo alimentar! 
 <h4 align="center" target="_blank">https://perene.onrender.com</h4>
 
@@ -84,8 +84,9 @@ A aplicação ficará disponível em:
 http://127.0.0.1:8000/
 
 ---
+## $${\color{darkseagreen}Entregas}$$
 
-## ⭐ Entrega 01
+### ⭐┆ Entrega 01
 
 <h4 align="center">𖥸</h4>
 
@@ -100,7 +101,7 @@ http://127.0.0.1:8000/
 
 <br/>
 
-## ⭐ Entrega 02
+### ⭐┆ Entrega 02
 
 ![Quadro da Sprint 02 - Jira](entregas/entrega-01/media/Sprint02.png)
 
@@ -115,7 +116,7 @@ Veja o projeto funcionando: [Acesse o vídeo no Youtube](https://youtu.be/EpsZ5v
 <br/>
 Explicação do código inicial (W.I.P): [Youtube](https://youtu.be/7_4VonwUPlg?si=UQOuGa8QSrvDRjkZ)
 
-
+---
 
 ### $${\color{darkseagreen}Nossa \space equipe \space :}$$
 
