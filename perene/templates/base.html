@@ -1,0 +1,98 @@
+{% comment %} {% load static %} {% endcomment %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titulo %}Perene{% endblock %}</title>
+    {% comment %} <link rel="stylesheet" href="{% static 'css/estilo.css' %}"> {% endcomment %}
+</head>
+<body>
+
+{% include "icons.html" %}
+
+<div class="estrutura-app">
+
+    <aside class="barra-lateral">
+        <a href="{% url 'home' %}" class="marca">
+            <span class="simbolo-marca"><i></i><i></i><i></i></span>
+            <span>perene</span>
+        </a>
+
+        <nav class="pilha-nav" aria-label="Navegação principal">
+            <p class="legenda-nav">Área de trabalho</p>
+
+            <a href="{% url 'home' %}" class="item-nav {% if pagina_atual == 'home' %}ativo{% endif %}">
+                <svg width="19" height="19"><use href="#icon-home"/></svg>
+                <span>Visão geral</span>
+            </a>
+
+            <a href="{% url 'lista_produtos' %}" class="item-nav {% if pagina_atual == 'inventario' %}ativo{% endif %}">
+                <svg width="19" height="19"><use href="#icon-box"/></svg>
+                <span>Inventário</span>
+            </a>
+
+            {% comment %} INSERIR EQUIPE {% endcomment %}
+
+            <span class="item-nav">
+                <svg width="19" height="19"><use href="#icon-chart"/></svg>
+                <span>Impacto</span>
+                <span class="em-breve">Em breve</span>
+            </span>
+        </nav>
+
+        <div class="espacador"></div>
+
+        <div class="card-planeta">
+            <div class="orbita">
+                <svg width="21" height="21"><use href="#icon-leaf"/></svg>
+            </div>
+            <strong>Escolhas melhores,<br>uma prateleira por vez.</strong>
+            <span>O impacto deste mês está crescendo</span>
+        </div>
+
+        <a href="{% url 'admin:index' %}" class="item-nav">
+            <svg width="19" height="19"><use href="#icon-settings"/></svg>
+            <span>Configurações</span>
+        </a>
+
+        <div class="perfil-loja">
+            <div class="avatar">GM</div>
+            <div>
+                <strong>Sustainable Market</strong>
+                <span>Loja Camden</span>
+            </div>
+            <svg width="17" height="17"><use href="#icon-more"/></svg>
+        </div>
+    </aside>
+
+    {% comment %} História implementar notificação {% endcomment %}
+    <main class="shell-principal">
+        <header class="barra-topo">
+            <div>
+                <span class="caminho">Sustainable Market /</span>
+                <strong>{% block titulo_pagina %}{% endblock %}</strong>
+            </div>
+
+            {% comment %} linkar aqui: {% endcomment %}
+            <div class="acoes-topo">
+                <button class="botao-icone" aria-label="Notificações">
+                    <svg width="19" height="19"><use href="#icon-bell"/></svg>
+                    <span class="ponto-notificacao"></span> 
+                </button>
+                <div class="chip-data">
+                    <span>{% now "D, d M" %}</span>
+                </div>
+
+
+                <div class="avatar">RM</div>
+            </div>
+        </header>
+
+        {% block conteudo %}{% endblock %}
+    </main>
+
+</div>
+
+</body>
+</html>

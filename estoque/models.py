@@ -1,6 +1,7 @@
 from django.db import models
 # Create your models here.
 
+# novo banco de dados
 class Produto(models.Model):
     
     STATUS_CHOICES = [

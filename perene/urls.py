@@ -9,6 +9,6 @@ urlpatterns = [
     path("gestor/entrar/", views.LoginGestor.as_view(), name="login_gestor"),
     path("gestor/cadastro/", views.CadastroGestor.as_view(), name="cadastro_gestor"),
     path("sair/", LogoutView.as_view(), name="sair"),
-    path('adicionar/', views.Add_produto.as_view(), name="inserir_produto"),
-    path('produtos/', views.Produto_view.as_view(), name="lista_produtos")
+    # path('adicionar/', views.Add_produto.as_view(), name="inserir_produto"),  # saiu do perene --> estoque
+    # path('produtos/', views.Produto_view.as_view(), name="lista_produtos")    # saiu do perene --> estoque
 ]
