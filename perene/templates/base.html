@@ -22,9 +22,10 @@
         <nav class="pilha-nav" aria-label="Navegação principal">
             <p class="legenda-nav">Área de trabalho</p>
 
-            <a href="{% url 'home' %}" class="item-nav {% if pagina_atual == 'home' %}ativo{% endif %}">
+            <a href="" class="item-nav">
                 <svg width="19" height="19"><use href="#icon-home"/></svg>
                 <span>Visão geral</span>
+                <span class="em-breve">Em breve</span>
             </a>
 
             <a href="{% url 'lista_produtos' %}" class="item-nav {% if pagina_atual == 'inventario' %}ativo{% endif %}">
