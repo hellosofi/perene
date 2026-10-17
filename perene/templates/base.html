@@ -1,11 +1,11 @@
-{% comment %} {% load static %} {% endcomment %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block titulo %}Perene{% endblock %}</title>
-    {% comment %} <link rel="stylesheet" href="{% static 'css/estilo.css' %}"> {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
 </head>
 <body>
 
@@ -56,11 +56,22 @@
             <span>Configurações</span>
         </a>
 
+        <form method="post" action="{% url 'sair' %}">
+            {% csrf_token %}
+            <button type="submit" class="item-nav">
+            <svg width="19" height="19"><use href="#icon-arrow"/></svg>
+            <span>Sair</span>
+            </button>
+        </form>
+
         <div class="perfil-loja">
-            <div class="avatar">GM</div>
+
+            {% comment %} Isso é pra o avatar ser as iniciais do usuário {% endcomment %}
+            <div class="avatar">{{ user.first_name|default:user.username|slice:":2"|upper }}</div>
             <div>
                 <strong>Sustainable Market</strong>
-                <span>Loja Camden</span>
+                {% comment %} Mostra se o perfil eh de funcionário ou gestor {% endcomment %}
+                <span>{% if user.is_staff %}Gestor{% else %}Funcionário{% endif %}</span>
             </div>
             <svg width="17" height="17"><use href="#icon-more"/></svg>
         </div>
@@ -84,8 +95,8 @@
                     <span>{% now "D, d M" %}</span>
                 </div>
 
-
-                <div class="avatar">RM</div>
+                {% comment %} Isso é pra o avatar ser as iniciais do usuário {% endcomment %}
+                <div class="avatar">{{ user.first_name|default:user.username|slice:":2"|upper }}</div>
             </div>
         </header>
 
