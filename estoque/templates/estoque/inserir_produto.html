@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Adicionar produto</title>
+</head>
+<body>
+  <h1>Novo produto</h1>
+  <form method="post">
+
+    {% csrf_token %}
+    <label>Nome <input type="text" name="nome" required></label><br>
+    
+    <label>Código <input type="text" name="codigo"></label><br>
+    
+    <label>Categoria <input type="text" name="categoria"></label><br>
+    
+    <label>Detalhe <textarea name="detalhe"></textarea></label><br>
+    
+    <label>Quantidade <input type="number" name="quantidade" value="0"></label><br>
+    
+    <label>Unidade <input type="text" name="unidade"></label><br>
+    
+    <label>Validade <input type="date" name="validade"></label><br>
+    
+    <label>Status
+      <select name="status">
+        {% for value, label in status_choices %}
+          <option value="{{ value }}">{{ label }}</option>
+        {% endfor %}
+      </select>
+    </label><br>
+    
+    <button type="submit">Salvar</button>
+  
+  </form>
+  <a href="{% url 'lista_produtos' %}">Voltar</a>
+</body>
+</html>
