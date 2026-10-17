@@ -22,8 +22,10 @@
 <body class='lista-de-produtos'>
 {% comment %} {% block content %} {% endcomment %}
     <p>- simulação -</p>
+    <p>Você entrou como {{ user.first_name|default:user.username }} ({% if user.is_staff %}gestor{% else %}funcionário{% endif %})</p>
     <h1>Estoque</h1>
     <a class="btn-nova" href="{% url 'inserir_produto' %}"><button>+ Novo produto</button></a>
+    <form class="form-sair" method="post" action="{% url 'sair' %}">{% csrf_token %}<button type="submit">Sair</button></form>
 
     {% if produto %}
     <table>

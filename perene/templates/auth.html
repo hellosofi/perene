@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ titulo }} | Perene</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+</head>
+<body class="tema-{{ tema }}">
+    <div class="auth-layout">
+        <aside class="lateral">
+            <a class="marca" href="{% url 'index' %}"><em>Perene</em></a>
+            <div class="lateral-texto">
+                <h1>{{ titulo }}</h1>
+                <p>{{ descricao }}</p>
+            </div>
+            <a class="voltar" href="{% url 'index' %}">Voltar para o início</a>
+        </aside>
+
+        <main class="area-form">
+            <form method="post" class="form">
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                <div class="erros-gerais" role="alert">
+                    {% for erro in form.non_field_errors %}<p>{{ erro }}</p>{% endfor %}
+                </div>
+                {% endif %}
+
+                {% for campo in form %}
+                <div class="campo">
+                    <label for="{{ campo.id_for_label }}">{{ campo.label }}</label>
+                    {{ campo }}
+                    {% if campo.help_text %}<p class="ajuda">{{ campo.help_text }}</p>{% endif %}
+                    {% for erro in campo.errors %}<p class="erro">{{ erro }}</p>{% endfor %}
+                </div>
+                {% endfor %}
+
+                <button type="submit" class="btn-enviar">{{ botao }}</button>
+
+                <p class="troca">{{ troca_pergunta }} <a href="{% url troca_url %}">{{ troca_texto }}</a></p>
+                <p class="outro-papel"><a href="{% url outro_url %}">{{ outro_texto }}</a></p>
+            </form>
+        </main>
+    </div>
+</body>
+</html>

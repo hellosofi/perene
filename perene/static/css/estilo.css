@@ -248,3 +248,9 @@ button.btn-destaque{
     background-color: #ff7e3456;
 }
 
+/* botão sair (lista de produtos) */
+
+.form-sair {
+    display: inline;
+    margin-left: 6px;
+}
