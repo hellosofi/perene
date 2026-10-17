@@ -61,6 +61,14 @@ ENVIRONMENT=development
 
 Substitua `cole-sua-chave-gerada-aqui` pela chave gerada no comando anterior.
 
+Para liberar o cadastro de gestor pela página, defina também um código de acesso (quem não souber o código não consegue criar conta de gestor):
+
+```env
+GESTOR_CODIGO_CONVITE=escolha-um-codigo-aqui
+```
+
+No deploy (Render), adicione essa mesma variável em *Environment*.
+
 ### 5. Executar as migrações
 
 ```bash
