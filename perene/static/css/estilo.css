@@ -197,6 +197,19 @@ body {
     letter-spacing: .08em;
 }
 
+.novidade {
+    margin-left: auto;
+    padding: 3px 6px;
+    border: 1px solid #4a4f48;
+    border-radius: 8px;
+    color: #20231f;
+    text-transform: uppercase;
+    font-size: 8px;
+    letter-spacing: .08em;
+    background-color: var(--fundo-suave);
+    opacity: 50%;
+}
+
 .espacador {
     flex: 1;
     min-height: 30px;
