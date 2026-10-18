@@ -19,6 +19,8 @@
     </section>
 
     
+    {% comment %} atualizar condições aqui {% endcomment %}
+    {% comment %} xxxxxxxxxxxxxxxxxxxx {% endcomment %}
     <div class="estatisticas">
         <div>
             <span>Todos os itens</span>
@@ -35,12 +37,14 @@
             <strong>{{ pct_saudavel }}%</strong>
             <small>Tudo certo</small>
         </div>
+
         <div class="destaque-estoque">
             <svg width="18" height="18"><use href="#icon-leaf"/></svg>
             <span>Menos desperdício esta semana</span>
             <strong>−14%</strong>
         </div>
     </div>
+    {% comment %} xxxxxxxxxxxxxxxxxxxx {% endcomment %}
 
     <form method="get" id="form-filtros">
         <input type="hidden" name="visao" id="campo-visao" value="{{ visao }}">

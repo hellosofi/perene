@@ -1,0 +1,443 @@
+/* tela de equipe */
+
+.resumo-equipe {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.equipe-hoje {
+    background: white;
+    border: 1px solid var(--borda-suave);
+    border-radius: 16px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.icone-suave {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--superficie);
+    display: grid;
+    place-items: center;
+    color: var(--texto-suave);
+    flex-shrink: 0;
+}
+
+.equipe-hoje > div strong {
+    font: 600 14px "Manrope";
+    display: block;
+}
+
+.equipe-hoje > div small {
+    font-size: 10px;
+    color: var(--texto-mudo);
+}
+
+.pilha-avatares {
+    display: flex;
+    margin-left: auto;
+}
+
+.pilha-avatares span {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--superficie);
+    border: 2px solid white;
+    display: grid;
+    place-items: center;
+    font-size: 9px;
+    font-weight: 700;
+    margin-left: -8px;
+}
+
+.pilha-avatares span:first-child {
+    margin-left: 0;
+}
+
+.conclusao {
+    background: white;
+    border: 1px solid var(--borda-suave);
+    border-radius: 16px;
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.conclusao > div:first-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.conclusao > div:first-child span {
+    font-size: 10px;
+    color: var(--texto-mudo);
+}
+
+.conclusao strong {
+    font: 600 18px "Manrope";
+}
+
+.barra-progresso {
+    height: 5px;
+    background: var(--superficie);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.barra-progresso i {
+    display: block;
+    height: 100%;
+    background: var(--tinta);
+    border-radius: 6px;
+}
+
+.conclusao > small {
+    font-size: 9px;
+    color: var(--texto-mudo);
+}
+
+.nota-turno {
+    background: white;
+    border: 1px solid var(--borda-suave);
+    border-radius: 16px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--texto-suave);
+}
+
+.nota-turno > span {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.nota-turno strong {
+    font-size: 12px;
+    color: var(--tinta);
+    display: block;
+}
+
+.nota-turno small {
+    font-size: 10px;
+    color: var(--texto-mudo);
+    margin-top: 2px;
+}
+
+.nota-turno > button {
+    border: 0;
+    background: none;
+    color: var(--texto-suave);
+}
+
+/* grade de equipe */
+
+.grade-equipe {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+}
+
+.painel {
+    background: white;
+    border: 1px solid var(--borda-suave);
+    border-radius: 22px;
+    padding: 24px;
+}
+
+/* painel de funcionários */
+
+.lista-equipe {
+    margin-top: 18px;
+    display: grid;
+    gap: 14px;
+}
+
+.linha-equipe {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.avatar-equipe {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.avatar-equipe i {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #a8d4a0;
+    border: 2px solid white;
+    bottom: 0;
+    right: -1px;
+}
+
+.tom-0 {
+    background: #d4d5cd;
+}
+
+.tom-1 {
+    background: #c9d0ca;
+}
+
+.tom-2 {
+    background: #d0cfd5;
+}
+
+.tom-3 {
+    background: #cdd0cd;
+}
+
+.pessoa {
+    flex: 1;
+    min-width: 0;
+}
+
+.pessoa strong {
+    font-size: 12px;
+    font-weight: 600;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pessoa small {
+    font-size: 10px;
+    color: var(--texto-suave);
+}
+
+.status-pessoa {
+    font-size: 10px;
+    color: var(--texto-medio);
+    white-space: nowrap;
+}
+
+.progresso-mini {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 80px;
+}
+
+.progresso-mini > span {
+    height: 4px;
+    background: var(--superficie);
+    border-radius: 4px;
+    overflow: hidden;
+    display: block;
+}
+
+.progresso-mini > span > i {
+    display: block;
+    height: 100%;
+    background: var(--tinta);
+    border-radius: 4px;
+}
+
+.progresso-mini small {
+    font-size: 9px;
+    color: var(--texto-mudo);
+}
+
+/* painel de tarefas */
+
+.botao-circulo {
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--borda);
+    border-radius: 50%;
+    background: none;
+    display: grid;
+    place-items: center;
+    color: var(--texto-suave);
+}
+
+.lista-tarefas {
+    margin-top: 18px;
+    display: grid;
+}
+
+.linha-tarefa {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--borda-suave);
+}
+
+.linha-tarefa:last-child {
+    border-bottom: 0;
+}
+
+.linha-tarefa > div {
+    flex: 1;
+    min-width: 0;
+}
+
+.linha-tarefa > div strong {
+    font-size: 12px;
+    font-weight: 600;
+    display: block;
+}
+
+.linha-tarefa > div small {
+    font-size: 10px;
+    color: var(--texto-suave);
+}
+
+.linha-tarefa time {
+    font-size: 10px;
+    color: var(--texto-mudo);
+    white-space: nowrap;
+}
+
+.linha-tarefa.concluida > div strong {
+    text-decoration: line-through;
+    color: var(--texto-mudo);
+}
+
+.botao-marcar {
+    width: 22px;
+    height: 22px;
+    border: 1.5px solid var(--borda);
+    border-radius: 7px;
+    background: none;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    color: var(--texto-suave);
+}
+
+.linha-tarefa.concluida .botao-marcar {
+    background: var(--tinta);
+    border-color: var(--tinta);
+    color: white;
+}
+
+.responsavel {
+    position: relative;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--superficie);
+    display: grid;
+    place-items: center;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+    cursor: default;
+}
+
+.responsavel small {
+    position: absolute;
+    background: var(--tinta);
+    color: white;
+    font-size: 8px;
+    padding: 3px 6px;
+    border-radius: 6px;
+    white-space: nowrap;
+    bottom: calc(100% + 5px);
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+}
+
+.responsavel:hover small {
+    display: block;
+}
+
+.responsavel.vazio {
+    border: 1.5px dashed var(--borda);
+    background: none;
+    color: var(--texto-mudo);
+}
+
+.adicionar-tarefa {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    border: 0;
+    background: none;
+    color: var(--texto-suave);
+    font-size: 11px;
+    padding: 14px 0 0;
+    width: 100%;
+}
+
+/* dica de equipe */
+
+.dica-equipe {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--tinta);
+    color: white;
+    border-radius: 18px;
+    padding: 20px 24px;
+    overflow: hidden;
+}
+
+.dica-equipe > span {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #ffffff18;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+}
+
+.dica-equipe > div {
+    flex: 1;
+}
+
+.dica-equipe > div strong {
+    font: 600 13px "Manrope";
+    display: block;
+    margin-bottom: 3px;
+}
+
+.dica-equipe > div p {
+    margin: 0;
+    font-size: 11px;
+    color: #ffffffaa;
+}
+
+.dica-equipe > button {
+    border: 0;
+    background: #ffffff18;
+    color: white;
+    border-radius: 10px;
+    padding: 8px 14px;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.dica-equipe > i {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border: 1px solid #ffffff18;
+    border-radius: 50%;
+    right: -40px;
+    bottom: -60px;
+}

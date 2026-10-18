@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block titulo %}Perene{% endblock %}</title>
+    <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
     <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+    {% block estilos %}{% endblock %}
 </head>
 <body>
 
@@ -22,18 +24,28 @@
         <nav class="pilha-nav" aria-label="Navegação principal">
             <p class="legenda-nav">Área de trabalho</p>
 
-            <a href="{% url 'home' %}" class="item-nav {% if pagina_atual == 'home' %}ativo{% endif %}">
+            {% comment %} home {% endcomment %}
+            <a href="" class="item-nav">
                 <svg width="19" height="19"><use href="#icon-home"/></svg>
                 <span>Visão geral</span>
+                <span class="em-breve">Em breve</span>
             </a>
 
+            {% comment %} estoque {% endcomment %}
             <a href="{% url 'lista_produtos' %}" class="item-nav {% if pagina_atual == 'inventario' %}ativo{% endif %}">
                 <svg width="19" height="19"><use href="#icon-box"/></svg>
                 <span>Inventário</span>
             </a>
 
-            {% comment %} INSERIR EQUIPE {% endcomment %}
+            
+            {% comment %} (novo) EQUIPE | funcionários {% endcomment %}
+            <a href="{% url 'funcionarios' %}" class="item-nav {% if pagina_atual == 'equipe' %}ativo{% endif %}">
+                <svg width="19" height="19"><use href="#icon-box"/></svg>
+                <span>Equipe</span>
+                <span class="novidade">Novidade!</span>
+            </a>
 
+            {% comment %} imapcto {% endcomment %}
             <span class="item-nav">
                 <svg width="19" height="19"><use href="#icon-chart"/></svg>
                 <span>Impacto</span>
