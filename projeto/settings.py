@@ -39,6 +39,7 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1', '*']
 
 INSTALLED_APPS = [
     'perene',
+    'estoque', # <------
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -117,7 +118,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/6.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
 TIME_ZONE = 'America/Sao_Paulo'
 
@@ -140,3 +141,14 @@ MAILERS = {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },
 }
+
+# Autenticação
+# https://docs.djangoproject.com/en/6.1/ref/settings/#auth
+
+LOGIN_URL = 'index'                      # quem não está logado volta para a página inicial
+LOGIN_REDIRECT_URL = 'lista_produtos'    # depois do login, vai para o estoque
+LOGOUT_REDIRECT_URL = 'index'
+
+# Código exigido para cadastrar um gestor pela página (defina no .env).
+# Se não estiver definido, o cadastro de gestor fica desativado.
+GESTOR_CODIGO_CONVITE = os.getenv('GESTOR_CODIGO_CONVITE')

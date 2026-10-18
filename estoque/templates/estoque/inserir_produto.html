@@ -1,0 +1,26 @@
+{% comment %}  {% endcomment %}
+
+<label>Nome <input type="text" name="nome" required></label>
+
+<label>Código <input type="text" name="codigo"></label>
+
+<label>Categoria <input type="text" name="categoria"></label>
+
+<label>Detalhe <textarea name="detalhe"></textarea></label>
+
+<div class="par-campos">
+    <label>Quantidade <input type="number" name="quantidade" value="0"></label>
+    <label>Unidade <input type="text" name="unidade"></label>
+</div>
+
+<label>Validade <input type="date" name="validade"></label>
+
+<label>Status
+    <select name="status">
+        {% for value, label in status_choices %}
+            <option value="{{ value }}">{{ label }}</option>
+        {% endfor %}
+    </select>
+</label>
+
+<button type="submit" class="botao-primario" style="width:100%;margin-top:8px;">Salvar</button>
