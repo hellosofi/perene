@@ -110,7 +110,7 @@ http://127.0.0.1:8000/
 
 </div>
 
-![Nosso quadro - Jira](./entregas/entrega-01/media/backlog.png)
+![Quadro da Sprint 01 - Jira](./entregas/entrega-01/media/backlog.png)
 
 
 <br/>
@@ -125,12 +125,20 @@ http://127.0.0.1:8000/
 
 <br/>
 
-
 Veja o projeto funcionando: [Acesse o vídeo no Youtube](https://youtu.be/EpsZ5v47rjs)
+
 <br/>
+
 Explicação do código inicial (W.I.P): [Youtube](https://youtu.be/7_4VonwUPlg?si=UQOuGa8QSrvDRjkZ)
 
 ### ⭐┆ Entrega 03
+![Quadro da Sprint 03 - Jira](entregas/entrega-03/media/Sprint03.png)
+
+<br/>
+
+![Backlog da Sprint 03](entregas/entrega-03/media/Backlog03.png)
+
+<br/>
 
 ---
 
