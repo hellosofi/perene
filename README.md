@@ -145,6 +145,8 @@ Explicação do código inicial (W.I.P): [Youtube](https://youtu.be/7_4VonwUPlg?
 
 <br/>
 
+![Histórias BDD](entregas/entrega-03/media/HistóriasBDD.png)
+
 ---
 
 ### $${\color{darkseagreen}Nossa \space equipe \space :}$$
