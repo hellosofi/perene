@@ -35,6 +35,12 @@ No Windows (PowerShell):
 py -m venv .venv
 .\.venv\Scripts\Activate.ps1
 ```
+Mac/Linux (Terminal):
+
+```
+python3 -m venv .venv
+source .venv/bin/activate
+```
 
 ### 3. Instalar as dependências
 
