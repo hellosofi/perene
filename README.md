@@ -130,6 +130,7 @@ Veja o projeto funcionando: [Acesse o vídeo no Youtube](https://youtu.be/EpsZ5v
 Explicação do código inicial (W.I.P): [Youtube](https://youtu.be/7_4VonwUPlg?si=UQOuGa8QSrvDRjkZ)
 
 ### ⭐┆ Entrega 03
+
 <div align="center">
 
 <a href="https://github.com/hellosofi/perene/blob/main/entregas/entrega-03/historias.md"><img src="https://img.shields.io/badge/HIST%C3%93RIAS-A?style=for-the-badge&logo=readme&logoColor=darkseagreen&labelColor=33473B&color=darkseagreen"></a>
