@@ -110,32 +110,34 @@ class CadastroGestor(AuthView):
     }
 
 
-class Produto_view(LoginRequiredMixin, View):
-    def get(self, request):
-        try:
-            produtos =  Produto.objects.all().order_by('-validade')
-        except Produto.DoesNotExist:
-            raise Http404("Produto inexistente")
-        contexto = {'produto' : produtos}
-        return render(request, 'lista_produtos.html', contexto)
+# class Produto_view(LoginRequiredMixin, View):
+#     def get(self, request):
+#         try:
+#             produtos =  Produto.objects.all().order_by('-validade')
+#         except Produto.DoesNotExist:
+#             raise Http404("Produto inexistente")
+#         contexto = {'produto' : produtos}
+#         return render(request, 'lista_produtos.html', contexto)
 
-class Add_produto(LoginRequiredMixin, View):
-    def get(self, request):
-        return render(request, 'inserir_produto.html')
+# class Add_produto(LoginRequiredMixin, View):
+#     def get(self, request):
+#         return render(request, 'inserir_produto.html')
 
-    def post(self, request):
-        nome = request.POST.get('nome')
-        detalhe = request.POST.get('detalhe')
-        validade = request.POST.get('validade')
+#     def post(self, request):
+#         nome = request.POST.get('nome')
+#         detalhe = request.POST.get('detalhe')
+#         validade = request.POST.get('validade')
         
-        produto = Produto(nome=nome, detalhe=detalhe, validade=validade)
-        produto.save()
+#         produto = Produto(nome=nome, detalhe=detalhe, validade=validade)
+#         produto.save()
 
-        return redirect(reverse('lista_produtos'))    
+#         return redirect(reverse('lista_produtos'))    
 
     # def lista(request):
     #     produtos = Produto.objects.all().order_by('validade')
     #     return render(request, 'lista.html', {'produtos': produtos})
+
+# =====================================================================
 
 # def add_produto(request):
 #     if request.method == 'POST':
