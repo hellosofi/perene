@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 from .models import Produto
 
@@ -75,10 +76,12 @@ def contexto_lista(request):
     }
     
 
+@login_required  # requer login
 def lista_produtos(request):
     contexto = contexto_lista(request)
     return render(request, 'estoque/lista_produtos.html', contexto)
 
+@login_required  # requer login
 def adicionar_produto(request):
     if request.method == 'POST':
         Produto.objects.create(
