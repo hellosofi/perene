@@ -1,0 +1,119 @@
+/* Telas de login e cadastro. */
+
+.tema-funcionario {
+    --lateral: #a8216a;
+    --lateral-texto: #fffcf6;
+    --lateral-suave: #f2c9d3;
+    --fundo: #fffcf6;
+    --texto: #5c3740;
+    --campo-borda: #5c374099;
+    --botao: #a8216a;
+    --botao-hover: #8a1a57;
+    --botao-texto: #fff;
+    --erro-texto: #9c1236;
+    --erro-fundo: #fde6ec;
+    --foco: #ff7f34;
+}
+
+.tema-gestor {
+    --lateral: #000;
+    --lateral-texto: #fff;
+    --lateral-suave: #a8a8a8;
+    --fundo: #efefef;
+    --texto: #1a1a1a;
+    --campo-borda: #8a8a8a;
+    --botao: #000;
+    --botao-hover: #333;
+    --botao-texto: #fff;
+    --erro-texto: #000;
+    --erro-fundo: #dcdcdc;
+    --foco: #000;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: "Montserrat", system-ui, sans-serif;
+    line-height: 1.55;
+    color: var(--texto);
+    background: var(--fundo);
+}
+
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid var(--foco); outline-offset: 2px; }
+
+.auth-layout { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); min-height: 100vh; }
+
+/* painel lateral */
+.lateral {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 48px;
+    padding: 40px 48px;
+    background: var(--lateral);
+    color: var(--lateral-texto);
+}
+.lateral a { color: inherit; text-decoration: none; }
+.lateral a:focus-visible { outline-color: var(--lateral-texto); }
+.marca { font-size: 28px; font-weight: 700; }
+.lateral-texto h1 { margin: 0 0 16px; font-size: clamp(36px, 5vw, 64px); line-height: 1.05; font-weight: 800; letter-spacing: -0.02em; }
+.lateral-texto p { margin: 0; max-width: 24em; color: var(--lateral-suave); }
+.voltar { font-size: 14px; font-weight: 600; color: var(--lateral-suave); }
+.voltar:hover { color: var(--lateral-texto); text-decoration: underline; }
+
+/* formulário */
+.area-form { display: flex; align-items: center; padding: 48px; }
+.form { width: 100%; max-width: 420px; margin: 0 auto; }
+
+.campo { margin-bottom: 20px; }
+.campo label { display: block; margin-bottom: 6px; font-size: 13px; font-weight: 600; }
+.campo input {
+    width: 100%;
+    height: 48px;
+    padding: 0 14px;
+    font: inherit;
+    color: #000;
+    background: #fff;
+    border: 1px solid var(--campo-borda);
+    border-radius: 0;
+}
+.campo input:focus { border-color: var(--texto); }
+.ajuda { margin: 6px 0 0; font-size: 12px; opacity: 0.75; }
+.erro { margin: 6px 0 0; font-size: 13px; font-weight: 600; color: var(--erro-texto); }
+
+.erros-gerais {
+    margin-bottom: 24px;
+    padding: 12px 16px;
+    background: var(--erro-fundo);
+    border-left: 4px solid var(--erro-texto);
+    color: var(--erro-texto);
+    font-size: 14px;
+    font-weight: 600;
+}
+.erros-gerais p { margin: 0; }
+
+.btn-enviar {
+    width: 100%;
+    height: 52px;
+    margin-top: 8px;
+    font: 700 14px "Montserrat", sans-serif;
+    color: var(--botao-texto);
+    background: var(--botao);
+    border: 0;
+    border-radius: 0;
+    cursor: pointer;
+    transition: background-color 120ms ease;
+}
+.btn-enviar:hover { background: var(--botao-hover); }
+
+.troca, .outro-papel { margin: 20px 0 0; font-size: 14px; }
+.outro-papel { padding-top: 20px; border-top: 1px solid var(--campo-borda); }
+.form a { color: var(--texto); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.form a:hover { text-decoration-thickness: 2px; }
+
+@media (max-width: 820px) { 
+    .auth-layout { grid-template-columns: 1fr; }
+    .lateral { gap: 28px; padding: 28px 24px; }
+    .area-form { padding: 32px 24px 48px; }
+}

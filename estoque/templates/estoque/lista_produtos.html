@@ -1,0 +1,256 @@
+{% extends "base.html" %}
+
+{% block titulo %}Inventário — Perene{% endblock %}
+{% block titulo_pagina %}Inventário{% endblock %}
+
+{% block conteudo %}
+<div class="conteudo-pagina">
+    
+    <section class="titulo-pagina compacto">
+        <div>
+            <p class="etiqueta-topo">Saiba o que está nas prateleiras</p>
+            <h1>Inventário</h1>
+            <p>Identifique o que precisa de atenção antes que vire desperdício.</p>
+        </div>
+        <a href="{% url 'adicionar_produto' %}" class="botao-primario">
+            <svg width="18" height="18"><use href="#icon-plus"/></svg>
+            Adicionar item
+        </a>
+    </section>
+
+    
+    {% comment %} atualizar condições aqui {% endcomment %}
+    {% comment %} xxxxxxxxxxxxxxxxxxxx {% endcomment %}
+    <div class="estatisticas">
+        <div>
+            <span>Todos os itens</span>
+            <strong>{{ total }}</strong>
+        </div>
+
+        <div>
+            <span>Precisam de atenção</span>
+            <strong>{{ atencao }}</strong>
+        </div>
+
+        <div>
+            <span>Estoque saudável</span>
+            <strong>{{ pct_saudavel }}%</strong>
+            <small>Tudo certo</small>
+        </div>
+
+        <div class="destaque-estoque">
+            <svg width="18" height="18"><use href="#icon-leaf"/></svg>
+            <span>Menos desperdício esta semana</span>
+            <strong>−14%</strong>
+        </div>
+    </div>
+    {% comment %} xxxxxxxxxxxxxxxxxxxx {% endcomment %}
+
+    <form method="get" id="form-filtros">
+        <input type="hidden" name="visao" id="campo-visao" value="{{ visao }}">
+        <input type="hidden" name="status" id="campo-status" value="{{ status_atual }}">
+        {% if categoria_atual %}
+            <input type="hidden" name="categoria" value="{{ categoria_atual }}">
+        {% endif %}
+
+        <div class="barra-ferramentas">
+            <label class="campo-busca">
+                <svg width="19" height="19"><use href="#icon-search"/></svg>
+                <input
+                    type="text"
+                    name="q"
+                    value="{{ query }}"
+                    placeholder="Buscar por nome, código ou categoria..."
+                >
+            </label>
+
+            <div class="divisor"></div>
+
+            <label class="campo-selecao">
+                <svg width="17" height="17"><use href="#icon-filter"/></svg>
+                <select name="categoria" onchange="this.form.submit()">
+                    <option value="">Todas as categorias</option>
+                    {% for cat in categorias %}
+                        <option value="{{ cat }}" {% if cat == categoria_atual %}selected{% endif %}>
+                            {{ cat }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </label>
+
+            <div class="alternar-visao">
+                <button
+                    type="button"
+                    class="{% if visao == 'quadro' %}selecionado{% endif %}"
+                    onclick="alternarVisao('quadro')"
+                    aria-label="Visualização em quadro"
+                >
+                    <svg width="17" height="17"><use href="#icon-grid"/></svg>
+                </button>
+                <button
+                    type="button"
+                    class="{% if visao == 'lista' %}selecionado{% endif %}"
+                    onclick="alternarVisao('lista')"
+                    aria-label="Visualização em lista"
+                >
+                    <svg width="18" height="18"><use href="#icon-list"/></svg>
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <div class="filtros">
+        <strong>Ocorrências</strong>
+
+        <button
+            type="button"
+            class="{% if status_atual == 'use_soon' %}selecionado{% endif %}"
+            onclick="alternarStatus('use_soon')"
+        >
+            Vencimento próximo
+        </button>
+
+        <button
+            type="button"
+            class="{% if status_atual == 'damaged' %}selecionado{% endif %}"
+            onclick="alternarStatus('damaged')"
+        >
+            Danificados
+        </button>
+
+        <button
+            type="button"
+            class="{% if status_atual == 'low_stock' %}selecionado{% endif %}"
+            onclick="alternarStatus('low_stock')"
+        >
+            Estoque baixo
+        </button>
+
+        <button
+            type="button"
+            class="{% if status_atual == 'surplus' %}selecionado{% endif %}"
+            onclick="alternarStatus('surplus')"
+        >
+            Excedente
+        </button>
+
+        <a href="{% url 'adicionar_produto' %}" class="nova-etiqueta">
+            <svg width="15" height="15"><use href="#icon-plus"/></svg>
+            Novo item
+        </a>
+    </div>
+
+    {% if visao == 'lista' %}
+
+        <div class="painel-lista">
+            <div class="cabecalho-lista">
+                <span>Item</span>
+                <span>Categoria</span>
+                <span>Ocorrência</span>
+                <span>Estoque</span>
+                <span></span>
+            </div>
+
+            {% for produto in produtos %}
+                <div class="linha-lista">
+                    <span>
+                        <b>{{ produto.nome }}</b>
+                        <small>{{ produto.codigo }}</small>
+                    </span>
+                    <span>{{ produto.categoria }}</span>
+                    <span>
+                        <i class="etiqueta-status {{ produto.status_css }}">
+                            {{ produto.status_label }}
+                        </i>
+                    </span>
+                    <span>{{ produto.quantidade }} {{ produto.unidade }}</span>
+                    <button aria-label="Ver detalhes de {{ produto.nome }}">
+                        <svg width="17" height="17"><use href="#icon-chevron"/></svg>
+                    </button>
+                </div>
+            {% empty %}
+                <div class="lista-vazia">Nenhum item corresponde à sua busca.</div>
+            {% endfor %}
+        </div>
+
+    {% else %}
+
+        <div class="quadro">
+            {% for grupo in grupos %}
+                <section class="coluna">
+                    <header>
+                        <h3>{{ grupo.titulo }}</h3>
+                        <span>{{ grupo.items|length|stringformat:"02d" }}</span>
+                    </header>
+
+                    <div class="lista-cards">
+                        {% for produto in grupo.items %}
+                            <article class="card-produto">
+                                <div class="card-principal">
+                                    <span class="icone-card">
+                                        <svg width="20" height="20"><use href="#icon-box"/></svg>
+                                    </span>
+                                    <div class="info-card">
+                                        <div class="titulo-card">
+                                            <h4>{{ produto.nome }}</h4>
+                                            <button aria-label="Mais opções para {{ produto.nome }}">
+                                                <svg width="18" height="18"><use href="#icon-more"/></svg>
+                                            </button>
+                                        </div>
+                                        <p>Código {{ produto.codigo }} · {{ produto.categoria }}</p>
+                                        {% if produto.tem_ocorrencia %}
+                                            <span class="etiqueta-status {{ produto.status_css }}">
+                                                {{ produto.status_label }}
+                                            </span>
+                                        {% else %}
+                                            <span class="sem-ocorrencias">Sem ocorrências</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="rodape-card">
+                                    <span>
+                                        <b>Qtd. {{ produto.quantidade }}</b>
+                                        · {{ produto.unidade }}
+                                        {% if produto.detalhe %} · {{ produto.detalhe }}{% endif %}
+                                    </span>
+                                    <button aria-label="Abrir {{ produto.nome }}">
+                                        <svg width="15" height="15"><use href="#icon-arrow"/></svg>
+                                    </button>
+                                </div>
+                            </article>
+                        {% empty %}
+                            <div class="lista-vazia">Nenhum item aqui.</div>
+                        {% endfor %}
+                    </div>
+
+                    <a href="{% url 'adicionar_produto' %}" class="adicionar-na-coluna">
+                        <svg width="16" height="16"><use href="#icon-plus"/></svg>
+                        Adicionar item
+                    </a>
+                </section>
+            {% endfor %}
+        </div>
+
+    {% endif %}
+
+    {% if mostrar_modal %}
+    <div class="fundo-modal">
+        <div class="modal">
+            <div class="cabecalho-modal">
+                <h2>Adicionar item</h2>
+                <a href="{% url 'lista_produtos' %}" class="botao-fechar-modal">✕</a>
+            </div>
+            <div class="corpo-modal">
+                <form method="post">
+                    {% csrf_token %}
+                    {% include 'estoque/inserir_produto.html' %}
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}
+
+{% block scripts %}{% endblock %}

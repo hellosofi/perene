@@ -1,0 +1,198 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block estilos %}<link rel="stylesheet" href="{% static 'css/equipe.css' %}">{% endblock %}
+
+{% block titulo %}Minha equipe — Perene{% endblock %}
+{% block titulo_pagina %}Minha equipe{% endblock %}
+
+{% block conteudo %}
+<div class="conteudo-pagina">
+
+    <section class="titulo-pagina compacto">
+        <div>
+            <p class="etiqueta-topo">Planeje menos, faça mais</p>
+            <h1>Minha equipe</h1>
+            <p>Veja quem está trabalhando e acompanhe as tarefas de hoje.</p>
+        </div>
+        <button class="botao-primario">
+            <svg width="18" height="18"><use href="#icon-plus"/></svg>
+            Atribuir tarefa
+        </button>
+    </section>
+
+    <div class="resumo-equipe">
+
+        <div class="equipe-hoje">
+            <span class="icone-suave">
+                <svg width="20" height="20"><use href="#icon-users"/></svg>
+            </span>
+            <div>
+                <strong>{{ total_funcionarios }} pessoas</strong>
+                <small>trabalhando hoje</small>
+            </div>
+            <div class="pilha-avatares">
+                {% for f in funcionarios|slice:":3" %}
+                    <span>{{ f.iniciais }}</span>
+                {% endfor %}
+                {% if total_funcionarios > 3 %}
+                    <span>+{{ total_funcionarios|add:"-3" }}</span>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="conclusao">
+            <div>
+                <span>Progresso de hoje</span>
+                <strong>{{ pct_conclusao }}%</strong>
+            </div>
+            <div class="barra-progresso">
+                <i style="width: {{ pct_conclusao }}%"></i>
+            </div>
+            <small>{{ tarefas_concluidas }} de {{ total_tarefas }} tarefas concluídas</small>
+        </div>
+
+        <div class="nota-turno">
+            <svg width="18" height="18"><use href="#icon-clock"/></svg>
+            <span>
+                <strong>Próxima troca de turno</strong>
+                <small>16h · 3 pessoas chegando</small>
+            </span>
+            <button>
+                <svg width="17" height="17"><use href="#icon-chevron"/></svg>
+            </button>
+        </div>
+
+    </div>
+
+    <div class="grade-equipe">
+
+        <section class="painel painel-equipe">
+            <div class="titulo-secao">
+                <div>
+                    <span>Equipe</span>
+                    <h3>Equipe de hoje</h3>
+                </div>
+                <button class="botao-texto">
+                    Ver escala
+                    <svg width="15" height="15"><use href="#icon-arrow"/></svg>
+                </button>
+            </div>
+            <div class="lista-equipe">
+
+                {% for f in funcionarios %}
+
+                    <div class="linha-equipe">
+
+                        <div class="avatar avatar-equipe {% cycle 'tom-0' 'tom-1' 'tom-2' 'tom-3' %}">
+                            {{ f.iniciais }}
+                            <i></i>
+                        </div>
+
+                        <div class="pessoa">
+                            <strong>{{ f.nome }}</strong>
+                            <small>{{ f.cargo }}</small>
+                        </div>
+
+                        <span class="status-pessoa">{{ f.status }}</span>
+
+                        <div class="progresso-mini">
+                            <span>
+                                {% if f.total_tarefas > 0 %}
+                                    <i style="width: {% widthratio f.tarefas_concluidas f.total_tarefas 100 %}%"></i>
+                                {% else %}
+                                    <i style="width: 0%"></i>
+                                {% endif %}
+                            </span>
+
+                            <small>{{ f.tarefas_concluidas }} de {{ f.total_tarefas }} concluídas</small>
+                        </div>
+
+                        <button aria-label="Mais opções para {{ f.nome }}">
+                            <svg width="18" height="18"><use href="#icon-more"/></svg>
+                        </button>
+
+                    </div>
+                {% empty %}
+                    <div class="lista-vazia">Nenhum funcionário cadastrado.</div>
+                {% endfor %}
+
+            </div>
+        </section>
+
+        <section class="painel painel-tarefas">
+            <div class="titulo-secao">
+                <div>
+                    <span>A fazer</span>
+                    <h3>Tarefas de hoje</h3>
+                </div>
+                <button class="botao-circulo" aria-label="Adicionar tarefa">
+                    <svg width="18" height="18"><use href="#icon-plus"/></svg>
+                </button>
+            </div>
+            <div class="lista-tarefas">
+
+                {% for t in tarefas %}
+
+                    <div class="linha-tarefa {% if t.concluida %}concluida{% endif %}">
+                      
+                        <button class="botao-marcar" aria-label="Marcar {{ t.titulo }}">
+
+                            {% if t.concluida %}
+                                <svg width="14" height="14"><use href="#icon-check"/></svg>
+                            {% endif %}
+
+                        </button>
+
+                        <div>
+                            <strong>{{ t.titulo }}</strong>
+                            <small>{{ t.area }}</small>
+                        </div>
+
+                        <span class="responsavel {% if not t.responsavel %}vazio{% endif %}">
+                            {% if t.responsavel %}
+                                {{ t.responsavel.nome|slice:":1" }}
+                                <small>{{ t.responsavel.nome }}</small>
+                            {% else %}
+                                +
+                                <small>Não atribuído</small>
+                            {% endif %}
+                        </span>
+
+                        <time>
+                            {% if t.horario %}{{ t.horario|time:"H:i" }}{% else %}Hoje{% endif %}
+                        </time>
+                    </div>
+
+                {% empty %}
+                    <div class="lista-vazia">Nenhuma tarefa cadastrada.</div>
+                {% endfor %}
+
+            </div>
+            
+            <button class="adicionar-tarefa">
+                <svg width="16" height="16"><use href="#icon-plus"/></svg>
+                Adicionar outra tarefa
+            </button>
+        </section>
+
+    </div>
+
+    <article class="dica-equipe">
+        <span>
+            <svg width="20" height="20"><use href="#icon-spark"/></svg>
+        </span>
+        <div>
+            <strong>Simplifique a troca de turno</strong>
+            <span class="em-breve">Em breve</span> 
+            <p>Deixe uma nota breve para a equipe da noite não deixar nada passar.</p>
+        </div>
+        <button>
+            Adicionar nota
+            <svg width="15" height="15"><use href="#icon-arrow"/></svg>
+        </button>
+        <i></i>
+    </article>
+
+</div>
+{% endblock %}

@@ -1,0 +1,182 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Perene | ESG para o varejo alimentar</title>
+    <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+    <header class="topo">
+        <nav aria-label="Principal">
+            <a href="#sobre">Sobre</a>
+            <a href="#pilares">Pilares ESG</a>
+            <a href="#quem-somos">Quem somos</a>
+            <a href="#acesso" class="nav-destaque">Entrar</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1><em>Perene</em></h1>
+            <p class="lema">Soluções ESG para pequenas e médias empresas do varejo alimentar.</p>
+            <p class="texto">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, ut enim ad minim veniam.</p>
+            <a class="btn btn-primario" href="#acesso">Acessar o sistema</a>
+        </section>
+
+        <section class="secao" id="sobre">
+            <h2>Sobre o projeto</h2>
+            <div class="duas-colunas">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+            </div>
+        </section>
+
+        <section class="secao" id="pilares">
+            <h2>Ambiental, social e governança</h2>
+            <div class="pilares">
+                <article class="pilar pilar-a">
+                    <h3>Ambiental</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                </article>
+                <article class="pilar pilar-b">
+                    <h3>Social</h3>
+                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+                </article>
+                <article class="pilar pilar-c">
+                    <h3>Governança</h3>
+                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="secao" id="quem-somos">
+            <h2>Quem somos</h2>
+            <p class="intro">Acreditamos que sustentabilidade também se faz nos pequenos negócios. Por isso, criamos soluções ESG para o varejo alimentar: mais controle do estoque, menos desperdício e uma equipe mais organizada.</p>
+            <ul class="equipe">
+                <li class="membro">
+                    <img src="{% static 'images/equipe/flor-cerejeira.jpg' %}" alt="" width="88" height="88">
+                    <div>
+                        <strong>João Gustavo Vieira Fernandes Pedrosa</strong>
+                        <a href="mailto:jgvfp@cesar.school">jgvfp@cesar.school</a>
+                    </div>
+                </li>
+                <li class="membro">
+                    <img src="{% static 'images/equipe/flor-girassol.jpg' %}" alt="" width="88" height="88">
+                    <div>
+                        <strong>Kauã Cardoso de Melo</strong>
+                        <a href="mailto:kcm2@cesar.school">kcm2@cesar.school</a>
+                    </div>
+                </li>
+                <li class="membro">
+                    <img src="{% static 'images/equipe/flor-margarida.jpg' %}" alt="" width="88" height="88">
+                    <div>
+                        <strong>Lunna de Aguiar Mendonça Morelato Moreno</strong>
+                        <a href="mailto:lammm@cesar.school">lammm@cesar.school</a>
+                    </div>
+                </li>
+                <li class="membro">
+                    <img src="{% static 'images/equipe/flor-plumeria.jpg' %}" alt="" width="88" height="88">
+                    <div>
+                        <strong>Matheus Pinheiro Laurentino</strong>
+                        <a href="mailto:mpl2@cesar.school">mpl2@cesar.school</a>
+                    </div>
+                </li>
+                <li class="membro">
+                    <img src="{% static 'images/equipe/flor-hibisco-laranja.jpg' %}" alt="" width="88" height="88">
+                    <div>
+                        <strong>Nara de Melo Santos</strong>
+                        <a href="mailto:nms2@cesar.school">nms2@cesar.school</a>
+                    </div>
+                </li>
+                <li class="membro">
+                    <img src="{% static 'images/equipe/flor-hibisco-azul.jpg' %}" alt="" width="88" height="88">
+                    <div>
+                        <strong>Sofia Carolina Santos Bezerra</strong>
+                        <a href="mailto:scsb@cesar.school">scsb@cesar.school</a>
+                    </div>
+                </li>
+                <li class="membro">
+                    <img src="{% static 'images/equipe/flor-lirio.jpg' %}" alt="" width="88" height="88">
+                    <div>
+                        <strong>Sabrina Rayanne</strong>
+                        <a href="mailto:srso@cesar.school">srso@cesar.school</a>
+                    </div>
+                </li>
+                <li class="membro">
+                    <img src="{% static 'images/equipe/flor-hibisco-amarelo.jpg' %}" alt="" width="88" height="88">
+                    <div>
+                        <strong>Nadla Gabriele</strong>
+                        <a href="mailto:ngma@cesar.school">ngma@cesar.school</a>
+                    </div>
+                </li>
+                <li class="membro">
+                    <img src="{% static 'images/equipe/flor-hibisco-tropical.jpg' %}" alt="" width="88" height="88">
+                    <div>
+                        <strong>Maria Clara</strong>
+                        <a href="mailto:mcmt@cesar.school">mcmt@cesar.school</a>
+                    </div>
+                </li>
+                <li class="membro">
+                    <img src="{% static 'images/equipe/flor-gerbera.jpg' %}" alt="" width="88" height="88">
+                    <div>
+                        <strong>Beatriz Aciolli</strong>
+                        <a href="mailto:bam4@cesar.school">bam4@cesar.school</a>
+                    </div>
+                </li>
+                <li class="membro">
+                    <img src="{% static 'images/equipe/flor-rosa-amarela.jpg' %}" alt="" width="88" height="88">
+                    <div>
+                        <strong>Guilherme Lôbo</strong>
+                        <a href="mailto:glbm@cesar.school">glbm@cesar.school</a>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section class="secao" id="acesso">
+            <h2>Acesse o sistema</h2>
+
+            {% if user.is_authenticated %}
+            <div class="ja-logado">
+                <p>Você já está logado como <strong>{{ user.first_name|default:user.username }}</strong>.</p>
+                <a class="btn btn-primario" href="{% url 'lista_produtos' %}">Ir para o estoque</a>
+                <form method="post" action="{% url 'sair' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-contorno">Sair</button>
+                </form>
+            </div>
+            {% else %}
+            <div class="acessos">
+                <div class="painel painel-funcionario">
+                    <h3>Funcionário</h3>
+                    <p>Consulte e atualize o estoque do seu mercado com e-mail e senha.</p>
+                    <div class="acoes">
+                        <a class="btn btn-primario" href="{% url 'login_funcionario' %}">Entrar</a>
+                        <a class="btn btn-contorno" href="{% url 'cadastro_funcionario' %}">Cadastre-se</a>
+                    </div>
+                </div>
+
+                <div class="painel painel-gestor">
+                    <h3>Gestor</h3>
+                    <p>Acesso com o mesmo usuário e senha do painel administrativo.</p>
+                    <div class="acoes">
+                        <a class="btn btn-primario" href="{% url 'login_gestor' %}">Entrar como gestor</a>
+                        <a class="btn btn-contorno" href="{% url 'cadastro_gestor' %}">Cadastrar gestor</a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </section>
+    </main>
+
+    <footer class="rodape">
+        <p>Perene, 2026 - Aplicação de ESG nos Mercados.</p>
+    </footer>
+</body>
+</html>
