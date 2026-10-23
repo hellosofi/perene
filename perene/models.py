@@ -15,6 +15,7 @@ class Notificacao(models.Model):
             ('low_stock', 'Estoque baixo'),
             ('damaged', 'Lote danificado'),
             ('undocumented', 'Não cadastrado'),
+            ('surplus', 'Excedente'),
         ]),
 
         ('Equipe', [
