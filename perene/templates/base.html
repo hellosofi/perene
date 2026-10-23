@@ -42,7 +42,7 @@
             <a href="{% url 'funcionarios' %}" class="item-nav {% if pagina_atual == 'equipe' %}ativo{% endif %}">
                 <svg width="19" height="19"><use href="#icon-box"/></svg>
                 <span>Equipe</span>
-                <span class="novidade">Novidade!</span>
+                <span class="em-breve">Ajustes</span>
             </a>
 
             {% comment %} imapcto {% endcomment %}
@@ -99,10 +99,7 @@
 
             {% comment %} linkar aqui: {% endcomment %}
             <div class="acoes-topo">
-                <button class="botao-icone" aria-label="Notificações">
-                    <svg width="19" height="19"><use href="#icon-bell"/></svg>
-                    <span class="ponto-notificacao"></span> 
-                </button>
+                {% include "notificacao.html" %}
                 <div class="chip-data">
                     <span>{% now "D, d M" %}</span>
                 </div>
@@ -117,5 +114,6 @@
 
 </div>
 
+{% block scripts %}{% endblock %}
 </body>
 </html>
