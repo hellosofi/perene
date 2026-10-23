@@ -99,10 +99,7 @@
 
             {% comment %} linkar aqui: {% endcomment %}
             <div class="acoes-topo">
-                <button class="botao-icone" aria-label="Notificações">
-                    <svg width="19" height="19"><use href="#icon-bell"/></svg>
-                    <span class="ponto-notificacao"></span> 
-                </button>
+                {% include "notificacao.html" %}
                 <div class="chip-data">
                     <span>{% now "D, d M" %}</span>
                 </div>
