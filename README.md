@@ -183,6 +183,7 @@ Explicação do código inicial (W.I.P): [Youtube](https://youtu.be/7_4VonwUPlg?
 ![Histórias BDD](entregas/entrega-03/media/HistóriasBDD.png)
 
 <br/>
+
 Explicação do código Django: [Youtube](https://www.youtube.com/watch?v=sAK3rgWsdeo)
 
 ---
