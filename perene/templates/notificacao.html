@@ -1,0 +1,49 @@
+<details class="ancora-notificacao">
+    <summary class="botao-icone" aria-label="Notificações">
+        <svg width="19" height="19"><use href="#icon-bell"/></svg>
+        {% if notificacoes_novas %}
+            <span class="ponto-notificacao"></span>
+        {% endif %}
+    </summary>
+
+    <section class="painel-notificacoes" aria-label="Notificações">
+        <div class="cabecalho-notificacoes">
+            <div>
+                <span>Atualizações</span>
+                <strong>Notificações</strong>
+            </div>
+            <small>{{ notificacoes_novas }} nova{{ notificacoes_novas|pluralize }}</small>
+        </div>
+
+        <div class="lista-notificacoes">
+            {% for n in notificacoes %}
+                <article class="item-notificacao">
+                    <span class="icone-notificacao">
+                        <svg width="17" height="17">
+                            {% if n.categoria == 'estoque' %}
+                                <use href="#icon-box"/>
+                            {% elif n.categoria == 'equipe' %}
+                                <use href="#icon-users"/>
+                            {% else %}
+                                <use href="#icon-bell"/>
+                            {% endif %}
+                        </svg>
+                    </span>
+                    <div>
+                        <strong>{{ n.titulo }}</strong>
+                        <p>{{ n.mensagem }}</p>
+                    </div>
+                </article>
+            {% empty %}
+                <p class="notificacoes-vazio">Nenhuma notificação por aqui.</p>
+            {% endfor %}
+        </div>
+
+        {% if user.is_staff %}
+            <button type="button" class="criar-notificacao">
+                <svg width="16" height="16"><use href="#icon-plus"/></svg>
+                Emitir nova notificação
+            </button>
+        {% endif %}
+    </section>
+</details>

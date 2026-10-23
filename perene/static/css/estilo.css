@@ -1042,3 +1042,137 @@ body {
     }
 
 }
+
+
+
+/* notificações */
+.ancora-notificacao {
+    position: relative;
+}
+
+/* tira a setinha padrão do <summary> */
+.ancora-notificacao > summary {
+    list-style: none;
+    cursor: pointer;
+}
+
+.ancora-notificacao > summary::-webkit-details-marker {
+    display: none;
+}
+
+.painel-notificacoes {
+    position: absolute;
+    z-index: 11;
+    top: calc(100% + 10px);
+    right: 0;
+    width: 280px;
+    max-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid #dedfd8;
+    border-radius: 18px 18px 18px 6px;
+    background: #fff;
+    box-shadow: 0 18px 45px #1d201e24;
+}
+
+.cabecalho-notificacoes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 17px 18px 13px;
+    border-bottom: 1px solid #e8e9e3;
+}
+
+.cabecalho-notificacoes > div {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.cabecalho-notificacoes span {
+    color: #929690;
+    text-transform: uppercase;
+    font-size: 9px;
+    letter-spacing: .13em;
+    font-weight: 700;
+}
+
+.cabecalho-notificacoes strong {
+    font: 600 15px "Manrope";
+}
+
+.cabecalho-notificacoes small {
+    padding: 4px 7px;
+    border-radius: 10px;
+    background: #eeefea;
+    color: #686d67;
+    font-size: 9px;
+    font-weight: 600;
+}
+
+.lista-notificacoes {
+    overflow-y: auto;
+    padding: 0 15px;
+}
+
+.item-notificacao {
+    display: grid;
+    grid-template-columns: 35px 1fr;
+    gap: 10px;
+    padding: 14px 0;
+    border-bottom: 1px solid #eeeeea;
+}
+
+.item-notificacao:last-child {
+    border-bottom: 0;
+}
+
+.icone-notificacao {
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    border-radius: 44% 56% 52% 48%;
+    background: #eff0eb;
+    color: #555a54;
+}
+
+.item-notificacao strong {
+    display: block;
+    font-size: 11px;
+    line-height: 1.35;
+}
+
+.item-notificacao p {
+    margin: 4px 0 0;
+    color: #898d87;
+    font-size: 10px;
+    line-height: 1.45;
+}
+
+.notificacoes-vazio {
+    color: #929690;
+    text-align: center;
+    font-size: 11px;
+    padding: 25px 0;
+}
+
+.criar-notificacao {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-height: 42px;
+    margin: 0 15px 15px;
+    border: 0;
+    border-radius: 11px 11px 11px 4px;
+    background: #292c29;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.criar-notificacao:hover {
+    background: #3a3e39;
+}
