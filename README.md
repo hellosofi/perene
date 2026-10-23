@@ -185,6 +185,7 @@ Explicação do código inicial (W.I.P): [Youtube](https://youtu.be/7_4VonwUPlg?
 <br/>
 
 Explicação do código Django: [Youtube](https://www.youtube.com/watch?v=sAK3rgWsdeo)
+Demonstração das Histórias de Usuário: [Youtube](https://www.youtube.com/watch?v=W3mO9d5cqSs)
 
 ---
 
