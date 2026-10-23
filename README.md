@@ -185,7 +185,19 @@ Explicação do código inicial (W.I.P): [Youtube](https://youtu.be/7_4VonwUPlg?
 <br/>
 
 Explicação do código Django: [Youtube](https://www.youtube.com/watch?v=sAK3rgWsdeo)
+<br/>
+
+
 Demonstração das Histórias de Usuário: [Youtube](https://www.youtube.com/watch?v=W3mO9d5cqSs)
+<br/>
+
+
+
+Bug Tracker:
+<br/>
+
+![Print Bug Tracker](https://github.com/user-attachments/assets/7f3b7095-48b7-45ff-8a01-e6ac43ac44a7)
+
 
 ---
 
