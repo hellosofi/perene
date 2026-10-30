@@ -198,6 +198,7 @@ Bug Tracker:
 
 ![Print Bug Tracker](https://github.com/user-attachments/assets/7f3b7095-48b7-45ff-8a01-e6ac43ac44a7)
 
+<br/> 
 
 ---
 
