@@ -7,7 +7,6 @@ from django.http import HttpResponse, Http404
 from django.views import View
 
 from django.shortcuts import render, redirect
-
 from django.urls import reverse
 from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
