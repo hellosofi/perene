@@ -154,3 +154,7 @@ LOGOUT_REDIRECT_URL = 'index'
 # Código exigido para cadastrar um gestor pela página (defina no .env).
 # Se não estiver definido, o cadastro de gestor fica desativado.
 GESTOR_CODIGO_CONVITE = os.getenv('GESTOR_CODIGO_CONVITE')
+
+# parte dos testes
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField' 
