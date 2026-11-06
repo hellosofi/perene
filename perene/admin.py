@@ -1,7 +1,16 @@
 from django.contrib import admin
-from .models import Notificacao
+from .models import Mercado, Perfil, Notificacao
 
 # Register your models here.
+@admin.register(Mercado)
+class MercadoAdmin(admin.ModelAdmin):
+    list_display = ('nome', 'cidade', 'criado_em')
+
+
+@admin.register(Perfil)
+class PerfilAdmin(admin.ModelAdmin):
+    list_display = ('usuario', 'mercado', 'papel')
+    list_filter = ('papel', 'mercado')
 
 @admin.register(Notificacao)
 class NotificacaoAdmin(admin.ModelAdmin):
