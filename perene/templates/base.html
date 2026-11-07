@@ -11,12 +11,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Smooch+Sans:wght@700&display=swap" rel="stylesheet">
 
-    {% comment %} CSS antigo: ainda estiliza o CONTEÚDO das telas que não migraram {% endcomment %}
-    <link rel="stylesheet" href="{% static 'css/legado/estilo.css' %}">
-
-    {% comment %} CSS novo: a casca (menu lateral, topo e menu inferior) {% endcomment %}
     <link rel="stylesheet" href="{% static 'css/base/tokens.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base/tipografia.css' %}">
     <link rel="stylesheet" href="{% static 'css/componentes/aviso.css' %}">
+    <link rel="stylesheet" href="{% static 'css/componentes/botao.css' %}">
+    <link rel="stylesheet" href="{% static 'css/componentes/notificacoes.css' %}">
     <link rel="stylesheet" href="{% static 'css/layout/casca.css' %}">
     {% block estilos %}{% endblock %}
 </head>
@@ -138,6 +138,7 @@
 
 </div>
 
+<script src="{% static 'js/notificacoes.js' %}"></script>
 {% block scripts %}{% endblock %}
 </body>
 </html>

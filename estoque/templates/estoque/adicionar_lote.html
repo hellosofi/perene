@@ -5,19 +5,13 @@
 {% block titulo_pagina %}Registrar lote{% endblock %}
 
 {% block estilos %}
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Smooch+Sans:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{% static 'css/base/tokens.css' %}">
-<link rel="stylesheet" href="{% static 'css/componentes/botao.css' %}">
 <link rel="stylesheet" href="{% static 'css/componentes/campo.css' %}">
-<link rel="stylesheet" href="{% static 'css/componentes/aviso.css' %}">
 <link rel="stylesheet" href="{% static 'css/componentes/formulario.css' %}">
 <link rel="stylesheet" href="{% static 'css/paginas/registrar-lote.css' %}">
 {% endblock %}
 
 {% block conteudo %}
-<div class="conteudo-pagina">
+<div class="registrar-lote-pagina">
     <form method="post" class="registrar-lote" novalidate>
         {% csrf_token %}
 

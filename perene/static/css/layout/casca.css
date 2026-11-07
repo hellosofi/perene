@@ -10,9 +10,6 @@
  *   .casca__topo              barra de cima (notificações e avatar)
  *   .casca__conteudo          onde entra o bloco "conteudo" de cada tela
  *   .menu-inferior            menu fixo embaixo (só no celular)
- *
- * Enquanto as telas internas não migram, o legado/estilo.css continua
- * carregado para estilizar o CONTEÚDO delas. Esta casca só cuida da moldura.
  */
 
 /* ------------------------------------------------------------------
@@ -20,7 +17,7 @@
  * ---------------------------------------------------------------- */
 
 .app {
-    min-width: 0; /* o legado forçava 1120px e quebrava o celular */
+    min-width: 0;
     min-height: 100vh;
     margin: 0;
     background: var(--cor-fundo-pagina) url('../../images/marca/fundo-rios.svg') center / cover fixed no-repeat;
