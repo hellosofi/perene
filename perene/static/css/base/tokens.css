@@ -27,6 +27,7 @@
     --borda: #E9DDBE;
     --sucesso: #2E9B6A;
     --erro: #D2493A;
+    --placeholder-texto: #6F6B63;
 
     --ok-fundo: #DDF1E6;
     --ok-texto: #1D6B47;
@@ -43,10 +44,12 @@
     --cor-superficie-suave: var(--creme);
     --cor-texto: var(--marinho);
     --cor-texto-suave: var(--marinho-suave);
+    --cor-texto-desativado: var(--placeholder-texto);
     --cor-texto-invertido: var(--branco-puro);
     --cor-linha: var(--linha);
 
     --cor-marca: var(--ciano);
+    --cor-marca-suave: var(--ciano-claro);
     --cor-primaria: var(--ciano-escuro);
     --cor-primaria-hover: var(--marinho);
     --cor-destaque: var(--laranja);
@@ -131,6 +134,9 @@
     --largura-formulario-largo: 576px;
     --largura-cartao-formulario: 712px;
     --largura-modal: 640px;
+    --largura-menu-lateral: 256px;
+    --largura-logo-menu: 116px;
+    --altura-menu-inferior: 64px;
     --largura-cartao-app: 1280px;
     --altura-cartao-app: 780px;
     --largura-imagotipo: 68px;
@@ -144,5 +150,6 @@
 
     /* Camadas e fundos de sobreposição */
     --camada-modal: 100;
+    --camada-menu: 50;
     --cor-fundo-modal: rgb(45 54 78 / 0.45);
 }

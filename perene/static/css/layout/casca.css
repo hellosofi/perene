@@ -1,0 +1,289 @@
+/*
+ * Casca do app (pen.dev: App/Menu Lateral, App/Topo Mobile e App/Menu Inferior).
+ * Vale para todas as telas internas (base.html).
+ *
+ *   .app                      o <body> das telas internas
+ *   .casca                    o cartão branco que envolve tudo
+ *   .casca__lateral           menu lateral (só a partir de 1024px)
+ *   .menu-lateral__item       um item do menu lateral
+ *   .cartao-mercado           mercado + perfil, no rodapé do menu
+ *   .casca__topo              barra de cima (notificações e avatar)
+ *   .casca__conteudo          onde entra o bloco "conteudo" de cada tela
+ *   .menu-inferior            menu fixo embaixo (só no celular)
+ *
+ * Enquanto as telas internas não migram, o legado/estilo.css continua
+ * carregado para estilizar o CONTEÚDO delas. Esta casca só cuida da moldura.
+ */
+
+/* ------------------------------------------------------------------
+ * Página e cartão (celular: tela cheia, sem cartão)
+ * ---------------------------------------------------------------- */
+
+.app {
+    min-width: 0; /* o legado forçava 1120px e quebrava o celular */
+    min-height: 100vh;
+    margin: 0;
+    background: var(--cor-fundo-pagina) url('../../images/marca/fundo-rios.svg') center / cover fixed no-repeat;
+    font-family: var(--fonte-texto);
+    color: var(--cor-texto);
+}
+
+.casca {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: var(--cor-superficie);
+}
+
+/* ------------------------------------------------------------------
+ * Menu lateral (escondido no celular)
+ * ---------------------------------------------------------------- */
+
+.casca__lateral {
+    display: none;
+}
+
+.casca__logo img {
+    width: var(--largura-logo-menu);
+}
+
+.menu-lateral {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-1);
+}
+
+.menu-lateral__item {
+    display: flex;
+    align-items: center;
+    gap: var(--espaco-3);
+    width: 100%;
+    min-height: var(--area-toque);
+    padding: 0 var(--espaco-3);
+    border: none;
+    border-radius: var(--raio-s);
+    background: none;
+    color: var(--cor-texto);
+    font-family: var(--fonte-texto);
+    font-size: var(--texto-m);
+    font-weight: var(--peso-normal);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.menu-lateral__item:hover {
+    background: var(--cor-superficie-suave);
+    text-decoration: none;
+}
+
+.menu-lateral__item--ativo,
+.menu-lateral__item--ativo:hover {
+    background: var(--cor-marca-suave);
+    color: var(--cor-primaria);
+    font-weight: var(--peso-forte);
+}
+
+.menu-lateral__item--inativo,
+.menu-lateral__item--inativo:hover {
+    background: none;
+    color: var(--cor-texto-desativado);
+    cursor: default;
+}
+
+.menu-lateral__em-breve {
+    margin-left: auto;
+    font-size: var(--texto-xs);
+}
+
+.casca__rodape {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-2);
+    margin-top: auto;
+}
+
+.cartao-mercado {
+    display: flex;
+    align-items: center;
+    gap: var(--espaco-3);
+    padding: var(--espaco-3);
+    border-radius: var(--raio-m);
+    background: var(--cor-superficie-suave);
+}
+
+.cartao-mercado__nome {
+    display: block;
+    font-size: var(--texto-s);
+    font-weight: var(--peso-forte);
+}
+
+.cartao-mercado__papel {
+    font-size: var(--texto-xs);
+    color: var(--cor-texto-suave);
+}
+
+/* ------------------------------------------------------------------
+ * Topo e avatar
+ * ---------------------------------------------------------------- */
+
+.casca__topo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--espaco-3);
+    padding: var(--espaco-3) var(--espaco-4);
+    border-bottom: var(--borda-fina) solid var(--cor-linha);
+}
+
+.casca__marca-mobile img {
+    width: var(--largura-imagotipo);
+}
+
+.casca__acoes {
+    display: flex;
+    align-items: center;
+    gap: var(--espaco-3);
+}
+
+.casca__avatar {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: var(--area-toque);
+    height: var(--area-toque);
+    border-radius: var(--raio-pilula);
+    background: var(--cor-marca-suave);
+    color: var(--cor-primaria);
+    font-size: var(--texto-s);
+    font-weight: var(--peso-forte);
+}
+
+/* ------------------------------------------------------------------
+ * Conteúdo e mensagens
+ * ---------------------------------------------------------------- */
+
+.casca__principal {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+}
+
+.casca__conteudo {
+    flex: 1;
+    min-width: 0;
+    padding-bottom: calc(var(--altura-menu-inferior) + var(--espaco-4));
+}
+
+.casca__mensagens {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-2);
+    padding: var(--espaco-4) var(--espaco-4) 0;
+}
+
+/* ------------------------------------------------------------------
+ * Menu inferior (só no celular)
+ * ---------------------------------------------------------------- */
+
+.menu-inferior {
+    position: fixed;
+    inset: auto 0 0 0;
+    z-index: var(--camada-menu);
+    display: flex;
+    min-height: var(--altura-menu-inferior);
+    border-top: var(--borda-fina) solid var(--cor-linha);
+    background: var(--cor-superficie);
+}
+
+.menu-inferior__item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--espaco-1);
+    color: var(--cor-texto-suave);
+    font-size: var(--texto-xs);
+    font-weight: var(--peso-normal);
+    text-decoration: none;
+}
+
+.menu-inferior__item:hover {
+    text-decoration: none;
+}
+
+.menu-inferior__form {
+    flex: 1;
+    display: flex;
+}
+
+.menu-inferior__botao {
+    border: none;
+    background: none;
+    font-family: var(--fonte-texto);
+    cursor: pointer;
+}
+
+.menu-inferior__item--ativo {
+    color: var(--cor-primaria);
+    font-weight: var(--peso-forte);
+}
+
+.menu-inferior__item--inativo {
+    color: var(--cor-texto-desativado);
+}
+
+/* ------------------------------------------------------------------
+ * Desktop: cartão com menu lateral
+ * ---------------------------------------------------------------- */
+
+@media (min-width: 1024px) {
+    .app {
+        padding: var(--espaco-4);
+    }
+
+    .casca {
+        flex-direction: row;
+        min-height: calc(100vh - 2 * var(--espaco-4));
+        border: var(--borda-vidro) solid var(--cor-borda-vidro);
+        border-radius: var(--raio-cartao-app);
+        background-clip: padding-box;
+    }
+
+    .casca__lateral {
+        position: sticky;
+        top: var(--espaco-4);
+        display: flex;
+        flex-direction: column;
+        gap: var(--espaco-6);
+        flex-shrink: 0;
+        align-self: flex-start;
+        width: var(--largura-menu-lateral);
+        height: calc(100vh - 2 * var(--espaco-4) - 2 * var(--borda-vidro));
+        padding: var(--espaco-6) var(--espaco-4);
+        border-right: var(--borda-fina) solid var(--cor-linha);
+    }
+
+    .casca__topo {
+        justify-content: flex-end;
+        padding: var(--espaco-5) var(--espaco-6) 0;
+        border-bottom: none;
+    }
+
+    .casca__marca-mobile {
+        display: none;
+    }
+
+    .casca__conteudo {
+        padding-bottom: 0;
+    }
+
+    .casca__mensagens {
+        padding: var(--espaco-4) var(--espaco-6) 0;
+    }
+
+    .menu-inferior {
+        display: none;
+    }
+}
