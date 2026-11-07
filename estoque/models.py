@@ -5,6 +5,13 @@ from datetime import timedelta
 from django.utils import timezone
 
 # novo banco de dados
+
+SITUACOES = {
+    'ok': 'Tudo certo',
+    'atencao': 'Atenção',
+    'critico': 'Crítico',
+    'sem_lotes': 'Sem lotes',
+}
 class Produto(models.Model):
     
     STATUS_CHOICES = [
@@ -60,6 +67,18 @@ class Produto(models.Model):
     def quantidade_total(self):
         return self.lotes.aggregate(t=Sum('quantidade'))['t'] or 0
 
+    @property
+    def situacao(self):
+        gravidade = {'ok': 0, 'atencao': 1, 'critico': 2}
+        situacoes = [lote.situacao for lote in self.lotes.all()]
+        if not situacoes:
+            return 'sem_lotes'
+        return max(situacoes, key=gravidade.get)
+
+    @property
+    def situacao_label(self):
+        return SITUACOES[self.situacao]
+
 
 class Lote(models.Model):
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE, related_name='lotes')
@@ -88,3 +107,7 @@ class Lote(models.Model):
             return 'atencao'
 
         return 'ok'
+    
+    @property
+    def situacao_label(self):
+        return SITUACOES[self.situacao]

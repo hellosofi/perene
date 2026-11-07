@@ -11,12 +11,4 @@
 <div class="par-campos">
     <label>Unidade <input type="text" name="unidade"></label>
 
-<label>Status
-    <select name="status">
-        {% for value, label in status_choices %}
-            <option value="{{ value }}">{{ label }}</option>
-        {% endfor %}
-    </select>
-</label>
-
 <button type="submit" class="botao-primario" style="width:100%;margin-top:8px;">Salvar</button>
