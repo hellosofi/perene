@@ -2,34 +2,46 @@ from django.shortcuts import render
 
 # Create your views here.
 
-from django.db.models import Q
+from django.db.models import Q, F
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-
-from .models import Produto
+from django.db.models import Sum, Value
+from django.db.models.functions import Coalesce
+from .models import Produto, Lote
 
 def contexto_lista(request):
     query = request.GET.get('q', '')
     categoria = request.GET.get('categoria', '')
+    produto_id = request.GET.get('produto', '')                  # NOVO
     status_filtro = request.GET.get('status', '')
     visao = request.GET.get('visao', 'quadro')
 
-    produtos = Produto.objects.all()
+    # MUDOU: a lista agora é de lotes, com os que vencem antes primeiro
+    lotes = (
+        Lote.objects
+        .select_related('produto')
+        .order_by(F('validade').asc(nulls_last=True))
+    )
 
-    if query:
-        produtos = produtos.filter(
-            Q(nome__icontains=query) |
-            Q(codigo__icontains=query) |
-            Q(categoria__icontains=query)
+    if query:                                                     # MUDOU
+        lotes = lotes.filter(
+            Q(produto__nome__icontains=query) |
+            Q(produto__codigo__icontains=query) |
+            Q(produto__categoria__icontains=query) |
+            Q(local__icontains=query)
         )
 
-    if categoria:
-        produtos = produtos.filter(categoria=categoria)
+    if categoria:                                                 # MUDOU
+        lotes = lotes.filter(produto__categoria=categoria)
 
-    if status_filtro:
-        produtos = produtos.filter(status=status_filtro)
+    if produto_id.isdigit():                                      # NOVO
+        lotes = lotes.filter(produto_id=produto_id)
 
+    if status_filtro:                                             # MUDOU
+        lotes = lotes.filter(produto__status=status_filtro)
+
+    # Contadores do topo da página: continuam contando produtos
     total = Produto.objects.count()
     atencao = Produto.objects.filter(
         status__in=['use_soon', 'low_stock', 'damaged', 'surplus']
@@ -45,24 +57,30 @@ def contexto_lista(request):
         .order_by('categoria')
     )
 
-    lista = list(produtos)
-    grupos = [
+    produtos_filtro = Produto.objects.order_by('nome')            # NOVO
+    produto_selecionado = (                                       # NOVO
+        Produto.objects.filter(pk=produto_id).first()
+        if produto_id.isdigit() else None
+    )
+
+    lista = list(lotes)
+    grupos = [                                                    # MUDOU: l = lote
         {
             'titulo': 'Tudo certo',
-            'items': [p for p in lista if p.status == 'all_good'],
+            'items': [l for l in lista if l.produto.status == 'all_good'],
         },
         {
             'titulo': 'Precisa de atenção',
-            'items': [p for p in lista if p.status in ('use_soon', 'low_stock', 'damaged', 'surplus')],
+            'items': [l for l in lista if l.produto.status in ('use_soon', 'low_stock', 'damaged', 'surplus')],
         },
         {
             'titulo': 'Estoque não cadastrado',
-            'items': [p for p in lista if p.status == 'undocumented'],
+            'items': [l for l in lista if l.produto.status == 'undocumented'],
         },
     ]
 
     return {
-        'produtos': lista,
+        'lotes': lista,                                           # MUDOU: era 'produtos'
         'grupos': grupos,
         'total': total,
         'atencao': atencao,
@@ -73,6 +91,9 @@ def contexto_lista(request):
         'visao': visao,
         'categorias': categorias,
         'pagina_atual': 'inventario',
+        'produtos_filtro': produtos_filtro,                       # NOVO
+        'produto_atual': produto_id,                              # NOVO
+        'produto_selecionado': produto_selecionado,               # NOVO
     }
     
 
@@ -89,9 +110,7 @@ def adicionar_produto(request):
             codigo=request.POST.get('codigo', ''),
             categoria=request.POST.get('categoria', ''),
             detalhe=request.POST.get('detalhe', ''),
-            quantidade=request.POST.get('quantidade', 0),
             unidade=request.POST.get('unidade', ''),
-            validade=request.POST.get('validade') or None,
             status=request.POST.get('status', 'all_good'),
         )
         return redirect(reverse('lista_produtos'))
@@ -102,3 +121,17 @@ def adicionar_produto(request):
 
     return render(request, 'estoque/lista_produtos.html', contexto)
 
+from django.shortcuts import get_object_or_404
+from .forms import LoteForm
+
+@login_required
+def adicionar_lote(request, produto_id):
+    # TODO: filtrar por mercado (História 9)
+    produto = get_object_or_404(Produto, pk=produto_id)
+    form = LoteForm(request.POST or None)
+    if form.is_valid():
+        lote = form.save(commit=False)
+        lote.produto = produto
+        lote.save()
+        return redirect('lista_produtos')
+    return render(request, 'estoque/adicionar_lote.html', {'form': form, 'produto': produto})
