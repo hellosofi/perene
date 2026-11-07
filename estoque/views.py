@@ -93,23 +93,19 @@ def lista_produtos(request):
 
 @login_required  # requer login
 def adicionar_produto(request):
-    if request.method == 'POST':
-        Produto.objects.create(
-            nome=request.POST.get('nome', ''),
-            codigo=request.POST.get('codigo', ''),
-            categoria=request.POST.get('categoria', ''),
-            detalhe=request.POST.get('detalhe', ''),
-            unidade=request.POST.get('unidade', ''),
-        )
-        return redirect(reverse('lista_produtos'))
+    form = ProdutoForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect('lista_produtos')
 
     contexto = contexto_lista(request)
     contexto['mostrar_modal'] = True
+    contexto['form_produto'] = form
 
     return render(request, 'estoque/lista_produtos.html', contexto)
 
 from django.shortcuts import get_object_or_404
-from .forms import LoteForm
+from .forms import LoteForm, ProdutoForm
 
 @login_required
 def adicionar_lote(request, produto_id):

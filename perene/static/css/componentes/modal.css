@@ -1,0 +1,73 @@
+/*
+ * Modal (pen.dev: tela 04e · Novo produto).
+ *   .modal-fundo        cobre a página com um véu escuro
+ *   .modal              a caixa branca
+ *   .modal__cabecalho   título + botão de fechar
+ *   .modal__fechar      botão redondo "×"
+ */
+
+.modal-fundo {
+    position: fixed;
+    inset: 0;
+    z-index: var(--camada-modal);
+    display: grid;
+    place-items: center;
+    overflow-y: auto;
+    padding: var(--espaco-4);
+    background: var(--cor-fundo-modal);
+}
+
+.modal {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-5);
+    width: 100%;
+    max-width: var(--largura-modal);
+    padding: var(--espaco-5);
+    border-radius: var(--raio-l);
+    background: var(--cor-superficie);
+    font-family: var(--fonte-texto);
+    color: var(--cor-texto);
+}
+
+.modal__cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--espaco-4);
+}
+
+.modal__titulo {
+    font-family: var(--fonte-titulo);
+    font-size: var(--titulo-l);
+    font-weight: var(--peso-forte);
+    line-height: var(--altura-linha-titulo);
+    color: var(--cor-texto);
+}
+
+.modal__subtitulo {
+    color: var(--cor-texto-suave);
+}
+
+.modal__fechar {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: var(--area-toque);
+    height: var(--area-toque);
+    border-radius: var(--raio-pilula);
+    background: var(--cor-aviso-fundo);
+    color: var(--cor-texto);
+    font-size: var(--texto-l);
+    text-decoration: none;
+}
+
+.modal__fechar:hover {
+    text-decoration: none;
+}
+
+@media (min-width: 768px) {
+    .modal {
+        padding: var(--espaco-6);
+    }
+}

@@ -131,6 +131,7 @@
     --largura-formulario: 380px;
     --largura-formulario-largo: 576px;
     --largura-cartao-formulario: 712px;
+    --largura-modal: 640px;
     --largura-cartao-app: 1280px;
     --altura-cartao-app: 780px;
     --largura-imagotipo: 68px;
@@ -141,4 +142,8 @@
      * Movimento
      * ------------------------------------------------------------- */
     --transicao: 150ms ease;
+
+    /* Camadas e fundos de sobreposição */
+    --camada-modal: 100;
+    --cor-fundo-modal: rgb(45 54 78 / 0.45);
 }

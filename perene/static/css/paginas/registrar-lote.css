@@ -2,13 +2,11 @@
  * Registrar lote (pen.dev: tela 06).
  * Por enquanto só o cartão do formulário. O painel lateral (prévia do lote
  * e leitura pela câmera) fica para depois, porque precisa de JS.
+ * A grade dos campos vem de componentes/formulario.css.
  *
  *   .registrar-lote                o cartão
  *   .registrar-lote__trilha        "← Estoque / Registrar lote"
- *   .registrar-lote__campos        grade dos campos
- *   .registrar-lote__campo--largo  campo que ocupa a linha toda
  *   .opcao-avariado                a caixa do "Lote avariado"
- *   .registrar-lote__acoes         Cancelar + Salvar
  */
 
 .registrar-lote {
@@ -49,11 +47,6 @@
     color: var(--cor-texto-suave);
 }
 
-.registrar-lote__campos {
-    display: grid;
-    gap: var(--espaco-4);
-}
-
 .opcao-avariado {
     display: flex;
     align-items: center;
@@ -75,23 +68,8 @@
     color: var(--cor-texto-suave);
 }
 
-.registrar-lote__acoes {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    gap: var(--espaco-3);
-}
-
 @media (min-width: 768px) {
     .registrar-lote {
         padding: var(--espaco-6);
-    }
-
-    .registrar-lote__campos {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .registrar-lote__campo--largo {
-        grid-column: 1 / -1;
     }
 }

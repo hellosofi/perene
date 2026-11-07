@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="{% static 'css/componentes/botao.css' %}">
 <link rel="stylesheet" href="{% static 'css/componentes/campo.css' %}">
 <link rel="stylesheet" href="{% static 'css/componentes/aviso.css' %}">
+<link rel="stylesheet" href="{% static 'css/componentes/formulario.css' %}">
 <link rel="stylesheet" href="{% static 'css/paginas/registrar-lote.css' %}">
 {% endblock %}
 
@@ -39,10 +40,10 @@
         </div>
         {% endif %}
 
-        <div class="registrar-lote__campos">
+        <div class="formulario__campos">
             {% for campo in form %}
             {% if campo.name != 'avariado' %}
-            <div class="campo{% if campo.errors %} campo--erro{% endif %}{% if campo.name == 'local' or campo.name == 'observacao' %} registrar-lote__campo--largo{% endif %}">
+            <div class="campo{% if campo.errors %} campo--erro{% endif %}{% if campo.name == 'local' or campo.name == 'observacao' %} formulario__campo--largo{% endif %}">
                 <label for="{{ campo.id_for_label }}">{{ campo.label }}</label>
                 {{ campo }}
                 {% if campo.help_text %}<p class="campo__ajuda">{{ campo.help_text }}</p>{% endif %}
@@ -60,7 +61,7 @@
             </span>
         </label>
 
-        <div class="registrar-lote__acoes">
+        <div class="formulario__acoes">
             <a href="{% url 'lista_produtos' %}" class="botao botao--contorno">Cancelar</a>
             <button type="submit" class="botao">Salvar lote</button>
         </div>
