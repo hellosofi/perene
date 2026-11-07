@@ -121,34 +121,18 @@
 
         <button
             type="button"
-            class="{% if status_atual == 'use_soon' %}selecionado{% endif %}"
-            onclick="alternarStatus('use_soon')"
+            class="{% if status_atual == 'atencao' %}selecionado{% endif %}"
+            onclick="alternarStatus('atencao')"
         >
-            Vencimento próximo
+            Atenção
         </button>
 
         <button
             type="button"
-            class="{% if status_atual == 'damaged' %}selecionado{% endif %}"
-            onclick="alternarStatus('damaged')"
+            class="{% if status_atual == 'critico' %}selecionado{% endif %}"
+            onclick="alternarStatus('critico')"
         >
-            Danificados
-        </button>
-
-        <button
-            type="button"
-            class="{% if status_atual == 'low_stock' %}selecionado{% endif %}"
-            onclick="alternarStatus('low_stock')"
-        >
-            Estoque baixo
-        </button>
-
-        <button
-            type="button"
-            class="{% if status_atual == 'surplus' %}selecionado{% endif %}"
-            onclick="alternarStatus('surplus')"
-        >
-            Excedente
+            Crítico
         </button>
 
         <a href="{% url 'adicionar_produto' %}" class="nova-etiqueta">
@@ -156,7 +140,7 @@
             Novo item
         </a>
     </div>
-
+    
     {% if visao == 'lista' %}
 
         <div class="painel-lista">
@@ -176,8 +160,8 @@
         </span>
         <span>{{ lote.produto.categoria }}</span>
         <span>
-            <i class="etiqueta-status {{ lote.produto.status_css }}">
-                {{ lote.produto.status_label }}
+            <i class="etiqueta-status situacao-{{ lote.situacao }}">
+                {{ lote.situacao_label }}
             </i>
         </span>
         <span>{{ lote.quantidade }} {{ lote.produto.unidade }}</span>
@@ -212,9 +196,9 @@
                     <h4>{{ lote.produto.nome }}</h4>
                 </div>
                 <p>Código {{ lote.produto.codigo }} · {{ lote.produto.categoria }}</p>
-                {% if lote.produto.tem_ocorrencia %}
-                    <span class="etiqueta-status {{ lote.produto.status_css }}">
-                        {{ lote.produto.status_label }}
+                {% if lote.situacao != 'ok' %}
+                    <span class="etiqueta-status situacao-{{ lote.situacao }}">
+                        {{ lote.situacao_label }}
                     </span>
                 {% else %}
                     <span class="sem-ocorrencias">Sem ocorrências</span>

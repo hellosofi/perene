@@ -3,7 +3,7 @@ from django.db import models
 from django.conf import settings 
 import secrets
 
-from estoque.models import Produto
+from estoque.models import Produto, Lote
 from funcionarios.models import Tarefa
 
 # Create your models here.
@@ -45,10 +45,12 @@ class Notificacao(models.Model):
     TIPO_CHOICES = [
         ('Estoque', [
             ('use_soon', 'Vencimento próximo'),
+            ('expired', 'Lote vencido'),
             ('low_stock', 'Estoque baixo'),
             ('damaged', 'Lote danificado'),
             ('undocumented', 'Não cadastrado'),
             ('surplus', 'Excedente'),
+            
         ]),
 
         ('Equipe', [
@@ -83,6 +85,10 @@ class Notificacao(models.Model):
     produto = models.ForeignKey(
         Produto, null=True, blank=True, on_delete=models.CASCADE, related_name='notificacoes'
     )
+
+    lote = models.ForeignKey(
+        Lote, null=True, blank=True, on_delete=models.CASCADE, related_name='notificacoes'
+    )    
 
     tarefa = models.ForeignKey(
         Tarefa, null=True, blank=True, on_delete=models.CASCADE, related_name='notificacoes'

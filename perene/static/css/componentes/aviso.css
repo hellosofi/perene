@@ -1,0 +1,29 @@
+/*
+ * Aviso: caixa de mensagem dentro de formulários e páginas.
+ *   .aviso              informação importante (amarelo claro)
+ *   .aviso--erro        erro geral do formulário (vermelho claro)
+ *   .aviso__titulo      primeira linha em negrito
+ */
+
+.aviso {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-1);
+    padding: var(--espaco-4);
+    border: var(--borda-fina) solid var(--cor-aviso-borda);
+    border-radius: var(--raio-s);
+    background: var(--cor-aviso-fundo);
+    color: var(--cor-aviso-texto);
+    font-size: var(--texto-s);
+}
+
+.aviso__titulo {
+    font-weight: var(--peso-forte);
+    color: var(--cor-texto);
+}
+
+.aviso--erro {
+    border-color: var(--cor-erro);
+    background: var(--cor-erro-fundo);
+    color: var(--cor-erro-texto);
+}

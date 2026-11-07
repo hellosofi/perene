@@ -1176,6 +1176,11 @@ body {
 .criar-notificacao:hover {
     background: #3a3e39;
 }
+
+.situacao-ok { background: #cfc; }
+.situacao-atencao { background: #ffc; }
+.situacao-critico { background: #fcc; }
+
 .mensagens {
     margin: 16px 24px 0;
 }

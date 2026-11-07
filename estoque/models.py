@@ -1,7 +1,17 @@
 from django.db import models
 from django.db.models import Sum
 
+from datetime import timedelta
+from django.utils import timezone
+
 # novo banco de dados
+
+SITUACOES = {
+    'ok': 'Tudo certo',
+    'atencao': 'Atenção',
+    'critico': 'Crítico',
+    'sem_lotes': 'Sem lotes',
+}
 class Produto(models.Model):
     
     STATUS_CHOICES = [
@@ -30,6 +40,8 @@ class Produto(models.Model):
     detalhe = models.TextField(blank=True)
     unidade = models.CharField(max_length=50, blank=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='all_good')
+    estoque_minimo = models.PositiveIntegerField(default=0)
+    dias_alerta = models.PositiveIntegerField(default=7)    
 
     def __str__(self):
         return f'[{self.codigo}] {self.nome}'
@@ -55,6 +67,18 @@ class Produto(models.Model):
     def quantidade_total(self):
         return self.lotes.aggregate(t=Sum('quantidade'))['t'] or 0
 
+    @property
+    def situacao(self):
+        gravidade = {'ok': 0, 'atencao': 1, 'critico': 2}
+        situacoes = [lote.situacao for lote in self.lotes.all()]
+        if not situacoes:
+            return 'sem_lotes'
+        return max(situacoes, key=gravidade.get)
+
+    @property
+    def situacao_label(self):
+        return SITUACOES[self.situacao]
+
 
 class Lote(models.Model):
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE, related_name='lotes')
@@ -67,18 +91,23 @@ class Lote(models.Model):
 
     def __str__(self):
         return f'{self.produto.nome}: {self.quantidade} ({self.local})'
-    
-from django.db import migrations
 
-def copiar(apps, schema_editor):
-    Produto = apps.get_model('estoque', 'Produto')
-    Lote = apps.get_model('estoque', 'Lote')
-    for p in Produto.objects.all():
-        if p.quantidade > 0:
-            Lote.objects.create(produto=p, quantidade=p.quantidade,
-                                validade=p.validade, local='Não informado')
+    @property
+    def situacao(self):
+        hoje = timezone.localdate()
+        produto = self.produto
 
-class Migration(migrations.Migration):
-    dependencies = [...]  # já vem preenchido
-    operations = [migrations.RunPython(copiar, migrations.RunPython.noop)]
+        if self.avariado or (self.validade and self.validade < hoje):
+            return 'critico'
+
+        if self.validade and self.validade <= hoje + timedelta(days=produto.dias_alerta):
+            return 'atencao'
+
+        if produto.estoque_minimo and produto.quantidade_total < produto.estoque_minimo:
+            return 'atencao'
+
+        return 'ok'
     
+    @property
+    def situacao_label(self):
+        return SITUACOES[self.situacao]

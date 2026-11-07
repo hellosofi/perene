@@ -38,15 +38,10 @@ def contexto_lista(request):
     if produto_id.isdigit():                                      # NOVO
         lotes = lotes.filter(produto_id=produto_id)
 
-    if status_filtro:                                             # MUDOU
-        lotes = lotes.filter(produto__status=status_filtro)
-
-    # Contadores do topo da página: continuam contando produtos
-    total = Produto.objects.count()
-    atencao = Produto.objects.filter(
-        status__in=['use_soon', 'low_stock', 'damaged', 'surplus']
-    ).count()
-    saudaveis = Produto.objects.filter(status='all_good').count()
+    produtos = list(Produto.objects.prefetch_related('lotes'))
+    total = len(produtos)
+    atencao = len([p for p in produtos if p.situacao in ('atencao', 'critico')])
+    saudaveis = len([p for p in produtos if p.situacao == 'ok'])
     pct_saudavel = round(saudaveis / total * 100, 1) if total > 0 else 0
 
     categorias = (
@@ -57,26 +52,20 @@ def contexto_lista(request):
         .order_by('categoria')
     )
 
-    produtos_filtro = Produto.objects.order_by('nome')            # NOVO
-    produto_selecionado = (                                       # NOVO
+    produtos_filtro = Produto.objects.order_by('nome')            
+    produto_selecionado = (                                      
         Produto.objects.filter(pk=produto_id).first()
         if produto_id.isdigit() else None
     )
 
     lista = list(lotes)
-    grupos = [                                                    # MUDOU: l = lote
-        {
-            'titulo': 'Tudo certo',
-            'items': [l for l in lista if l.produto.status == 'all_good'],
-        },
-        {
-            'titulo': 'Precisa de atenção',
-            'items': [l for l in lista if l.produto.status in ('use_soon', 'low_stock', 'damaged', 'surplus')],
-        },
-        {
-            'titulo': 'Estoque não cadastrado',
-            'items': [l for l in lista if l.produto.status == 'undocumented'],
-        },
+    if status_filtro:
+        lista = [l for l in lista if l.situacao == status_filtro]
+        
+    grupos = [
+        {'titulo': 'Tudo certo', 'items': [l for l in lista if l.situacao == 'ok']},
+        {'titulo': 'Atenção', 'items': [l for l in lista if l.situacao == 'atencao']},
+        {'titulo': 'Crítico', 'items': [l for l in lista if l.situacao == 'critico']},
     ]
 
     return {
@@ -111,13 +100,11 @@ def adicionar_produto(request):
             categoria=request.POST.get('categoria', ''),
             detalhe=request.POST.get('detalhe', ''),
             unidade=request.POST.get('unidade', ''),
-            status=request.POST.get('status', 'all_good'),
         )
         return redirect(reverse('lista_produtos'))
 
     contexto = contexto_lista(request)
     contexto['mostrar_modal'] = True
-    contexto['status_choices'] = Produto.STATUS_CHOICES
 
     return render(request, 'estoque/lista_produtos.html', contexto)
 
