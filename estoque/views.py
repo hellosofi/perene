@@ -6,7 +6,6 @@ from django.db.models import Q, F
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from django.db.models import Sum, Value
 from django.db.models.functions import Coalesce
 from .models import Produto, Lote
 
