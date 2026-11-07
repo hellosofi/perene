@@ -4,6 +4,7 @@ from django import forms
 from django.conf import settings
 from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.password_validation import validate_password
+from .decorators import eh_gestor
 
 # perfil
 from django.db import transaction
@@ -50,7 +51,7 @@ class LoginFuncionarioForm(_ComRequest, forms.Form):
             user = authenticate(self.request, username=alvo.get_username(), password=senha) if alvo else None
             if user is None:
                 raise forms.ValidationError('E-mail ou senha incorretos.')
-            if user.is_staff:
+            if eh_gestor(user):
                 raise forms.ValidationError('Esta conta é de gestor. Entre pelo login de gestor.')
             self.user = user
         return dados
