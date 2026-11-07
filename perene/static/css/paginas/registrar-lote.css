@@ -1,0 +1,97 @@
+/*
+ * Registrar lote (pen.dev: tela 06).
+ * Por enquanto só o cartão do formulário. O painel lateral (prévia do lote
+ * e leitura pela câmera) fica para depois, porque precisa de JS.
+ *
+ *   .registrar-lote                o cartão
+ *   .registrar-lote__trilha        "← Estoque / Registrar lote"
+ *   .registrar-lote__campos        grade dos campos
+ *   .registrar-lote__campo--largo  campo que ocupa a linha toda
+ *   .opcao-avariado                a caixa do "Lote avariado"
+ *   .registrar-lote__acoes         Cancelar + Salvar
+ */
+
+.registrar-lote {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-5);
+    max-width: var(--largura-cartao-formulario);
+    padding: var(--espaco-5);
+    border: var(--borda-fina) solid var(--cor-linha);
+    border-radius: var(--raio-l);
+    background: var(--cor-superficie);
+    font-family: var(--fonte-texto);
+    color: var(--cor-texto);
+}
+
+.registrar-lote__trilha {
+    display: flex;
+    gap: var(--espaco-2);
+    font-size: var(--texto-s);
+    color: var(--cor-texto-suave);
+}
+
+.registrar-lote__trilha a {
+    color: var(--cor-primaria);
+    font-weight: var(--peso-forte);
+    text-decoration: none;
+}
+
+.registrar-lote__titulo {
+    font-family: var(--fonte-titulo);
+    font-size: var(--titulo-l);
+    font-weight: var(--peso-forte);
+    line-height: var(--altura-linha-titulo);
+    color: var(--cor-texto);
+}
+
+.registrar-lote__subtitulo {
+    color: var(--cor-texto-suave);
+}
+
+.registrar-lote__campos {
+    display: grid;
+    gap: var(--espaco-4);
+}
+
+.opcao-avariado {
+    display: flex;
+    align-items: center;
+    gap: var(--espaco-3);
+    padding: var(--espaco-4);
+    border-radius: var(--raio-m);
+    background: var(--cor-superficie-suave);
+    cursor: pointer;
+}
+
+.opcao-avariado input {
+    width: var(--espaco-5);
+    height: var(--espaco-5);
+    accent-color: var(--cor-primaria);
+}
+
+.opcao-avariado__texto {
+    font-size: var(--texto-xs);
+    color: var(--cor-texto-suave);
+}
+
+.registrar-lote__acoes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: var(--espaco-3);
+}
+
+@media (min-width: 768px) {
+    .registrar-lote {
+        padding: var(--espaco-6);
+    }
+
+    .registrar-lote__campos {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .registrar-lote__campo--largo {
+        grid-column: 1 / -1;
+    }
+}

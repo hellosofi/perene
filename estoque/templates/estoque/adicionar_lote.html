@@ -1,18 +1,69 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block titulo %}Registrar lote — Perene{% endblock %}
 {% block titulo_pagina %}Registrar lote{% endblock %}
 
+{% block estilos %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Smooch+Sans:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/base/tokens.css' %}">
+<link rel="stylesheet" href="{% static 'css/componentes/botao.css' %}">
+<link rel="stylesheet" href="{% static 'css/componentes/campo.css' %}">
+<link rel="stylesheet" href="{% static 'css/componentes/aviso.css' %}">
+<link rel="stylesheet" href="{% static 'css/paginas/registrar-lote.css' %}">
+{% endblock %}
+
 {% block conteudo %}
 <div class="conteudo-pagina">
-    <h1>Novo lote de {{ produto.nome }}</h1>
-
-    <form method="post">
+    <form method="post" class="registrar-lote" novalidate>
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="botao-primario">Salvar</button>
-    </form>
 
-    <a href="{% url 'lista_produtos' %}">Voltar</a>
+        <nav class="registrar-lote__trilha" aria-label="Caminho">
+            <a href="{% url 'lista_produtos' %}">← Estoque</a>
+            <span>/</span>
+            <span>Registrar lote</span>
+        </nav>
+
+        <div>
+            <h1 class="registrar-lote__titulo">Registrar lote</h1>
+            <p class="registrar-lote__subtitulo">
+                Lote de <strong>{{ produto.nome }}</strong>. Preencha o que está na etiqueta da caixa.
+            </p>
+        </div>
+
+        {% if form.non_field_errors %}
+        <div class="aviso aviso--erro" role="alert">
+            {% for erro in form.non_field_errors %}<p>{{ erro }}</p>{% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="registrar-lote__campos">
+            {% for campo in form %}
+            {% if campo.name != 'avariado' %}
+            <div class="campo{% if campo.errors %} campo--erro{% endif %}{% if campo.name == 'local' or campo.name == 'observacao' %} registrar-lote__campo--largo{% endif %}">
+                <label for="{{ campo.id_for_label }}">{{ campo.label }}</label>
+                {{ campo }}
+                {% if campo.help_text %}<p class="campo__ajuda">{{ campo.help_text }}</p>{% endif %}
+                {% for erro in campo.errors %}<p class="campo__erro">{{ erro }}</p>{% endfor %}
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+
+        <label class="opcao-avariado" for="{{ form.avariado.id_for_label }}">
+            {{ form.avariado }}
+            <span>
+                <strong>{{ form.avariado.label }}</strong><br>
+                <span class="opcao-avariado__texto">Marque se a embalagem chegou danificada. O lote entra como Crítico.</span>
+            </span>
+        </label>
+
+        <div class="registrar-lote__acoes">
+            <a href="{% url 'lista_produtos' %}" class="botao botao--contorno">Cancelar</a>
+            <button type="submit" class="botao">Salvar lote</button>
+        </div>
+    </form>
 </div>
 {% endblock %}

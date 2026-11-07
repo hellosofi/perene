@@ -35,7 +35,14 @@
     transition: border-color var(--transicao), box-shadow var(--transicao);
 }
 
-.campo input::placeholder {
+.campo textarea {
+    min-height: var(--altura-texto-longo);
+    padding: var(--espaco-3) var(--espaco-4);
+    resize: vertical;
+}
+
+.campo input::placeholder,
+.campo textarea::placeholder {
     color: var(--cor-texto-suave);
 }
 

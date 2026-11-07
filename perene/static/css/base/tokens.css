@@ -124,11 +124,13 @@
      * Tamanhos de componentes
      * ------------------------------------------------------------- */
     --altura-campo: 48px;
+    --altura-texto-longo: 96px;
     --altura-botao: 52px;
     --altura-seletor: 44px;
     --area-toque: 44px;
     --largura-formulario: 380px;
     --largura-formulario-largo: 576px;
+    --largura-cartao-formulario: 712px;
     --largura-cartao-app: 1280px;
     --altura-cartao-app: 780px;
     --largura-imagotipo: 68px;
