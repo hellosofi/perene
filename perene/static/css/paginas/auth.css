@@ -1,0 +1,267 @@
+/*
+ * Página de entrada: login e cadastros (pen.dev: telas 01, 02 e 02d).
+ * Um só template (auth.html) serve as quatro telas.
+ *
+ *   .auth                       a página (fundo ciano claro com rios)
+ *   .auth-cartao                o cartão branco com borda de vidro
+ *   .auth-cartao--cadastro      painel da marca à esquerda (cadastros)
+ *   .auth-formulario            a coluna do formulário
+ *   .seletor-perfil             a pílula "Sou gestor | Sou funcionário"
+ *   .auth-painel                o painel ciano da marca
+ *
+ * Mobile-first: no celular aparece só o formulário.
+ * O painel da marca entra a partir de 1024px.
+ */
+
+/* ------------------------------------------------------------------
+ * Página
+ * ---------------------------------------------------------------- */
+
+.auth {
+    display: grid;
+    place-items: center;
+    padding: var(--espaco-4);
+    background: var(--cor-fundo-pagina) url('../../images/marca/fundo-rios.svg') center / cover no-repeat;
+}
+
+/* ------------------------------------------------------------------
+ * Cartão
+ * ---------------------------------------------------------------- */
+
+.auth-cartao {
+    display: grid;
+    width: 100%;
+    max-width: var(--largura-cartao-app);
+    overflow: hidden;
+    border: var(--borda-vidro) solid var(--cor-borda-vidro);
+    border-radius: var(--raio-cartao-app);
+    background: var(--cor-superficie);
+    background-clip: padding-box;
+}
+
+/* ------------------------------------------------------------------
+ * Formulário
+ * ---------------------------------------------------------------- */
+
+.auth-formulario {
+    display: flex;
+    justify-content: center;
+    padding: var(--espaco-7) var(--espaco-5);
+}
+
+.auth-formulario__conteudo {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-5);
+    width: 100%;
+    max-width: var(--largura-formulario);
+}
+
+.auth-cartao--cadastro .auth-formulario__conteudo {
+    max-width: var(--largura-formulario-largo);
+}
+
+.auth-formulario__marca {
+    width: var(--largura-imagotipo);
+    align-self: center;
+}
+
+.auth-formulario__cabecalho {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-2);
+    text-align: center;
+}
+
+.auth-cartao--cadastro .auth-formulario__cabecalho {
+    text-align: left;
+}
+
+.auth-formulario__subtitulo {
+    color: var(--cor-texto-suave);
+}
+
+.auth-formulario__campos {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-4);
+}
+
+.auth-formulario__acoes {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-4);
+}
+
+.auth-formulario__troca {
+    text-align: center;
+    font-size: var(--texto-s);
+    color: var(--cor-texto-suave);
+}
+
+/* ------------------------------------------------------------------
+ * Seletor de perfil (pílula)
+ * ---------------------------------------------------------------- */
+
+.seletor-perfil {
+    display: flex;
+    gap: var(--espaco-1);
+    padding: var(--espaco-1);
+    border-radius: var(--raio-pilula);
+    background: var(--cor-superficie-suave);
+}
+
+.seletor-perfil__opcao {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--altura-seletor);
+    border-radius: var(--raio-pilula);
+    color: var(--cor-texto-suave);
+    font-size: var(--texto-m);
+    font-weight: var(--peso-forte);
+    text-decoration: none;
+}
+
+.seletor-perfil__opcao:hover {
+    color: var(--cor-texto);
+    text-decoration: none;
+}
+
+.seletor-perfil__opcao--ativa {
+    background: var(--cor-superficie);
+    color: var(--cor-texto);
+    box-shadow: var(--sombra-suave);
+}
+
+/* ------------------------------------------------------------------
+ * Painel da marca (escondido no celular)
+ * ---------------------------------------------------------------- */
+
+.auth-painel {
+    display: none;
+}
+
+.auth-painel__logo {
+    width: var(--largura-logo);
+}
+
+.auth-painel__barra {
+    width: var(--espaco-7);
+    height: var(--espessura-barra);
+    border-radius: var(--raio-pilula);
+    background: var(--cor-destaque);
+}
+
+.auth-painel__frase {
+    font-family: var(--fonte-titulo);
+    font-size: var(--titulo-l);
+    font-weight: var(--peso-forte);
+    line-height: var(--altura-linha-titulo);
+    color: var(--cor-texto-invertido);
+}
+
+.auth-painel__titulo {
+    color: var(--cor-texto-invertido);
+}
+
+.auth-painel__texto {
+    padding-left: var(--espaco-4);
+    border-left: var(--espessura-barra) solid var(--cor-destaque);
+    color: var(--cor-texto-invertido);
+}
+
+.auth-painel__passos {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-5);
+}
+
+.auth-painel__passo {
+    display: flex;
+    gap: var(--espaco-4);
+    color: var(--cor-texto-invertido);
+}
+
+.auth-painel__numero {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: var(--espaco-6);
+    height: var(--espaco-6);
+    border: var(--borda-media) solid var(--cor-texto-invertido);
+    border-radius: var(--raio-pilula);
+    font-size: var(--texto-s);
+    font-weight: var(--peso-forte);
+}
+
+.auth-painel__passo-titulo {
+    display: block;
+    font-weight: var(--peso-forte);
+}
+
+.auth-painel__passo-texto {
+    font-size: var(--texto-s);
+}
+
+.auth-painel__nota {
+    margin-top: auto;
+    font-size: var(--texto-xs);
+    color: var(--cor-texto-invertido);
+}
+
+/* ------------------------------------------------------------------
+ * Tablet: mais respiro no formulário
+ * ---------------------------------------------------------------- */
+
+@media (min-width: 768px) {
+    .auth {
+        padding: var(--espaco-7);
+    }
+
+    .auth-formulario {
+        padding: var(--espaco-9) var(--espaco-8);
+    }
+}
+
+/* ------------------------------------------------------------------
+ * Desktop: formulário + painel da marca lado a lado
+ * ---------------------------------------------------------------- */
+
+@media (min-width: 1024px) {
+    .auth-cartao {
+        grid-template-columns: 17fr 15fr;
+        min-height: var(--altura-cartao-app);
+    }
+
+    .auth-cartao--cadastro {
+        grid-template-columns: 14fr 18.5fr;
+    }
+
+    .auth-formulario {
+        align-items: center;
+    }
+
+    .auth-cartao--cadastro .auth-formulario__marca {
+        display: none;
+    }
+
+    .auth-painel {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: var(--espaco-5);
+        padding: var(--espaco-9) var(--espaco-8) var(--espaco-9) 38%;
+        background: url('../../images/marca/painel-login.svg') right center / cover no-repeat;
+    }
+
+    .auth-cartao--cadastro .auth-painel {
+        order: -1;
+        justify-content: flex-start;
+        gap: var(--espaco-7);
+        padding: var(--espaco-8) 30% var(--espaco-8) var(--espaco-8);
+        background-image: url('../../images/marca/painel-cadastro.svg');
+        background-position: left center;
+    }
+}

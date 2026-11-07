@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block estilos %}<link rel="stylesheet" href="{% static 'css/equipe.css' %}">{% endblock %}
+{% block estilos %}<link rel="stylesheet" href="{% static 'css/legado/equipe.css' %}">{% endblock %}
 
 {% block titulo %}Minha equipe — Perene{% endblock %}
 {% block titulo_pagina %}Minha equipe{% endblock %}
@@ -14,6 +14,15 @@
             <p class="etiqueta-topo">Planeje menos, faça mais</p>
             <h1>Minha equipe</h1>
             <p>Veja quem está trabalhando e acompanhe as tarefas de hoje.</p>
+
+            {% comment %} mostrar código de funcionário para gestor {% endcomment %}
+            {% if user.perfil.papel == 'gestor' %}
+                <p class="codigo-mercado">
+                    Código para cadastro de funcionários:
+                    <strong>{{ user.perfil.mercado.codigo_convite }}</strong>
+                </p>
+            {% endif %}            
+
         </div>
         <button class="botao-primario">
             <svg width="18" height="18"><use href="#icon-plus"/></svg>

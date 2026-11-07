@@ -1,21 +1,56 @@
 # import
 from django.db import models
 from django.conf import settings 
+import secrets
 
-from estoque.models import Produto
+from estoque.models import Produto, Lote
 from funcionarios.models import Tarefa
 
 # Create your models here.
+
+# 
+def gerar_codigo_convite():
+    return secrets.token_hex(4).upper()
+
+class Mercado(models.Model):
+    nome = models.CharField(max_length=200)
+    cidade = models.CharField(max_length=100, blank=True)
+    criado_em = models.DateTimeField(auto_now_add=True)
+    codigo_convite = models.CharField(
+        max_length=8, unique=True, default=gerar_codigo_convite, editable=False
+    )    
+
+    def __str__(self):
+        return self.nome
+class Perfil(models.Model):
+    PAPEL_CHOICES = [
+        ('gestor', 'Gestor'),
+        ('funcionario', 'Funcionário'),
+    ]
+
+    usuario = models.OneToOneField( 
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='perfil'
+    )
+    mercado = models.ForeignKey(
+        Mercado, on_delete=models.CASCADE, related_name='perfis'
+    )
+    papel = models.CharField(max_length=20, choices=PAPEL_CHOICES)
+
+    def __str__(self):
+        return f'{self.usuario} ({self.get_papel_display()}) - {self.mercado}'
+
 
 class Notificacao(models.Model):
 
     TIPO_CHOICES = [
         ('Estoque', [
             ('use_soon', 'Vencimento próximo'),
+            ('expired', 'Lote vencido'),
             ('low_stock', 'Estoque baixo'),
             ('damaged', 'Lote danificado'),
             ('undocumented', 'Não cadastrado'),
             ('surplus', 'Excedente'),
+            
         ]),
 
         ('Equipe', [
@@ -50,6 +85,10 @@ class Notificacao(models.Model):
     produto = models.ForeignKey(
         Produto, null=True, blank=True, on_delete=models.CASCADE, related_name='notificacoes'
     )
+
+    lote = models.ForeignKey(
+        Lote, null=True, blank=True, on_delete=models.CASCADE, related_name='notificacoes'
+    )    
 
     tarefa = models.ForeignKey(
         Tarefa, null=True, blank=True, on_delete=models.CASCADE, related_name='notificacoes'

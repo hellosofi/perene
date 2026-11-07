@@ -1,0 +1,55 @@
+/*
+ * Botões (pen.dev: App/Botão Primário e App/Botão Texto)
+ *   .botao                  primário: ciano escuro, em pílula
+ *   .botao--largo           ocupa a largura toda
+ *   .botao--contorno        secundário: só o contorno
+ *   .botao-texto            só texto, sem fundo
+ */
+
+.botao {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--espaco-2);
+    min-height: var(--altura-botao);
+    padding: var(--espaco-3) var(--espaco-5);
+    border: none;
+    border-radius: var(--raio-pilula);
+    background: var(--cor-primaria);
+    color: var(--cor-texto-invertido);
+    font-size: var(--texto-m);
+    font-weight: var(--peso-forte);
+    text-decoration: none;
+    transition: background var(--transicao);
+}
+
+.botao:hover {
+    background: var(--cor-primaria-hover);
+    text-decoration: none;
+}
+
+.botao--contorno {
+    border: var(--borda-media) solid var(--cor-primaria);
+    background: transparent;
+    color: var(--cor-primaria);
+}
+
+.botao--contorno:hover {
+    background: var(--cor-superficie-suave);
+}
+
+.botao--largo {
+    width: 100%;
+}
+
+.botao-texto {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--espaco-2);
+    min-height: var(--area-toque);
+    padding: 0 var(--espaco-2);
+    border-radius: var(--raio-pilula);
+    color: var(--cor-primaria);
+    font-size: var(--texto-m);
+    font-weight: var(--peso-forte);
+}

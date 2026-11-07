@@ -1,0 +1,72 @@
+/*
+ * Campo de formulário (pen.dev: App/Campo e "Estados do campo")
+ *   .campo              rótulo + controle + ajuda + erros
+ *   .campo--erro        estado de erro (vem do form do Django)
+ *   .campo__ajuda       texto de ajuda
+ *   .campo__erro        mensagem de erro
+ *
+ * O <input> é gerado pelo Django ({{ campo }}), por isso é estilizado
+ * pela tag dentro do .campo.
+ */
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-2);
+}
+
+.campo label {
+    font-size: var(--texto-s);
+    font-weight: var(--peso-forte);
+    color: var(--cor-texto);
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+    width: 100%;
+    min-height: var(--altura-campo);
+    padding: 0 var(--espaco-4);
+    border: var(--borda-fina) solid var(--cor-linha);
+    border-radius: var(--raio-s);
+    background: var(--cor-superficie);
+    color: var(--cor-texto);
+    font-size: var(--texto-m);
+    transition: border-color var(--transicao), box-shadow var(--transicao);
+}
+
+.campo textarea {
+    min-height: var(--altura-texto-longo);
+    padding: var(--espaco-3) var(--espaco-4);
+    resize: vertical;
+}
+
+.campo input::placeholder,
+.campo textarea::placeholder {
+    color: var(--cor-texto-suave);
+}
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+    outline: none;
+    border-color: var(--cor-foco);
+    box-shadow: 0 0 0 var(--espaco-1) var(--cor-foco-anel);
+}
+
+.campo__ajuda {
+    font-size: var(--texto-xs);
+    color: var(--cor-texto-suave);
+}
+
+.campo__erro {
+    font-size: var(--texto-xs);
+    color: var(--cor-erro-texto);
+}
+
+.campo--erro input,
+.campo--erro select,
+.campo--erro textarea {
+    border-color: var(--cor-erro);
+    background: var(--cor-erro-fundo);
+}

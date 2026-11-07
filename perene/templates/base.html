@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block titulo %}Perene{% endblock %}</title>
     <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
-    <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+    <link rel="stylesheet" href="{% static 'css/legado/estilo.css' %}">
     {% block estilos %}{% endblock %}
 </head>
 <body>
@@ -21,7 +21,7 @@
             <span>perene</span>
         </a>
 
-        <nav class="pilha-nav" aria-label="Navegação principal">
+         <nav class="pilha-nav" aria-label="Navegação principal">
             <p class="legenda-nav">Área de trabalho</p>
 
             {% comment %} home {% endcomment %}
@@ -37,15 +37,16 @@
                 <span>Inventário</span>
             </a>
 
-            
-            {% comment %} (novo) EQUIPE | funcionários {% endcomment %}
-            <a href="{% url 'funcionarios' %}" class="item-nav {% if pagina_atual == 'equipe' %}ativo{% endif %}">
-                <svg width="19" height="19"><use href="#icon-box"/></svg>
-                <span>Equipe</span>
-                <span class="em-breve">Ajustes</span>
-            </a>
+            {% comment %} EQUIPE | funcionários: só gestor (História 10) {% endcomment %}
+            {% if user.perfil.papel == 'gestor' %}
+                <a href="{% url 'funcionarios' %}" class="item-nav {% if pagina_atual == 'equipe' %}ativo{% endif %}">
+                    <svg width="19" height="19"><use href="#icon-box"/></svg>
+                    <span>Equipe</span>
+                    <span class="em-breve">Ajustes</span>
+                </a>
+            {% endif %}
 
-            {% comment %} imapcto {% endcomment %}
+            {% comment %} impacto {% endcomment %}
             <span class="item-nav">
                 <svg width="19" height="19"><use href="#icon-chart"/></svg>
                 <span>Impacto</span>
@@ -63,10 +64,12 @@
             <span>O impacto deste mês está crescendo</span>
         </div>
 
-        <a href="{% url 'admin:index' %}" class="item-nav">
-            <svg width="19" height="19"><use href="#icon-settings"/></svg>
-            <span>Configurações</span>
-        </a>
+       {% if user.perfil.papel == 'gestor' %}
+    <a href="{% url 'admin:index' %}" class="item-nav">
+        <svg width="19" height="19"><use href="#icon-settings"/></svg>
+        <span>Configurações</span>
+    </a>
+{% endif %}
 
         <form method="post" action="{% url 'sair' %}">
             {% csrf_token %}
@@ -83,7 +86,7 @@
             <div>
                 <strong>Sustainable Market</strong>
                 {% comment %} Mostra se o perfil eh de funcionário ou gestor {% endcomment %}
-                <span>{% if user.is_staff %}Gestor{% else %}Funcionário{% endif %}</span>
+                <span>{{ user.perfil.get_papel_display|default:"Sem perfil" }}</span>
             </div>
             <svg width="17" height="17"><use href="#icon-more"/></svg>
         </div>
@@ -108,7 +111,13 @@
                 <div class="avatar">{{ user.first_name|default:user.username|slice:":2"|upper }}</div>
             </div>
         </header>
-
+ {% if messages %}
+            <div class="mensagens">
+                {% for mensagem in messages %}
+                    <p class="mensagem mensagem-{{ mensagem.tags }}">{{ mensagem }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
         {% block conteudo %}{% endblock %}
     </main>
 

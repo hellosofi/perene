@@ -4,6 +4,11 @@ from django import forms
 from django.conf import settings
 from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.password_validation import validate_password
+from .decorators import eh_gestor
+
+# perfil
+from django.db import transaction
+from .models import Mercado, Perfil
 
 User = get_user_model()
 
@@ -46,7 +51,7 @@ class LoginFuncionarioForm(_ComRequest, forms.Form):
             user = authenticate(self.request, username=alvo.get_username(), password=senha) if alvo else None
             if user is None:
                 raise forms.ValidationError('E-mail ou senha incorretos.')
-            if user.is_staff:
+            if eh_gestor(user):
                 raise forms.ValidationError('Esta conta é de gestor. Entre pelo login de gestor.')
             self.user = user
         return dados
@@ -123,6 +128,26 @@ class _CadastroBase(_ComRequest, forms.Form):
 
 class CadastroFuncionarioForm(_CadastroBase):
     is_staff = False
+    codigo_mercado = forms.CharField(
+        label='Código do mercado',
+        max_length=8,
+        help_text='Peça este código ao gestor do seu mercado.',
+    )
+
+    def clean_codigo_mercado(self):
+        codigo = self.cleaned_data['codigo_mercado'].strip().upper()
+        mercado = Mercado.objects.filter(codigo_convite=codigo).first()
+        if mercado is None:
+            raise forms.ValidationError('Código de mercado inválido.')
+        self.mercado = mercado
+        return codigo
+
+    # cria perfil do funcionário    
+    def finalizar(self):
+        with transaction.atomic():
+            user = super().finalizar()
+            Perfil.objects.create(usuario=user, mercado=self.mercado, papel='funcionario')
+        return user
 
 
 class CadastroGestorForm(_CadastroBase):
@@ -134,6 +159,9 @@ class CadastroGestorForm(_CadastroBase):
         widget=forms.PasswordInput(attrs={'autocomplete': 'off'}),
     )
 
+    nome_mercado = forms.CharField(label='Nome do mercado', max_length=200)
+    cidade_mercado = forms.CharField(label='Cidade', max_length=100, required=False)
+
     def clean_codigo(self):
         esperado = settings.GESTOR_CODIGO_CONVITE
         if not esperado:
@@ -142,3 +170,14 @@ class CadastroGestorForm(_CadastroBase):
         if not secrets.compare_digest(informado.encode(), esperado.encode()):
             raise forms.ValidationError('Código de acesso inválido.')
         return informado
+
+    def finalizar(self):
+        d = self.cleaned_data
+        with transaction.atomic():
+            user = super().finalizar()
+            mercado = Mercado.objects.create(
+                nome=d['nome_mercado'],
+                cidade=d['cidade_mercado'],
+            )
+            Perfil.objects.create(usuario=user, mercado=mercado, papel='gestor')
+        return user    

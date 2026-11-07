@@ -1,7 +1,17 @@
 from django.db import models
-# Create your models here.
+from django.db.models import Sum
+
+from datetime import timedelta
+from django.utils import timezone
 
 # novo banco de dados
+
+SITUACOES = {
+    'ok': 'Tudo certo',
+    'atencao': 'Atenção',
+    'critico': 'Crítico',
+    'sem_lotes': 'Sem lotes',
+}
 class Produto(models.Model):
     
     STATUS_CHOICES = [
@@ -28,10 +38,10 @@ class Produto(models.Model):
     codigo = models.CharField(max_length=50, blank=True)
     categoria = models.CharField(max_length=100, blank=True)
     detalhe = models.TextField(blank=True)
-    quantidade = models.IntegerField(default=0)
     unidade = models.CharField(max_length=50, blank=True)
-    validade = models.DateField(null=True, blank=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='all_good')
+    estoque_minimo = models.PositiveIntegerField(default=0)
+    dias_alerta = models.PositiveIntegerField(default=7)    
 
     def __str__(self):
         return f'[{self.codigo}] {self.nome}'
@@ -52,3 +62,52 @@ class Produto(models.Model):
     @property
     def tem_ocorrencia(self):
         return self.status != 'all_good'
+    
+    @property                                  # 4 espaços de recuo
+    def quantidade_total(self):
+        return self.lotes.aggregate(t=Sum('quantidade'))['t'] or 0
+
+    @property
+    def situacao(self):
+        gravidade = {'ok': 0, 'atencao': 1, 'critico': 2}
+        situacoes = [lote.situacao for lote in self.lotes.all()]
+        if not situacoes:
+            return 'sem_lotes'
+        return max(situacoes, key=gravidade.get)
+
+    @property
+    def situacao_label(self):
+        return SITUACOES[self.situacao]
+
+
+class Lote(models.Model):
+    produto = models.ForeignKey(Produto, on_delete=models.CASCADE, related_name='lotes')
+    quantidade = models.PositiveIntegerField()
+    validade = models.DateField(null=True, blank=True)
+    local = models.CharField(max_length=100)
+    observacao = models.TextField(blank=True)
+    avariado = models.BooleanField(default=False)
+    criado_em = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.produto.nome}: {self.quantidade} ({self.local})'
+
+    @property
+    def situacao(self):
+        hoje = timezone.localdate()
+        produto = self.produto
+
+        if self.avariado or (self.validade and self.validade < hoje):
+            return 'critico'
+
+        if self.validade and self.validade <= hoje + timedelta(days=produto.dias_alerta):
+            return 'atencao'
+
+        if produto.estoque_minimo and produto.quantidade_total < produto.estoque_minimo:
+            return 'atencao'
+
+        return 'ok'
+    
+    @property
+    def situacao_label(self):
+        return SITUACOES[self.situacao]

@@ -156,5 +156,4 @@ LOGOUT_REDIRECT_URL = 'index'
 GESTOR_CODIGO_CONVITE = os.getenv('GESTOR_CODIGO_CONVITE')
 
 # parte dos testes
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField' 

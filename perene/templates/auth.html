@@ -4,49 +4,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ titulo }} | Perene</title>
+    <title>{{ aba }} | Perene</title>
     <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
-</head>
-<body class="tema-{{ tema }}">
-    <div class="auth-layout">
-        <aside class="lateral">
-            <a class="marca" href="{% url 'index' %}"><em>Perene</em></a>
-            <div class="lateral-texto">
-                <h1>{{ titulo }}</h1>
-                <p>{{ descricao }}</p>
-            </div>
-            <a class="voltar" href="{% url 'index' %}">Voltar para o início</a>
-        </aside>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Smooch+Sans:wght@700&display=swap" rel="stylesheet">
 
-        <main class="area-form">
-            <form method="post" class="form">
+    <link rel="stylesheet" href="{% static 'css/base/tokens.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base/tipografia.css' %}">
+    <link rel="stylesheet" href="{% static 'css/componentes/botao.css' %}">
+    <link rel="stylesheet" href="{% static 'css/componentes/campo.css' %}">
+    <link rel="stylesheet" href="{% static 'css/componentes/aviso.css' %}">
+    <link rel="stylesheet" href="{% static 'css/paginas/auth.css' %}">
+</head>
+<body class="auth">
+    <div class="auth-cartao{% if tipo == 'cadastro' %} auth-cartao--cadastro{% endif %}">
+
+        <main class="auth-formulario">
+            <form method="post" class="auth-formulario__conteudo" novalidate>
                 {% csrf_token %}
 
+                <img class="auth-formulario__marca" src="{% static 'images/marca/imagotipo.svg' %}" alt="Perene">
+
+                <div class="auth-formulario__cabecalho">
+                    <h1>{{ titulo }}</h1>
+                    <p class="auth-formulario__subtitulo">{{ descricao }}</p>
+                </div>
+
+                <nav class="seletor-perfil" aria-label="Tipo de conta">
+                    <a href="{% url url_gestor %}"
+                       class="seletor-perfil__opcao{% if tema == 'gestor' %} seletor-perfil__opcao--ativa{% endif %}"
+                       {% if tema == 'gestor' %}aria-current="page"{% endif %}>Sou gestor</a>
+                    <a href="{% url url_funcionario %}"
+                       class="seletor-perfil__opcao{% if tema == 'funcionario' %} seletor-perfil__opcao--ativa{% endif %}"
+                       {% if tema == 'funcionario' %}aria-current="page"{% endif %}>Sou funcionário</a>
+                </nav>
+
+                {% if aviso_titulo %}
+                <div class="aviso">
+                    <p class="aviso__titulo">{{ aviso_titulo }}</p>
+                    <p>{{ aviso_texto }}</p>
+                </div>
+                {% endif %}
+
                 {% if form.non_field_errors %}
-                <div class="erros-gerais" role="alert">
+                <div class="aviso aviso--erro" role="alert">
                     {% for erro in form.non_field_errors %}<p>{{ erro }}</p>{% endfor %}
                 </div>
                 {% endif %}
 
-                {% for campo in form %}
-                <div class="campo">
-                    <label for="{{ campo.id_for_label }}">{{ campo.label }}</label>
-                    {{ campo }}
-                    {% if campo.help_text %}<p class="ajuda">{{ campo.help_text }}</p>{% endif %}
-                    {% for erro in campo.errors %}<p class="erro">{{ erro }}</p>{% endfor %}
+                <div class="auth-formulario__campos">
+                    {% for campo in form %}
+                    <div class="campo{% if campo.errors %} campo--erro{% endif %}">
+                        <label for="{{ campo.id_for_label }}">{{ campo.label }}</label>
+                        {{ campo }}
+                        {% if campo.help_text %}<p class="campo__ajuda">{{ campo.help_text }}</p>{% endif %}
+                        {% for erro in campo.errors %}<p class="campo__erro">{{ erro }}</p>{% endfor %}
+                    </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
 
-                <button type="submit" class="btn-enviar">{{ botao }}</button>
-
-                <p class="troca">{{ troca_pergunta }} <a href="{% url troca_url %}">{{ troca_texto }}</a></p>
-                <p class="outro-papel"><a href="{% url outro_url %}">{{ outro_texto }}</a></p>
+                <div class="auth-formulario__acoes">
+                    <button type="submit" class="botao botao--largo">{{ botao }}</button>
+                    <p class="auth-formulario__troca">
+                        {{ troca_pergunta }} <a href="{% url troca_url %}">{{ troca_texto }}</a>
+                    </p>
+                </div>
             </form>
         </main>
+
+        <aside class="auth-painel" aria-label="Sobre o Perene">
+            <img class="auth-painel__logo" src="{% static 'images/marca/logo-branca.svg' %}" alt="">
+
+            {% if painel_frase %}
+                <span class="auth-painel__barra"></span>
+                <p class="auth-painel__frase">{{ painel_frase }}</p>
+            {% endif %}
+
+            {% if painel_titulo %}
+                <h2 class="auth-painel__titulo">{{ painel_titulo }}</h2>
+            {% endif %}
+
+            {% if painel_texto %}
+                <p class="auth-painel__texto">{{ painel_texto }}</p>
+            {% endif %}
+
+            {% if painel_passos %}
+            <ol class="auth-painel__passos">
+                {% for passo_titulo, passo_texto in painel_passos %}
+                <li class="auth-painel__passo">
+                    <span class="auth-painel__numero">{{ forloop.counter }}</span>
+                    <span>
+                        <strong class="auth-painel__passo-titulo">{{ passo_titulo }}</strong>
+                        <span class="auth-painel__passo-texto">{{ passo_texto }}</span>
+                    </span>
+                </li>
+                {% endfor %}
+            </ol>
+            {% endif %}
+
+            {% if tipo == 'cadastro' %}
+                <p class="auth-painel__nota">Seus dados ficam protegidos e não são compartilhados.</p>
+            {% endif %}
+        </aside>
     </div>
 </body>
 </html>
