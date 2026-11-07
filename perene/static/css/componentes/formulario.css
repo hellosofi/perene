@@ -1,0 +1,28 @@
+/*
+ * Formulário em grade (telas Registrar lote e Novo produto).
+ *   .formulario__campos         grade dos campos: 1 coluna no celular, 2 a partir de 768px
+ *   .formulario__campo--largo   campo que ocupa a linha toda
+ *   .formulario__acoes          botões no fim (Cancelar + Salvar)
+ */
+
+.formulario__campos {
+    display: grid;
+    gap: var(--espaco-4);
+}
+
+.formulario__acoes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: var(--espaco-3);
+}
+
+@media (min-width: 768px) {
+    .formulario__campos {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .formulario__campo--largo {
+        grid-column: 1 / -1;
+    }
+}

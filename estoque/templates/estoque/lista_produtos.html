@@ -4,6 +4,20 @@
 {% block titulo %}Inventário — Perene{% endblock %}
 {% block titulo_pagina %}Inventário{% endblock %}
 
+{% block estilos %}
+{% if mostrar_modal %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Smooch+Sans:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/base/tokens.css' %}">
+<link rel="stylesheet" href="{% static 'css/componentes/botao.css' %}">
+<link rel="stylesheet" href="{% static 'css/componentes/campo.css' %}">
+<link rel="stylesheet" href="{% static 'css/componentes/aviso.css' %}">
+<link rel="stylesheet" href="{% static 'css/componentes/formulario.css' %}">
+<link rel="stylesheet" href="{% static 'css/componentes/modal.css' %}">
+{% endif %}
+{% endblock %}
+
 {% block conteudo %}
 <div class="conteudo-pagina">
     
@@ -235,19 +249,18 @@
     {% endif %}
 
     {% if mostrar_modal %}
-    <div class="fundo-modal">
-        <div class="modal">
-            <div class="cabecalho-modal">
-                <h2>Adicionar item</h2>
-                <a href="{% url 'lista_produtos' %}" class="botao-fechar-modal">✕</a>
+    <div class="modal-fundo">
+        <form method="post" action="{% url 'adicionar_produto' %}" class="modal" role="dialog" aria-modal="true" aria-labelledby="titulo-modal" novalidate>
+            {% csrf_token %}
+            <div class="modal__cabecalho">
+                <div>
+                    <h2 class="modal__titulo" id="titulo-modal">Novo produto</h2>
+                    <p class="modal__subtitulo">Cadastre uma vez. Depois é só registrar os lotes que chegarem.</p>
+                </div>
+                <a href="{% url 'lista_produtos' %}" class="modal__fechar" aria-label="Fechar">✕</a>
             </div>
-            <div class="corpo-modal">
-                <form method="post">
-                    {% csrf_token %}
-                    {% include 'estoque/inserir_produto.html' %}
-                </form>
-            </div>
-        </div>
+            {% include 'estoque/inserir_produto.html' %}
+        </form>
     </div>
     {% endif %}
 

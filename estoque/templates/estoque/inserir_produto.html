@@ -1,14 +1,26 @@
-{% comment %}  {% endcomment %}
+{% comment %}
+Campos do modal "Novo produto" (incluído em lista_produtos.html).
+Usa os componentes campo, formulario e botao.
+{% endcomment %}
 
-<label>Nome <input type="text" name="nome" required></label>
+{% if form_produto.non_field_errors %}
+<div class="aviso aviso--erro" role="alert">
+    {% for erro in form_produto.non_field_errors %}<p>{{ erro }}</p>{% endfor %}
+</div>
+{% endif %}
 
-<label>Código <input type="text" name="codigo"></label>
+<div class="formulario__campos">
+    {% for campo in form_produto %}
+    <div class="campo{% if campo.errors %} campo--erro{% endif %}{% if campo.name == 'nome' or campo.name == 'detalhe' %} formulario__campo--largo{% endif %}">
+        <label for="{{ campo.id_for_label }}">{{ campo.label }}</label>
+        {{ campo }}
+        {% if campo.help_text %}<p class="campo__ajuda">{{ campo.help_text }}</p>{% endif %}
+        {% for erro in campo.errors %}<p class="campo__erro">{{ erro }}</p>{% endfor %}
+    </div>
+    {% endfor %}
+</div>
 
-<label>Categoria <input type="text" name="categoria"></label>
-
-<label>Detalhe <textarea name="detalhe"></textarea></label>
-
-<div class="par-campos">
-    <label>Unidade <input type="text" name="unidade"></label>
-
-<button type="submit" class="botao-primario" style="width:100%;margin-top:8px;">Salvar</button>
+<div class="formulario__acoes">
+    <a href="{% url 'lista_produtos' %}" class="botao botao--contorno">Cancelar</a>
+    <button type="submit" class="botao">Salvar produto</button>
+</div>

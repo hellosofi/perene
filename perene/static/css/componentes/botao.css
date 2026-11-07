@@ -2,6 +2,7 @@
  * Botões (pen.dev: App/Botão Primário e App/Botão Texto)
  *   .botao                  primário: ciano escuro, em pílula
  *   .botao--largo           ocupa a largura toda
+ *   .botao--contorno        secundário: só o contorno
  *   .botao-texto            só texto, sem fundo
  */
 
@@ -25,6 +26,16 @@
 .botao:hover {
     background: var(--cor-primaria-hover);
     text-decoration: none;
+}
+
+.botao--contorno {
+    border: var(--borda-media) solid var(--cor-primaria);
+    background: transparent;
+    color: var(--cor-primaria);
+}
+
+.botao--contorno:hover {
+    background: var(--cor-superficie-suave);
 }
 
 .botao--largo {
