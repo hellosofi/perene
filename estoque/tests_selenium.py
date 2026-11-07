@@ -15,7 +15,16 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 import time
 
-from estoque.models import Produto 
+# específico
+from estoque.models import Produto, Lote
+
+from datetime import date
+from unittest.mock import patch
+
+from django.contrib.auth import get_user_model
+from django.urls import reverse
+
+
 
 class BaseTestCase(StaticLiveServerTestCase):
     """
