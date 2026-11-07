@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from .models import Funcionario, Tarefa
 from django.db.models import Q, Count
+from perene.decorators import gestor_required 
 
 # Create your views here.
-
+@gestor_required          
 def equipe(request):
     funcionarios = Funcionario.objects.annotate(
         total_tarefas = Count('tarefas'),

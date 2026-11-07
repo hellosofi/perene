@@ -1176,3 +1176,17 @@ body {
 .criar-notificacao:hover {
     background: #3a3e39;
 }
+.mensagens {
+    margin: 16px 24px 0;
+}
+
+.mensagem {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin: 0 0 8px;
+}
+
+.mensagem-error {
+    background: #fbebeb;
+    color: #8a1f1f;
+}
