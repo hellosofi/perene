@@ -5,6 +5,10 @@ from django.conf import settings
 from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.password_validation import validate_password
 
+# perfil
+from django.db import transaction
+from .models import Mercado, Perfil
+
 User = get_user_model()
 
 
@@ -134,6 +138,9 @@ class CadastroGestorForm(_CadastroBase):
         widget=forms.PasswordInput(attrs={'autocomplete': 'off'}),
     )
 
+    nome_mercado = forms.CharField(label='Nome do mercado', max_length=200)
+    cidade_mercado = forms.CharField(label='Cidade', max_length=100, required=False)
+
     def clean_codigo(self):
         esperado = settings.GESTOR_CODIGO_CONVITE
         if not esperado:
@@ -142,3 +149,14 @@ class CadastroGestorForm(_CadastroBase):
         if not secrets.compare_digest(informado.encode(), esperado.encode()):
             raise forms.ValidationError('Código de acesso inválido.')
         return informado
+
+    def finalizar(self):
+        d = self.cleaned_data
+        with transaction.atomic():
+            user = super().finalizar()
+            mercado = Mercado.objects.create(
+                nome=d['nome_mercado'],
+                cidade=d['cidade_mercado'],
+            )
+            Perfil.objects.create(usuario=user, mercado=mercado, papel='gestor')
+        return user    
