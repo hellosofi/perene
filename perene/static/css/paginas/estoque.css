@@ -1,0 +1,355 @@
+/*
+ * Estoque (pen.dev: telas 04 · lista e 04c · quadro, mais as versões mobile).
+ *
+ *   .estoque                  a página
+ *   .estoque__ferramentas     busca, filtros, Lista/Quadro e botões
+ *   .seletor-visao            a pílula Lista | Quadro
+ *   .filtro-situacao          os botões Todos / Tudo certo / Atenção / Crítico
+ *   .quadro-estoque           as colunas por situação
+ *   .coluna-estoque--{chave}  cor de cada coluna (critico, atencao, ok)
+ *   .cartao-lote              um lote no quadro
+ *   .tabela-lotes             a visão em lista
+ */
+
+.estoque {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-5);
+    padding: var(--espaco-4);
+}
+
+.estoque__cabecalho {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-1);
+}
+
+.estoque__titulo {
+    margin: 0;
+    font-family: var(--fonte-titulo);
+    font-size: var(--titulo-xl);
+    font-weight: var(--peso-forte);
+    line-height: var(--altura-linha-titulo);
+    color: var(--cor-texto);
+}
+
+.estoque__subtitulo {
+    margin: 0;
+    color: var(--cor-texto-suave);
+}
+
+/* ------------------------------------------------------------------
+ * Ferramentas
+ * ---------------------------------------------------------------- */
+
+.estoque__ferramentas {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--espaco-3);
+}
+
+.estoque__busca {
+    display: flex;
+    flex: 1 1 100%;
+    align-items: center;
+    gap: var(--espaco-2);
+    min-height: var(--altura-campo);
+    padding: 0 var(--espaco-4);
+    border: var(--borda-fina) solid var(--cor-linha);
+    border-radius: var(--raio-pilula);
+    background: var(--cor-superficie);
+    color: var(--cor-texto-suave);
+}
+
+.estoque__busca:focus-within {
+    border-color: var(--cor-foco);
+    box-shadow: 0 0 0 var(--espaco-1) var(--cor-foco-anel);
+}
+
+.estoque__busca input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--cor-texto);
+    font-family: var(--fonte-texto);
+    font-size: var(--texto-m);
+}
+
+.estoque__selecao {
+    min-height: var(--altura-campo);
+    padding: 0 var(--espaco-4);
+    border: var(--borda-fina) solid var(--cor-linha);
+    border-radius: var(--raio-pilula);
+    background: var(--cor-superficie);
+    color: var(--cor-texto);
+    font-family: var(--fonte-texto);
+    font-size: var(--texto-s);
+}
+
+.seletor-visao {
+    display: flex;
+    gap: var(--espaco-1);
+    padding: var(--espaco-1);
+    border: var(--borda-fina) solid var(--cor-linha);
+    border-radius: var(--raio-pilula);
+    background: var(--cor-superficie);
+}
+
+.seletor-visao__opcao {
+    min-height: var(--area-toque);
+    padding: 0 var(--espaco-4);
+    border: none;
+    border-radius: var(--raio-pilula);
+    background: none;
+    color: var(--cor-texto-suave);
+    font-family: var(--fonte-texto);
+    font-size: var(--texto-s);
+    font-weight: var(--peso-forte);
+    cursor: pointer;
+}
+
+.seletor-visao__opcao--ativa {
+    background: var(--cor-selecionado);
+    color: var(--cor-texto-invertido);
+}
+
+.estoque__acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--espaco-3);
+}
+
+/* ------------------------------------------------------------------
+ * Filtro por situação
+ * ---------------------------------------------------------------- */
+
+.filtro-situacao {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--espaco-2);
+}
+
+.filtro-situacao__opcao {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--espaco-2);
+    min-height: var(--area-toque);
+    padding: 0 var(--espaco-4);
+    border: var(--borda-fina) solid var(--cor-linha);
+    border-radius: var(--raio-pilula);
+    background: var(--cor-superficie);
+    color: var(--cor-texto);
+    font-family: var(--fonte-texto);
+    font-size: var(--texto-s);
+    cursor: pointer;
+}
+
+.filtro-situacao__opcao--ativa {
+    border-color: var(--cor-selecionado);
+    background: var(--cor-selecionado);
+    color: var(--cor-texto-invertido);
+}
+
+.filtro-situacao__numero {
+    font-weight: var(--peso-forte);
+}
+
+/* ------------------------------------------------------------------
+ * Quadro
+ * ---------------------------------------------------------------- */
+
+.quadro-estoque {
+    display: grid;
+    gap: var(--espaco-4);
+    align-items: start;
+}
+
+.coluna-estoque {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-3);
+    padding: var(--espaco-3);
+    border-radius: var(--raio-l);
+}
+
+.coluna-estoque--critico {
+    background: var(--quadro-critico);
+}
+
+.coluna-estoque--atencao {
+    background: var(--quadro-atencao);
+}
+
+.coluna-estoque--ok {
+    background: var(--quadro-ok);
+}
+
+.coluna-estoque__cabecalho {
+    padding: var(--espaco-1) var(--espaco-2);
+}
+
+.coluna-estoque__titulo {
+    display: flex;
+    align-items: center;
+    gap: var(--espaco-2);
+    margin: 0;
+    font-family: var(--fonte-texto);
+    font-size: var(--texto-l);
+    font-weight: var(--peso-forte);
+    color: var(--cor-texto);
+}
+
+.coluna-estoque__descricao {
+    margin: 0;
+    font-size: var(--texto-xs);
+    color: var(--cor-texto-suave);
+}
+
+.coluna-estoque__vazio {
+    margin: 0;
+    padding: var(--espaco-5);
+    text-align: center;
+    font-size: var(--texto-s);
+    color: var(--cor-texto-suave);
+}
+
+.cartao-lote {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--espaco-2);
+    padding: var(--espaco-4);
+    border-radius: var(--raio-m);
+    background: var(--cor-superficie);
+}
+
+.cartao-lote__nome {
+    margin: 0;
+    font-family: var(--fonte-texto);
+    font-size: var(--texto-l);
+    font-weight: var(--peso-forte);
+    color: var(--cor-texto);
+}
+
+.cartao-lote__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--espaco-1) var(--espaco-3);
+    font-size: var(--texto-xs);
+    color: var(--cor-texto-suave);
+}
+
+.cartao-lote__mais {
+    color: var(--cor-primaria);
+    font-size: var(--texto-s);
+    font-weight: var(--peso-forte);
+    text-decoration: none;
+}
+
+.cartao-lote__mais:hover {
+    text-decoration: underline;
+}
+
+/* ------------------------------------------------------------------
+ * Lista
+ * ---------------------------------------------------------------- */
+
+.tabela-lotes {
+    overflow: hidden;
+    border: var(--borda-fina) solid var(--cor-linha);
+    border-radius: var(--raio-l);
+    background: var(--cor-superficie);
+}
+
+.tabela-lotes__cabecalho {
+    display: none;
+}
+
+.linha-lote {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: var(--espaco-1) var(--espaco-3);
+    padding: var(--espaco-3) var(--espaco-4);
+    border-top: var(--borda-fina) solid var(--cor-linha);
+    font-size: var(--texto-s);
+}
+
+.linha-lote:first-of-type {
+    border-top: none;
+}
+
+.linha-lote__nome {
+    display: block;
+    font-weight: var(--peso-forte);
+}
+
+.linha-lote__detalhe,
+.linha-lote__extra {
+    font-size: var(--texto-xs);
+    color: var(--cor-texto-suave);
+}
+
+.estoque__vazio {
+    margin: 0;
+    padding: var(--espaco-6);
+    text-align: center;
+    color: var(--cor-texto-suave);
+}
+
+/* ------------------------------------------------------------------
+ * Tablet e desktop
+ * ---------------------------------------------------------------- */
+
+@media (min-width: 768px) {
+    .estoque__busca {
+        flex-basis: 280px;
+    }
+
+    .estoque__acoes {
+        margin-left: auto;
+    }
+}
+
+@media (min-width: 1024px) {
+    .estoque {
+        padding: 0 var(--espaco-6) var(--espaco-6);
+    }
+
+    .quadro-estoque {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .tabela-lotes__cabecalho,
+    .linha-lote {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+        gap: var(--espaco-3);
+    }
+
+    .tabela-lotes__cabecalho {
+        padding: var(--espaco-3) var(--espaco-4);
+        background: var(--cor-superficie-suave);
+        font-size: var(--texto-s);
+        font-weight: var(--peso-forte);
+    }
+
+    .linha-lote__extra {
+        font-size: var(--texto-s);
+        color: var(--cor-texto);
+    }
+}
+
+/* No celular, a linha da lista mostra só o nome e a situação. */
+.linha-lote__so-desktop {
+    display: none;
+}
+
+@media (min-width: 1024px) {
+    .linha-lote__so-desktop {
+        display: block;
+    }
+}

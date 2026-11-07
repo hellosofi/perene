@@ -1,0 +1,37 @@
+/*
+ * Etiquetas em pílula (pen.dev: App/Etiqueta OK, Atenção, Crítico e Neutra).
+ *   .etiqueta                     neutra (ex.: categoria)
+ *   .etiqueta--ok                 situação "Tudo certo"
+ *   .etiqueta--atencao            situação "Atenção"
+ *   .etiqueta--critico            situação "Crítico"
+ *
+ * A situação sempre aparece em TEXTO também, nunca só pela cor.
+ */
+
+.etiqueta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--espaco-1);
+    padding: var(--espaco-1) var(--espaco-2);
+    border-radius: var(--raio-pilula);
+    background: var(--cor-superficie-suave);
+    color: var(--cor-texto-suave);
+    font-size: var(--texto-xs);
+    font-weight: var(--peso-forte);
+    line-height: var(--altura-linha);
+}
+
+.etiqueta--ok {
+    background: var(--situacao-ok-fundo);
+    color: var(--situacao-ok-texto);
+}
+
+.etiqueta--atencao {
+    background: var(--situacao-atencao-fundo);
+    color: var(--situacao-atencao-texto);
+}
+
+.etiqueta--critico {
+    background: var(--situacao-critico-fundo);
+    color: var(--situacao-critico-texto);
+}

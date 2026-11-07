@@ -58,18 +58,29 @@ def contexto_lista(request):
     )
 
     lista = list(lotes)
+
+    # quantos lotes há em cada situação (antes do filtro de situação)
+    contagens = {'todos': len(lista), 'ok': 0, 'atencao': 0, 'critico': 0}
+    for l in lista:
+        contagens[l.situacao] += 1
+
     if status_filtro:
         lista = [l for l in lista if l.situacao == status_filtro]
-        
+
+    # colunas do quadro, da mais urgente para a menos urgente
     grupos = [
-        {'titulo': 'Tudo certo', 'items': [l for l in lista if l.situacao == 'ok']},
-        {'titulo': 'Atenção', 'items': [l for l in lista if l.situacao == 'atencao']},
-        {'titulo': 'Crítico', 'items': [l for l in lista if l.situacao == 'critico']},
+        {'chave': 'critico', 'titulo': 'Crítico', 'descricao': 'Vencidos ou avariados',
+         'items': [l for l in lista if l.situacao == 'critico']},
+        {'chave': 'atencao', 'titulo': 'Atenção', 'descricao': 'Vencem logo ou estoque baixo',
+         'items': [l for l in lista if l.situacao == 'atencao']},
+        {'chave': 'ok', 'titulo': 'Tudo certo', 'descricao': 'Dentro da validade',
+         'items': [l for l in lista if l.situacao == 'ok']},
     ]
 
     return {
         'lotes': lista,                                           # MUDOU: era 'produtos'
         'grupos': grupos,
+        'contagens': contagens,
         'total': total,
         'atencao': atencao,
         'pct_saudavel': pct_saudavel,

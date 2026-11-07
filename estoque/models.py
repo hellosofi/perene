@@ -111,3 +111,17 @@ class Lote(models.Model):
     @property
     def situacao_label(self):
         return SITUACOES[self.situacao]
+
+    @property
+    def prazo_texto(self):
+        """Texto curto sobre a validade, para as etiquetas do estoque."""
+        if self.avariado:
+            return 'avariado'
+        if not self.validade:
+            return 'sem validade'
+        dias = (self.validade - timezone.localdate()).days
+        if dias < 0:
+            return f'venceu há {-dias} dia(s)'
+        if dias == 0:
+            return 'vence hoje'
+        return f'vence em {dias} dia(s)'

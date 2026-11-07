@@ -74,6 +74,11 @@
     --situacao-critico-fundo: var(--critico-fundo);
     --situacao-critico-texto: var(--critico-texto);
 
+    --quadro-critico: var(--laranja-claro);
+    --quadro-atencao: var(--amarelo-claro);
+    --quadro-ok: var(--ciano-claro);
+    --cor-selecionado: var(--marinho);
+
     /* ---------------------------------------------------------------
      * Tipografia
      * ------------------------------------------------------------- */
