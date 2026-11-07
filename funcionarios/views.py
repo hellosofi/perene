@@ -9,7 +9,7 @@ def equipe(request):
     funcionarios = Funcionario.objects.annotate(
         total_tarefas = Count('tarefas'),
         tarefas_concluidas = Count('tarefas', filter=Q(tarefas__concluida = True)) 
-    )
+    ).prefetch_related('tarefas')
 
     total_tarefas = Tarefa.objects.count()
     tarefas_concluidas = Tarefa.objects.filter(concluida = True).count()
@@ -18,6 +18,7 @@ def equipe(request):
 
     total_funcionarios = Funcionario.objects.count()
     tarefas = Tarefa.objects.select_related('responsavel')
+    sem_responsavel = Tarefa.objects.filter(responsavel__isnull=True)
 
     return render(request, "funcionarios/equipe.html",
                   {
@@ -27,6 +28,7 @@ def equipe(request):
                     'tarefas_concluidas': tarefas_concluidas,
                     'total_funcionarios': total_funcionarios,
                     'tarefas': tarefas, 
+                    'sem_responsavel': sem_responsavel,
                     'pagina_atual': 'equipe'
                 }
                   

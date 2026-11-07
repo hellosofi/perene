@@ -78,6 +78,9 @@
     --quadro-atencao: var(--amarelo-claro);
     --quadro-ok: var(--ciano-claro);
     --cor-selecionado: var(--marinho);
+    --cor-progresso: var(--ciano-escuro);
+    --cor-progresso-fundo: var(--creme-escuro);
+    --cor-concluido: var(--ciano-escuro);
 
     /* ---------------------------------------------------------------
      * Tipografia
@@ -147,6 +150,9 @@
     --largura-imagotipo: 68px;
     --largura-logo: 214px;
     --espessura-barra: 5px;
+    --altura-progresso: 8px;
+    --tamanho-marcador: 24px;
+    --largura-coluna-equipe: 300px;
 
     /* ---------------------------------------------------------------
      * Movimento
