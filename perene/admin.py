@@ -4,8 +4,8 @@ from .models import Mercado, Perfil, Notificacao
 # Register your models here.
 @admin.register(Mercado)
 class MercadoAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'cidade', 'criado_em')
-
+    list_display = ('nome', 'cidade', 'codigo_convite', 'criado_em')
+    readonly_fields = ('codigo_convite',)    
 
 @admin.register(Perfil)
 class PerfilAdmin(admin.ModelAdmin):

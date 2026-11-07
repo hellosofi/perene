@@ -127,6 +127,26 @@ class _CadastroBase(_ComRequest, forms.Form):
 
 class CadastroFuncionarioForm(_CadastroBase):
     is_staff = False
+    codigo_mercado = forms.CharField(
+        label='Código do mercado',
+        max_length=8,
+        help_text='Peça este código ao gestor do seu mercado.',
+    )
+
+    def clean_codigo_mercado(self):
+        codigo = self.cleaned_data['codigo_mercado'].strip().upper()
+        mercado = Mercado.objects.filter(codigo_convite=codigo).first()
+        if mercado is None:
+            raise forms.ValidationError('Código de mercado inválido.')
+        self.mercado = mercado
+        return codigo
+
+    # cria perfil do funcionário    
+    def finalizar(self):
+        with transaction.atomic():
+            user = super().finalizar()
+            Perfil.objects.create(usuario=user, mercado=self.mercado, papel='funcionario')
+        return user
 
 
 class CadastroGestorForm(_CadastroBase):
