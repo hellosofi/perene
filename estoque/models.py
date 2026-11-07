@@ -1,6 +1,9 @@
 from django.db import models
 from django.db.models import Sum
 
+from datetime import timedelta
+from django.utils import timezone
+
 # novo banco de dados
 class Produto(models.Model):
     
@@ -30,6 +33,8 @@ class Produto(models.Model):
     detalhe = models.TextField(blank=True)
     unidade = models.CharField(max_length=50, blank=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='all_good')
+    estoque_minimo = models.PositiveIntegerField(default=0)
+    dias_alerta = models.PositiveIntegerField(default=7)    
 
     def __str__(self):
         return f'[{self.codigo}] {self.nome}'
@@ -67,4 +72,19 @@ class Lote(models.Model):
 
     def __str__(self):
         return f'{self.produto.nome}: {self.quantidade} ({self.local})'
-    
+
+    @property
+    def situacao(self):
+        hoje = timezone.localdate()
+        produto = self.produto
+
+        if self.avariado or (self.validade and self.validade < hoje):
+            return 'critico'
+
+        if self.validade and self.validade <= hoje + timedelta(days=produto.dias_alerta):
+            return 'atencao'
+
+        if produto.estoque_minimo and produto.quantidade_total < produto.estoque_minimo:
+            return 'atencao'
+
+        return 'ok'
