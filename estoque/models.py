@@ -68,17 +68,3 @@ class Lote(models.Model):
     def __str__(self):
         return f'{self.produto.nome}: {self.quantidade} ({self.local})'
     
-from django.db import migrations
-
-def copiar(apps, schema_editor):
-    Produto = apps.get_model('estoque', 'Produto')
-    Lote = apps.get_model('estoque', 'Lote')
-    for p in Produto.objects.all():
-        if p.quantidade > 0:
-            Lote.objects.create(produto=p, quantidade=p.quantidade,
-                                validade=p.validade, local='Não informado')
-
-class Migration(migrations.Migration):
-    dependencies = [...]  # já vem preenchido
-    operations = [migrations.RunPython(copiar, migrations.RunPython.noop)]
-    
