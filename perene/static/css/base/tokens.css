@@ -1,0 +1,142 @@
+/*
+ * Tokens do Perene: o ÚNICO arquivo com valores soltos.
+ * Os valores vêm do design oficial no pen.dev (design/perene.pen) e do Manual da marca.
+ * Veja docs/regras-css.md.
+ */
+
+:root {
+    /* ---------------------------------------------------------------
+     * Nível 1: paleta da marca (usar só dentro deste arquivo)
+     * ------------------------------------------------------------- */
+    --ciano: #19A6AA;
+    --ciano-escuro: #0F7C80;
+    --ciano-claro: #C1ECEE;
+    --laranja: #F18C53;
+    --laranja-escuro: #C9652C;
+    --laranja-claro: #FBD9C4;
+    --amarelo: #FCDE67;
+    --amarelo-claro: #FEF2C2;
+    --marinho: #2D364E;
+    --marinho-suave: #5A6275;
+    --menta: #8FCDC6;
+    --menta-claro: #D0E5D8;
+    --creme: #FFF6E0;
+    --creme-escuro: #F6EACB;
+    --branco: #FFFDF7;
+    --branco-puro: #FFFFFF;
+    --linha: #EDE4CF;
+    --borda: #E9DDBE;
+    --sucesso: #2E9B6A;
+    --erro: #D2493A;
+
+    --ok-fundo: #DDF1E6;
+    --ok-texto: #1D6B47;
+    --atencao-fundo: #FDF0BF;
+    --atencao-texto: #6B4E00;
+    --critico-fundo: #FBE1DD;
+    --critico-texto: #A12E22;
+
+    /* ---------------------------------------------------------------
+     * Nível 2: o papel de cada cor (é isto que os outros arquivos usam)
+     * ------------------------------------------------------------- */
+    --cor-fundo-pagina: var(--ciano-claro);
+    --cor-superficie: var(--branco-puro);
+    --cor-superficie-suave: var(--creme);
+    --cor-texto: var(--marinho);
+    --cor-texto-suave: var(--marinho-suave);
+    --cor-texto-invertido: var(--branco-puro);
+    --cor-linha: var(--linha);
+
+    --cor-marca: var(--ciano);
+    --cor-primaria: var(--ciano-escuro);
+    --cor-primaria-hover: var(--marinho);
+    --cor-destaque: var(--laranja);
+    --cor-foco: var(--ciano-escuro);
+    --cor-foco-anel: rgb(15 124 128 / 0.18);
+
+    --cor-borda-vidro: rgb(255 255 255 / 0.7);
+    --cor-sombra: rgb(45 54 78 / 0.1);
+
+    --cor-aviso-fundo: var(--amarelo-claro);
+    --cor-aviso-borda: var(--amarelo);
+    --cor-aviso-texto: var(--atencao-texto);
+
+    --cor-erro: var(--erro);
+    --cor-erro-fundo: var(--critico-fundo);
+    --cor-erro-texto: var(--critico-texto);
+
+    --situacao-ok-fundo: var(--ok-fundo);
+    --situacao-ok-texto: var(--ok-texto);
+    --situacao-atencao-fundo: var(--atencao-fundo);
+    --situacao-atencao-texto: var(--atencao-texto);
+    --situacao-critico-fundo: var(--critico-fundo);
+    --situacao-critico-texto: var(--critico-texto);
+
+    /* ---------------------------------------------------------------
+     * Tipografia
+     * ------------------------------------------------------------- */
+    --fonte-titulo: 'Smooch Sans', 'Arial Narrow', sans-serif; /* substituta da Sugo Pro Display */
+    --fonte-texto: 'Roboto', Arial, sans-serif;
+
+    --peso-normal: 400;
+    --peso-forte: 700;
+
+    --texto-xs: 12px;
+    --texto-s: 14px;
+    --texto-m: 15px;
+    --texto-l: 16px;
+    --titulo-m: 32px;
+    --titulo-l: 40px;
+    --titulo-xl: 44px;
+
+    --altura-linha: 1.45;
+    --altura-linha-titulo: 1.05;
+
+    /* ---------------------------------------------------------------
+     * Espaçamentos (base 4)
+     * ------------------------------------------------------------- */
+    --espaco-1: 4px;
+    --espaco-2: 8px;
+    --espaco-3: 12px;
+    --espaco-4: 16px;
+    --espaco-5: 24px;
+    --espaco-6: 32px;
+    --espaco-7: 40px;
+    --espaco-8: 56px;
+    --espaco-9: 64px;
+
+    /* ---------------------------------------------------------------
+     * Raios, bordas e sombras
+     * ------------------------------------------------------------- */
+    --raio-s: 12px;
+    --raio-m: 16px;
+    --raio-l: 28px;
+    --raio-cartao-app: 36px;
+    --raio-pilula: 999px;
+
+    --borda-fina: 1px;
+    --borda-media: 2px;
+    --borda-vidro: 8px;
+
+    --sombra-suave: 0 2px 6px var(--cor-sombra);
+
+    /* ---------------------------------------------------------------
+     * Tamanhos de componentes
+     * ------------------------------------------------------------- */
+    --altura-campo: 48px;
+    --altura-botao: 52px;
+    --altura-seletor: 44px;
+    --area-toque: 44px;
+    --largura-formulario: 380px;
+    --largura-formulario-largo: 576px;
+    --largura-cartao-app: 1280px;
+    --altura-cartao-app: 780px;
+    --largura-imagotipo: 68px;
+    --largura-logo: 214px;
+    --espessura-barra: 5px;
+
+    /* ---------------------------------------------------------------
+     * Movimento
+     * ------------------------------------------------------------- */
+    --transicao: 150ms ease;
+}

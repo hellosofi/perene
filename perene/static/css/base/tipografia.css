@@ -1,0 +1,46 @@
+/* Tipografia base: textos, títulos e links. */
+
+body {
+    font-family: var(--fonte-texto);
+    font-size: var(--texto-l);
+    font-weight: var(--peso-normal);
+    line-height: var(--altura-linha);
+    color: var(--cor-texto);
+}
+
+h1,
+h2,
+h3 {
+    font-family: var(--fonte-titulo);
+    font-weight: var(--peso-forte);
+    line-height: var(--altura-linha-titulo);
+    color: var(--cor-texto);
+}
+
+h1 {
+    font-size: var(--titulo-xl);
+}
+
+h2 {
+    font-size: var(--titulo-m);
+}
+
+strong,
+b {
+    font-weight: var(--peso-forte);
+}
+
+a {
+    color: var(--cor-primaria);
+    font-weight: var(--peso-forte);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+:focus-visible {
+    outline: var(--borda-media) solid var(--cor-foco);
+    outline-offset: var(--borda-media);
+}
