@@ -8,22 +8,26 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.db.models.functions import Coalesce
 from .models import Produto, Lote
+from perene.utils import mercado_do_usuario
 
 def contexto_lista(request):
     query = request.GET.get('q', '')
     categoria = request.GET.get('categoria', '')
-    produto_id = request.GET.get('produto', '')                  # NOVO
+    produto_id = request.GET.get('produto', '')
     status_filtro = request.GET.get('status', '')
     visao = request.GET.get('visao', 'quadro')
 
-    # MUDOU: a lista agora é de lotes, com os que vencem antes primeiro
+    mercado = mercado_do_usuario(request.user)                          # 9.4
+    produtos_do_mercado = Produto.objects.filter(mercado=mercado)       # 9.4
+
     lotes = (
         Lote.objects
+        .filter(produto__mercado=mercado)                               # 9.4
         .select_related('produto')
         .order_by(F('validade').asc(nulls_last=True))
     )
 
-    if query:                                                     # MUDOU
+    if query:
         lotes = lotes.filter(
             Q(produto__nome__icontains=query) |
             Q(produto__codigo__icontains=query) |
@@ -31,36 +35,36 @@ def contexto_lista(request):
             Q(local__icontains=query)
         )
 
-    if categoria:                                                 # MUDOU
+    if categoria:
         lotes = lotes.filter(produto__categoria=categoria)
 
-    if produto_id.isdigit():                                      # NOVO
+    if produto_id.isdigit():
         lotes = lotes.filter(produto_id=produto_id)
 
-    produtos = list(Produto.objects.prefetch_related('lotes'))
+    produtos = list(produtos_do_mercado.prefetch_related('lotes'))     # 9.4
     total = len(produtos)
     atencao = len([p for p in produtos if p.situacao in ('atencao', 'critico')])
     saudaveis = len([p for p in produtos if p.situacao == 'ok'])
     pct_saudavel = round(saudaveis / total * 100, 1) if total > 0 else 0
 
     categorias = (
-        Produto.objects
+        produtos_do_mercado                                             # 9.4
         .exclude(categoria='')
         .values_list('categoria', flat=True)
         .distinct()
         .order_by('categoria')
     )
 
-    produtos_filtro = Produto.objects.order_by('nome')            
-    produto_selecionado = (                                      
-        Produto.objects.filter(pk=produto_id).first()
+    produtos_filtro = produtos_do_mercado.order_by('nome')             # 9.4
+    produto_selecionado = (
+        produtos_do_mercado.filter(pk=produto_id).first()              # 9.4
         if produto_id.isdigit() else None
     )
 
     lista = list(lotes)
     if status_filtro:
         lista = [l for l in lista if l.situacao == status_filtro]
-        
+
     grupos = [
         {'titulo': 'Tudo certo', 'items': [l for l in lista if l.situacao == 'ok']},
         {'titulo': 'Atenção', 'items': [l for l in lista if l.situacao == 'atencao']},
@@ -68,7 +72,7 @@ def contexto_lista(request):
     ]
 
     return {
-        'lotes': lista,                                           # MUDOU: era 'produtos'
+        'lotes': lista,
         'grupos': grupos,
         'total': total,
         'atencao': atencao,
@@ -79,9 +83,9 @@ def contexto_lista(request):
         'visao': visao,
         'categorias': categorias,
         'pagina_atual': 'inventario',
-        'produtos_filtro': produtos_filtro,                       # NOVO
-        'produto_atual': produto_id,                              # NOVO
-        'produto_selecionado': produto_selecionado,               # NOVO
+        'produtos_filtro': produtos_filtro,
+        'produto_atual': produto_id,
+        'produto_selecionado': produto_selecionado,
     }
     
 
@@ -90,11 +94,13 @@ def lista_produtos(request):
     contexto = contexto_lista(request)
     return render(request, 'estoque/lista_produtos.html', contexto)
 
-@login_required  # requer login
+@login_required
 def adicionar_produto(request):
     form = ProdutoForm(request.POST or None)
     if form.is_valid():
-        form.save()
+        produto = form.save(commit=False)                        # 9.5 (era: form.save())
+        produto.mercado = mercado_do_usuario(request.user)       # 9.5
+        produto.save()                                           # 9.5
         return redirect('lista_produtos')
 
     contexto = contexto_lista(request)
@@ -108,8 +114,9 @@ from .forms import LoteForm, ProdutoForm
 
 @login_required
 def adicionar_lote(request, produto_id):
-    # TODO: filtrar por mercado (História 9)
-    produto = get_object_or_404(Produto, pk=produto_id)
+    produto = get_object_or_404(                                 # 9.6
+        Produto, pk=produto_id, mercado=mercado_do_usuario(request.user)
+    )
     form = LoteForm(request.POST or None)
     if form.is_valid():
         lote = form.save(commit=False)
