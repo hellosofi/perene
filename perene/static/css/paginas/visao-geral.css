@@ -1,0 +1,204 @@
+/*
+ * Visão geral (pen.dev: tela 03, versão 2).
+ *
+ *   .visao                     a página
+ *   .visao__grade              saúde + 4 indicadores
+ *   .visao__saude              o cartão ciano (indicador--destaque) com a % em dia
+ *   .prioridades               a lista "Prioridades de hoje"
+ *   .prioridade__icone--{tom}  gota tingida: critico, atencao, equipe
+ *   .tarefas-equipe            o cartão marinho com as próximas tarefas
+ */
+
+.visao {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-5);
+    padding: var(--espaco-4);
+}
+
+.visao__subtitulo {
+    color: var(--cor-texto-suave);
+}
+
+.visao__grade,
+.visao__inferior,
+.visao__indicadores {
+    display: grid;
+    gap: var(--espaco-4);
+}
+
+.visao__saude .indicador__numero {
+    font-size: calc(var(--titulo-xl) * 2);
+}
+
+.visao__indicador-rodape {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--espaco-2);
+}
+
+/* ------------------------------------------------------------------
+ * Prioridades de hoje
+ * ---------------------------------------------------------------- */
+
+.prioridades {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-3);
+    padding: var(--espaco-5);
+    border: var(--borda-fina) solid var(--cor-linha);
+    border-radius: var(--raio-l);
+    background: var(--cor-superficie);
+}
+
+.prioridades__cabecalho {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--espaco-3);
+}
+
+.prioridade {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--espaco-3);
+    padding-top: var(--espaco-3);
+    border-top: var(--borda-fina) solid var(--cor-linha);
+}
+
+.prioridade__icone {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: var(--area-toque);
+    height: var(--area-toque);
+    border-radius: var(--raio-pilula);
+    background: var(--cor-superficie-suave);
+}
+
+.prioridade__icone--critico {
+    background: var(--quadro-critico);
+}
+
+.prioridade__icone--atencao {
+    background: var(--quadro-atencao);
+}
+
+.prioridade__icone--equipe {
+    background: var(--cor-marca-suave);
+}
+
+.prioridade__corpo {
+    flex: 1;
+    min-width: 0;
+}
+
+.prioridade__titulo {
+    font-weight: var(--peso-forte);
+}
+
+.prioridade__texto {
+    font-size: var(--texto-s);
+    color: var(--cor-texto-suave);
+}
+
+.prioridade__acao {
+    padding: var(--espaco-2) var(--espaco-4);
+    border-radius: var(--raio-pilula);
+    background: var(--cor-superficie-suave);
+    font-size: var(--texto-s);
+    text-decoration: none;
+}
+
+.prioridades__vazio {
+    color: var(--cor-texto-suave);
+}
+
+/* ------------------------------------------------------------------
+ * Tarefas da equipe (cartão marinho)
+ * ---------------------------------------------------------------- */
+
+.tarefas-equipe {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-3);
+    padding: var(--espaco-5);
+    border-radius: var(--raio-l);
+    background: var(--cor-cartao-escuro);
+    color: var(--cor-texto-invertido);
+}
+
+.tarefas-equipe__titulo {
+    color: var(--cor-texto-invertido);
+}
+
+.tarefas-equipe__numero {
+    font-family: var(--fonte-titulo);
+    font-size: var(--titulo-l);
+    font-weight: var(--peso-forte);
+    color: var(--cor-realce-escuro);
+}
+
+.tarefas-equipe .progresso::-webkit-progress-value {
+    background: var(--cor-realce-escuro);
+}
+
+.tarefas-equipe .progresso::-moz-progress-bar {
+    background: var(--cor-realce-escuro);
+}
+
+.tarefas-equipe__item {
+    display: flex;
+    align-items: center;
+    gap: var(--espaco-3);
+    padding: var(--espaco-3);
+    border-radius: var(--raio-m);
+    background: var(--cor-linha-escura);
+}
+
+.tarefas-equipe__nome {
+    display: block;
+    font-size: var(--texto-s);
+    font-weight: var(--peso-forte);
+}
+
+.tarefas-equipe__hora {
+    font-size: var(--texto-xs);
+}
+
+.tarefas-equipe__link {
+    color: var(--cor-realce-escuro);
+}
+
+/* ------------------------------------------------------------------
+ * Tablet e desktop
+ * ---------------------------------------------------------------- */
+
+@media (min-width: 768px) {
+    .visao__indicadores {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width: 1024px) {
+    .visao {
+        padding: 0 var(--espaco-6) var(--espaco-6);
+    }
+
+    .visao__grade {
+        grid-template-columns: 1fr 1.4fr;
+    }
+
+    .visao__inferior {
+        grid-template-columns: 1.6fr 1fr;
+        align-items: start;
+    }
+}
+
+.visao__saude:hover,
+.prioridade__acao:hover {
+    text-decoration: none;
+}

@@ -79,6 +79,9 @@
     --quadro-atencao: var(--amarelo-claro);
     --quadro-ok: var(--ciano-claro);
     --cor-selecionado: var(--marinho);
+    --cor-cartao-escuro: var(--marinho);
+    --cor-realce-escuro: var(--amarelo);
+    --cor-linha-escura: rgb(255 255 255 / 0.12);
     --cor-progresso: var(--ciano-escuro);
     --cor-progresso-fundo: var(--creme-escuro);
     --cor-concluido: var(--ciano-escuro);

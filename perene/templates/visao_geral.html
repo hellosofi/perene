@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}Visão geral — Perene{% endblock %}
+
+{% block estilos %}
+<link rel="stylesheet" href="{% static 'css/componentes/etiqueta.css' %}">
+<link rel="stylesheet" href="{% static 'css/componentes/indicador.css' %}">
+<link rel="stylesheet" href="{% static 'css/componentes/progresso.css' %}">
+<link rel="stylesheet" href="{% static 'css/paginas/visao-geral.css' %}">
+{% endblock %}
+
+{% block conteudo %}
+<div class="visao">
+
+    <header>
+        <h1>{{ saudacao }}, {{ user.first_name|default:user.username }}</h1>
+        <p class="visao__subtitulo">{% now "l, j \d\e F" %} · veja o que precisa de atenção hoje.</p>
+    </header>
+
+    <section class="visao__grade" aria-label="Resumo do mercado">
+        <a href="{% url 'lista_produtos' %}" class="indicador indicador--destaque visao__saude">
+            <span class="indicador__rotulo">Saúde do estoque</span>
+            <span class="indicador__numero">{{ pct_em_dia }}%</span>
+            <span class="indicador__detalhe">
+                {{ total_em_dia }} de {{ total_com_lotes }} produto{{ total_com_lotes|pluralize }} sem alerta de validade ou estoque
+            </span>
+            <progress class="progresso" value="{{ total_em_dia }}" max="{{ total_com_lotes|default:1 }}">{{ pct_em_dia }}%</progress>
+        </a>
+
+        <div class="visao__indicadores">
+            <div class="indicador indicador--laranja">
+                <span class="indicador__rotulo">Vencidos ou avariados</span>
+                <div class="visao__indicador-rodape">
+                    <span class="indicador__numero">{{ criticos }}</span>
+                    <span class="etiqueta etiqueta--critico">Crítico</span>
+                </div>
+                <span class="indicador__detalhe">Tire da prateleira e registre a perda ou a doação.</span>
+            </div>
+
+            <div class="indicador indicador--amarelo">
+                <span class="indicador__rotulo">Pedem atenção</span>
+                <div class="visao__indicador-rodape">
+                    <span class="indicador__numero">{{ atencao }}</span>
+                    <span class="etiqueta etiqueta--atencao">Atenção</span>
+                </div>
+                <span class="indicador__detalhe">Lotes que vencem logo ou com estoque baixo.</span>
+            </div>
+
+            <div class="indicador indicador--ciano">
+                <span class="indicador__rotulo">Lotes registrados</span>
+                <span class="indicador__numero">{{ registrados_mes }}</span>
+                <span class="indicador__detalhe">Entradas no estoque neste mês.</span>
+            </div>
+
+            <div class="indicador indicador--creme">
+                <span class="indicador__rotulo">Abaixo do mínimo</span>
+                <span class="indicador__numero">{{ abaixo_minimo }}</span>
+                <span class="indicador__detalhe">Produtos com estoque menor que o mínimo cadastrado.</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="visao__inferior">
+        <section class="prioridades" aria-label="Prioridades de hoje">
+            <div class="prioridades__cabecalho">
+                <h2>Prioridades de hoje</h2>
+                {% if prioridades %}<span class="etiqueta etiqueta--critico">{{ prioridades|length }} pendente{{ prioridades|length|pluralize }}</span>{% endif %}
+            </div>
+
+            {% for item in prioridades %}
+            <article class="prioridade">
+                <span class="prioridade__icone prioridade__icone--{{ item.tom }}" aria-hidden="true">
+                    <svg width="18" height="18"><use href="#{{ item.icone }}"/></svg>
+                </span>
+                <div class="prioridade__corpo">
+                    <p class="prioridade__titulo">{{ item.titulo }}</p>
+                    {% if item.texto %}<p class="prioridade__texto">{{ item.texto }}</p>{% endif %}
+                </div>
+                <a href="{{ item.url }}" class="prioridade__acao">{{ item.acao }} →</a>
+            </article>
+            {% empty %}
+            <p class="prioridades__vazio">Tudo em dia por aqui. 🌿</p>
+            {% endfor %}
+        </section>
+
+        <section class="tarefas-equipe" aria-label="Tarefas da equipe">
+            <h2 class="tarefas-equipe__titulo">Tarefas da equipe</h2>
+            <p>
+                <span class="tarefas-equipe__numero">{{ tarefas_feitas }} de {{ tarefas_total }}</span>
+                concluídas
+            </p>
+            <progress class="progresso" value="{{ tarefas_feitas }}" max="{{ tarefas_total|default:1 }}"></progress>
+
+            {% for t in proximas_tarefas %}
+            <div class="tarefas-equipe__item">
+                <span class="casca__avatar" aria-hidden="true">{{ t.responsavel.iniciais|default:"—" }}</span>
+                <span>
+                    <span class="tarefas-equipe__nome">{{ t.titulo }}</span>
+                    <span class="tarefas-equipe__hora">{% if t.horario %}até {{ t.horario|time:"H:i" }}{% else %}sem horário{% endif %}</span>
+                </span>
+            </div>
+            {% empty %}
+            <p>Nenhuma tarefa pendente.</p>
+            {% endfor %}
+
+            {% if user.perfil.papel == 'gestor' %}
+            <a href="{% url 'funcionarios' %}" class="tarefas-equipe__link">Ver todas as tarefas →</a>
+            {% endif %}
+        </section>
+    </div>
+
+</div>
+{% endblock %}

@@ -6,15 +6,24 @@
 {% block estilos %}
 {% comment %} tokens.css e aviso.css já vêm do base.html {% endcomment %}
 <link rel="stylesheet" href="{% static 'css/componentes/indicador.css' %}">
+<link rel="stylesheet" href="{% static 'css/componentes/progresso.css' %}">
 <link rel="stylesheet" href="{% static 'css/paginas/equipe.css' %}">
+{% if form_tarefa %}
+<link rel="stylesheet" href="{% static 'css/componentes/campo.css' %}">
+<link rel="stylesheet" href="{% static 'css/componentes/formulario.css' %}">
+<link rel="stylesheet" href="{% static 'css/componentes/modal.css' %}">
+{% endif %}
 {% endblock %}
 
 {% block conteudo %}
 <div class="equipe">
 
-    <header>
-        <h1 class="equipe__titulo">Equipe e tarefas</h1>
-        <p class="equipe__subtitulo">{% now "l, j \d\e F" %}</p>
+    <header class="equipe__cabecalho">
+        <div>
+            <h1 class="equipe__titulo">Equipe e tarefas</h1>
+            <p class="equipe__subtitulo">{% now "l, j \d\e F" %}</p>
+        </div>
+        <a href="{% url 'nova_tarefa' %}" class="botao">+ Nova tarefa</a>
     </header>
 
     <section class="equipe__resumo" aria-label="Resumo">
@@ -82,6 +91,36 @@
         </article>
         {% endif %}
     </section>
+
+    {% if form_tarefa %}
+    <div class="modal-fundo">
+        <form method="post" action="{% url 'nova_tarefa' %}" class="modal" role="dialog" aria-modal="true" aria-labelledby="titulo-modal" novalidate>
+            {% csrf_token %}
+            <div class="modal__cabecalho">
+                <div>
+                    <h2 class="modal__titulo" id="titulo-modal">Nova tarefa</h2>
+                    <p class="modal__subtitulo">Ela aparece na coluna da pessoa responsável.</p>
+                </div>
+                <a href="{% url 'funcionarios' %}" class="modal__fechar" aria-label="Fechar">✕</a>
+            </div>
+
+            <div class="formulario__campos">
+                {% for campo in form_tarefa %}
+                <div class="campo{% if campo.errors %} campo--erro{% endif %}{% if campo.name == 'titulo' %} formulario__campo--largo{% endif %}">
+                    <label for="{{ campo.id_for_label }}">{{ campo.label }}</label>
+                    {{ campo }}
+                    {% for erro in campo.errors %}<p class="campo__erro">{{ erro }}</p>{% endfor %}
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="formulario__acoes">
+                <a href="{% url 'funcionarios' %}" class="botao botao--contorno">Cancelar</a>
+                <button type="submit" class="botao">Criar tarefa</button>
+            </div>
+        </form>
+    </div>
+    {% endif %}
 
 </div>
 {% endblock %}

@@ -32,11 +32,12 @@
         </a>
 
         <nav class="menu-lateral" aria-label="Navegação principal">
-            <span class="menu-lateral__item menu-lateral__item--inativo" aria-disabled="true">
+            <a href="{% url 'visao_geral' %}"
+               class="menu-lateral__item{% if pagina_atual == 'visao_geral' %} menu-lateral__item--ativo{% endif %}"
+               {% if pagina_atual == 'visao_geral' %}aria-current="page"{% endif %}>
                 <svg width="19" height="19" aria-hidden="true"><use href="#icon-home"/></svg>
                 Visão geral
-                <span class="menu-lateral__em-breve">em breve</span>
-            </span>
+            </a>
 
             <a href="{% url 'lista_produtos' %}"
                class="menu-lateral__item{% if pagina_atual == 'inventario' %} menu-lateral__item--ativo{% endif %}"
@@ -120,6 +121,12 @@
     </div>
 
     <nav class="menu-inferior" aria-label="Navegação principal no celular">
+        <a href="{% url 'visao_geral' %}"
+           class="menu-inferior__item{% if pagina_atual == 'visao_geral' %} menu-inferior__item--ativo{% endif %}">
+            <svg width="20" height="20" aria-hidden="true"><use href="#icon-home"/></svg>
+            Início
+        </a>
+
         <a href="{% url 'lista_produtos' %}"
            class="menu-inferior__item{% if pagina_atual == 'inventario' %} menu-inferior__item--ativo{% endif %}">
             <svg width="20" height="20" aria-hidden="true"><use href="#icon-box"/></svg>

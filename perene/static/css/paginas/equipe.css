@@ -3,7 +3,6 @@
  *
  *   .equipe                   a página
  *   .equipe__resumo           os cartões do topo (usam componentes/indicador.css)
- *   .progresso                barra de progresso (<progress> nativo, sem style="")
  *   .colunas-equipe           uma coluna por funcionário
  *   .coluna-pessoa            a coluna de um funcionário
  *   .tarefa                   uma tarefa (--feita)
@@ -14,6 +13,14 @@
     flex-direction: column;
     gap: var(--espaco-5);
     padding: var(--espaco-4);
+}
+
+.equipe__cabecalho {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--espaco-3);
 }
 
 .equipe__titulo {
@@ -48,42 +55,6 @@
     font-size: var(--titulo-m);
     font-weight: var(--peso-forte);
     letter-spacing: var(--espaco-1);
-}
-
-/* ------------------------------------------------------------------
- * Barra de progresso (o <progress> do HTML, estilizado)
- * ---------------------------------------------------------------- */
-
-.progresso {
-    width: 100%;
-    height: var(--altura-progresso);
-    border: none;
-    border-radius: var(--raio-pilula);
-    background: var(--cor-progresso-fundo);
-    overflow: hidden;
-    appearance: none;
-}
-
-.progresso::-webkit-progress-bar {
-    background: var(--cor-progresso-fundo);
-}
-
-.progresso::-webkit-progress-value {
-    border-radius: var(--raio-pilula);
-    background: var(--cor-progresso);
-}
-
-.progresso::-moz-progress-bar {
-    border-radius: var(--raio-pilula);
-    background: var(--cor-progresso);
-}
-
-.indicador--destaque .progresso::-webkit-progress-value {
-    background: var(--cor-aviso-borda);
-}
-
-.indicador--destaque .progresso::-moz-progress-bar {
-    background: var(--cor-aviso-borda);
 }
 
 /* ------------------------------------------------------------------
