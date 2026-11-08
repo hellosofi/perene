@@ -201,6 +201,15 @@ Bug Tracker:
 <br/> 
 
 ---
+### ⭐┆ Entrega 04
+
+<div align="center">
+
+<a href="entregas/entrega-04/TESTES.md"><img src="https://img.shields.io/badge/TESTES-A?style=for-the-badge&logo=readme&logoColor=darkseagreen&labelColor=33473B&color=darkseagreen"></a>
+
+</div>
+
+<br/>
 
 ### $${\color{darkseagreen}Nossa \space equipe \space :}$$
 

@@ -1,58 +1,80 @@
-from django.test import override_settings
-from django.utils import timezone
-from os import link
+"""Testes de sistema (ponta a ponta) do acesso ao Perene: cadastro, login e saída.
 
-from django.contrib.staticfiles.testing import StaticLiveServerTestCase
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
+Simulam uma pessoa usando o navegador de verdade (Chrome, via Selenium).
+São poucos de propósito: são lentos e mais frágeis que os testes de unidade
+e de integração (veja a pirâmide de testes).
 
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+Como rodar só estes:   python manage.py test perene.tests_selenium
+Como pular estes:      python manage.py test --exclude-tag=selenium
+"""
+from django.test import override_settings, tag
 
-from webdriver_manager.chrome import ChromeDriverManager
+from perene.fabricas import criar_funcionario, criar_gestor, criar_mercado
+from perene.models import Mercado
+from perene.selenium_base import BaseTestCase
 
-import time
+CODIGO_GESTOR = 'codigo-selenium'
+FORMULARIO = 'form.auth-formulario__conteudo'
 
 
-class BaseTestCase(StaticLiveServerTestCase):
-    """
-     Classe-base que inicializa e encerra o Chrome em modo headless
-     (sem interface gráfica) antes e depois de cada teste.
+@tag('selenium')
+@override_settings(GESTOR_CODIGO_CONVITE=CODIGO_GESTOR)
+class FluxoDeAcessoSeleniumTests(BaseTestCase):
 
-     StaticLiveServerTestCase sobe um servidor HTTP temporário em uma 
-     porta aleatória na própria máquina que está rodando os testes, usando 
-     um banco de dados de teste isolado, e disponibiliza self.live_server_url 
-     para que o Selenium possa acessá-lo.
+    def test_gestor_cria_conta_e_chega_ao_estoque(self):
+        self.abrir('cadastro_gestor')
+        self.preencher('id_nome', 'Carlos Lima')
+        self.preencher('id_email', 'carlos@mercado.com')
+        self.preencher('id_senha', 'Senha-Forte-123')
+        self.preencher('id_confirmar_senha', 'Senha-Forte-123')
+        self.preencher('id_codigo', CODIGO_GESTOR)
+        self.preencher('id_nome_mercado', 'Mercado Sol')
+        self.preencher('id_cidade_mercado', 'Olinda')
+        self.enviar(FORMULARIO)
+        self.esperar_url('/estoque/')
+        self.assertEqual(self.texto_de('.titulo-pagina h1'), 'Inventário')
 
-     live_server_url aponta sempre para localhost. Ex: http://127.0.0.1:54321
-     Esse servidor existe apenas durante a execução dos testes e é destruído 
-     logo depois. 
+    def test_funcionario_cria_conta_com_o_codigo_do_mercado(self):
+        mercado = criar_mercado('Mercado Lua')
+        self.abrir('cadastro_funcionario')
+        self.preencher('id_nome', 'Maria Souza')
+        self.preencher('id_email', 'maria@mercado.com')
+        self.preencher('id_senha', 'Senha-Forte-123')
+        self.preencher('id_confirmar_senha', 'Senha-Forte-123')
+        self.preencher('id_codigo_mercado', mercado.codigo_convite)
+        self.enviar(FORMULARIO)
+        self.esperar_url('/estoque/')
+        self.assertEqual(self.texto_de('.perfil-loja span'), 'Funcionário')
 
-    """
+    def test_codigo_de_gestor_errado_mostra_erro_e_nao_cria_mercado(self):
+        self.abrir('cadastro_gestor')
+        self.preencher('id_nome', 'Carlos Lima')
+        self.preencher('id_email', 'carlos@mercado.com')
+        self.preencher('id_senha', 'Senha-Forte-123')
+        self.preencher('id_confirmar_senha', 'Senha-Forte-123')
+        self.preencher('id_codigo', 'codigo-errado')
+        self.preencher('id_nome_mercado', 'Mercado Sol')
+        self.enviar(FORMULARIO)
+        self.assertEqual(self.texto_de('.campo__erro'), 'Código de acesso inválido.')
+        self.assertEqual(Mercado.objects.count(), 0)
 
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
+    def test_login_com_senha_errada_mostra_a_mensagem_de_erro(self):
+        criar_funcionario(criar_mercado(), email='func@mercado.com')
+        self.abrir('login_funcionario')
+        self.preencher('id_email', 'func@mercado.com')
+        self.preencher('id_senha', 'senha-errada')
+        self.enviar(FORMULARIO)
+        self.assertEqual(self.texto_de('.aviso--erro'), 'E-mail ou senha incorretos.')
 
-        opts = Options()
-        # opts.add_argument("--headless")
-        opts.add_argument('--no-sandbox')
-        opts.add_argument('--disable-dev-shm-usage')
-        opts.add_argument('--disable-gpu')
-        opts.add_argument('--window-size=1280,800')
+    def test_visitante_que_abre_o_estoque_volta_para_a_pagina_inicial(self):
+        self.abrir('lista_produtos')
+        self.esperar_url('/perene/')
+        self.assertFalse(self.existe('.barra-lateral'))
 
-        service = Service(ChromeDriverManager().install())
-        cls.driver = webdriver.Chrome(service=service, options=opts)
-        cls.wait = WebDriverWait(cls.driver, 10)
-
-    @classmethod
-    def tearDownClass(cls):
-        if hasattr(cls, 'driver'):
-            cls.driver.quit()
-        super().tearDownClass()
-
-    # -------------------------------------------------------------------------
-    # Inserção dos métodos aqui
-    # ---------------------------------------------
+    def test_gestor_entra_e_sai_da_conta(self):
+        criar_gestor(criar_mercado(), email='chefe@mercado.com')
+        self.entrar_como_gestor('chefe@mercado.com')
+        self.clicar("form[action$='/perene/sair/'] button")
+        self.esperar_url('/perene/')
+        self.abrir('lista_produtos')
+        self.esperar_url('next=')
