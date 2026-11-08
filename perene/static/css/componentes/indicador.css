@@ -17,7 +17,8 @@
 }
 
 .indicador--destaque {
-    background: var(--cor-marca);
+    /* ciano com o rio translúcido no canto (pen.dev: "Rio (textura)") */
+    background: var(--cor-marca) url('../../images/marca/rio-textura.svg') right -40px bottom -30px / 70% auto no-repeat;
     color: var(--cor-texto-invertido);
 }
 
@@ -37,7 +38,7 @@
 .indicador__numero {
     font-family: var(--fonte-titulo);
     font-size: var(--titulo-l);
-    font-weight: var(--peso-forte);
+    font-weight: var(--peso-titulo);
     line-height: var(--altura-linha-titulo);
 }
 

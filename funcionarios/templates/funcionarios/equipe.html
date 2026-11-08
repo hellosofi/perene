@@ -43,7 +43,17 @@
         {% if user.perfil.papel == 'gestor' %}
         <div class="indicador indicador--amarelo">
             <span class="indicador__rotulo">Convide a equipe</span>
-            <span class="equipe__codigo">{{ user.perfil.mercado.codigo_convite }}</span>
+            <span class="equipe__codigo-caixa">
+                <!-- o código começa desfocado; o botão de olho mostra/esconde (js/equipe.js) -->
+                <span class="equipe__codigo" data-codigo-convite data-oculto aria-hidden="true">{{ user.perfil.mercado.codigo_convite }}</span>
+                <button type="button" class="equipe__codigo-olho" data-mostrar-codigo aria-pressed="false" aria-label="Mostrar código">
+                    <svg width="16" height="16" aria-hidden="true"><use href="#icon-eye"/></svg>
+                </button>
+                <button type="button" class="equipe__codigo-copiar" data-copiar-codigo>
+                    <svg width="14" height="14" aria-hidden="true"><use href="#icon-copy"/></svg>
+                    <span data-copiar-rotulo>Copiar</span>
+                </button>
+            </span>
             <span class="indicador__detalhe">Código para cadastro de funcionários. Passe para quem vai entrar no mercado.</span>
         </div>
         {% endif %}
@@ -123,4 +133,8 @@
     {% endif %}
 
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/equipe.js' %}"></script>
 {% endblock %}

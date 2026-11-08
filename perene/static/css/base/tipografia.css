@@ -1,5 +1,17 @@
 /* Tipografia base: textos, títulos e links. */
 
+/* Sugo Pro Display (trial, licença CC BY-NC). O unicode-range deixa os
+   algarismos 0–9 de fora, porque a versão trial não os tem: eles usam a
+   próxima fonte da lista (Smooch Sans). */
+@font-face {
+    font-family: 'Sugo Pro Display';
+    src: url('../../fonts/sugo-pro-display-regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+    unicode-range: U+0000-002F, U+003A-FFFF;
+}
+
 body {
     font-family: var(--fonte-texto);
     font-size: var(--texto-l);
@@ -12,7 +24,7 @@ h1,
 h2,
 h3 {
     font-family: var(--fonte-titulo);
-    font-weight: var(--peso-forte);
+    font-weight: var(--peso-titulo);
     line-height: var(--altura-linha-titulo);
     color: var(--cor-texto);
 }

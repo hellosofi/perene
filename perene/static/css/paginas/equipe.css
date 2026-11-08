@@ -27,7 +27,7 @@
     margin: 0;
     font-family: var(--fonte-titulo);
     font-size: var(--titulo-xl);
-    font-weight: var(--peso-forte);
+    font-weight: var(--peso-titulo);
     line-height: var(--altura-linha-titulo);
     color: var(--cor-texto);
 }
@@ -46,15 +46,59 @@
     gap: var(--espaco-4);
 }
 
-.equipe__codigo {
-    align-self: flex-start;
-    padding: var(--espaco-2) var(--espaco-4);
+/* pílula branca com o código, o olho e o botão Copiar */
+.equipe__codigo-caixa {
+    display: flex;
+    align-items: center;
+    gap: var(--espaco-2);
+    align-self: stretch;
+    padding: var(--espaco-1) var(--espaco-1) var(--espaco-1) var(--espaco-4);
     border-radius: var(--raio-pilula);
     background: var(--cor-superficie);
+}
+
+.equipe__codigo {
+    flex: 1;
     font-family: var(--fonte-titulo);
     font-size: var(--titulo-m);
-    font-weight: var(--peso-forte);
+    font-weight: var(--peso-titulo);
     letter-spacing: var(--espaco-1);
+    transition: filter var(--transicao);
+}
+
+/* desfocado até a pessoa clicar no olho */
+.equipe__codigo[data-oculto] {
+    filter: blur(7px);
+    user-select: none;
+}
+
+.equipe__codigo-olho,
+.equipe__codigo-copiar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--espaco-1);
+    min-height: var(--altura-seletor);
+    border: none;
+    border-radius: var(--raio-pilula);
+    font-size: var(--texto-xs);
+    font-weight: var(--peso-forte);
+}
+
+.equipe__codigo-olho {
+    width: var(--altura-seletor);
+    background: var(--cor-marca-suave);
+    color: var(--cor-primaria);
+}
+
+.equipe__codigo-copiar {
+    padding: 0 var(--espaco-4);
+    background: var(--cor-primaria);
+    color: var(--cor-texto-invertido);
+}
+
+.equipe__codigo-copiar:hover {
+    background: var(--cor-primaria-hover);
 }
 
 /* ------------------------------------------------------------------

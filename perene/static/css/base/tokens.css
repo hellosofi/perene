@@ -89,11 +89,14 @@
     /* ---------------------------------------------------------------
      * Tipografia
      * ------------------------------------------------------------- */
-    --fonte-titulo: 'Smooch Sans', 'Arial Narrow', sans-serif; /* substituta da Sugo Pro Display */
+    /* Sugo Pro Display (manual da marca). A versão trial não tem algarismos:
+       os números caem na Smooch Sans, que é parecida (ver @font-face em tipografia.css). */
+    --fonte-titulo: 'Sugo Pro Display', 'Smooch Sans', 'Arial Narrow', sans-serif;
     --fonte-texto: 'Roboto', Arial, sans-serif;
 
     --peso-normal: 400;
     --peso-forte: 700;
+    --peso-titulo: 400; /* o manual usa só a Sugo regular */
 
     --texto-xs: 12px;
     --texto-s: 14px;
@@ -155,7 +158,7 @@
     --largura-cartao-app: 1280px;
     --altura-cartao-app: 780px;
     --largura-imagotipo: 68px;
-    --largura-logo: 214px;
+    --largura-logo: 254px;
     --espessura-barra: 5px;
     --altura-progresso: 8px;
     --tamanho-marcador: 24px;
@@ -170,4 +173,33 @@
     --camada-modal: 100;
     --camada-menu: 50;
     --cor-fundo-modal: rgb(45 54 78 / 0.45);
+
+    /* ---------------------------------------------------------------
+     * Home do site (pen.dev: "Home · site Perene")
+     * ------------------------------------------------------------- */
+    --home-largura-conteudo: 1280px;
+    --home-margem: 20px;
+    --home-altura-hero: 820px;
+    --home-raio-hero: 48px;
+    --home-raio-cartao: 32px;
+    --home-recorte-largura: 360px;
+    --home-recorte-altura: 104px;
+    --home-recorte-curva: 44px;
+    --home-titulo-hero: 128px;
+    --home-titulo-hero-menor: 46px;
+    --home-titulo-secao: 52px;
+    --home-titulo-cartao: 30px;
+    --home-numero: 56px;
+    --home-texto-apoio: 17px;
+    --home-tamanho-gota: 56px;
+    --home-tamanho-gota-p: 44px;
+    --home-secao-espaco: 96px;
+
+    --home-cor-vidro: rgb(255 255 255 / 0.15);
+    --home-cor-vidro-borda: rgb(255 255 255 / 0.4);
+    --home-cor-contorno-claro: rgb(255 255 255 / 0.6);
+    --home-cor-faixa-clara: rgb(255 255 255 / 0.12);
+    --home-cor-faixa-escura: rgb(15 124 128 / 0.45);
+    --home-cor-numero-passo: rgb(45 54 78 / 0.15);
+    --home-sombra-flutuante: 0 14px 36px rgb(15 61 63 / 0.25);
 }

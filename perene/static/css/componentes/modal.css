@@ -40,7 +40,7 @@
 .modal__titulo {
     font-family: var(--fonte-titulo);
     font-size: var(--titulo-l);
-    font-weight: var(--peso-forte);
+    font-weight: var(--peso-titulo);
     line-height: var(--altura-linha-titulo);
     color: var(--cor-texto);
 }

@@ -28,7 +28,7 @@
     margin: 0;
     font-family: var(--fonte-titulo);
     font-size: var(--titulo-xl);
-    font-weight: var(--peso-forte);
+    font-weight: var(--peso-titulo);
     line-height: var(--altura-linha-titulo);
     color: var(--cor-texto);
 }
@@ -126,35 +126,62 @@
  * Filtro por situação
  * ---------------------------------------------------------------- */
 
+/* cartões tingidos (pen.dev 04 · Estoque); o selecionado ganha contorno marinho */
 .filtro-situacao {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--espaco-2);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: var(--espaco-3);
 }
 
 .filtro-situacao__opcao {
-    display: inline-flex;
-    align-items: center;
+    display: grid;
+    align-content: space-between;
     gap: var(--espaco-2);
-    min-height: var(--area-toque);
-    padding: 0 var(--espaco-4);
-    border: var(--borda-fina) solid var(--cor-linha);
-    border-radius: var(--raio-pilula);
-    background: var(--cor-superficie);
+    min-height: 96px;
+    padding: var(--espaco-3) var(--espaco-4);
+    border: var(--borda-media) solid transparent;
+    border-radius: var(--raio-l);
     color: var(--cor-texto);
     font-family: var(--fonte-texto);
-    font-size: var(--texto-s);
+    text-align: left;
     cursor: pointer;
+    transition: border-color var(--transicao);
 }
 
-.filtro-situacao__opcao--ativa {
+.filtro-situacao__opcao--todos { background: var(--cor-marca); color: var(--cor-texto-invertido); }
+.filtro-situacao__opcao--ok { background: var(--quadro-ok); }
+.filtro-situacao__opcao--atencao { background: var(--quadro-atencao); }
+.filtro-situacao__opcao--critico { background: var(--quadro-critico); }
+
+.filtro-situacao__opcao:hover {
+    border-color: var(--cor-linha);
+}
+
+.filtro-situacao__opcao--ativa,
+.filtro-situacao__opcao--ativa:hover {
     border-color: var(--cor-selecionado);
-    background: var(--cor-selecionado);
-    color: var(--cor-texto-invertido);
+}
+
+.filtro-situacao__opcao--todos.filtro-situacao__opcao--ativa {
+    border-color: var(--cor-primaria);
+}
+
+.filtro-situacao__rotulo {
+    font-size: var(--texto-s);
+    font-weight: var(--peso-forte);
+}
+
+.filtro-situacao__valor {
+    display: flex;
+    align-items: baseline;
+    gap: var(--espaco-2);
+    font-size: var(--texto-xs);
 }
 
 .filtro-situacao__numero {
-    font-weight: var(--peso-forte);
+    font-family: var(--fonte-titulo);
+    font-size: var(--titulo-l);
+    line-height: 1;
 }
 
 /* ------------------------------------------------------------------

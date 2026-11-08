@@ -66,21 +66,26 @@
     </form>
 
     <div class="filtro-situacao" role="group" aria-label="Filtrar por situação">
-        <button type="button" onclick="alternarStatus('')"
-                class="filtro-situacao__opcao{% if not status_atual %} filtro-situacao__opcao--ativa{% endif %}">
-            Todos <span class="filtro-situacao__numero">{{ contagens.todos }}</span>
+        {% comment %} pen.dev 04 · Estoque: cartões tingidos que também filtram {% endcomment %}
+        <button type="button" onclick="alternarStatus('')" aria-pressed="{% if not status_atual %}true{% else %}false{% endif %}"
+                class="filtro-situacao__opcao filtro-situacao__opcao--todos{% if not status_atual %} filtro-situacao__opcao--ativa{% endif %}">
+            <span class="filtro-situacao__rotulo">Todos</span>
+            <span class="filtro-situacao__valor"><span class="filtro-situacao__numero">{{ contagens.todos }}</span> lotes</span>
         </button>
-        <button type="button" onclick="alternarStatus('ok')"
-                class="filtro-situacao__opcao{% if status_atual == 'ok' %} filtro-situacao__opcao--ativa{% endif %}">
-            Tudo certo <span class="filtro-situacao__numero">{{ contagens.ok }}</span>
+        <button type="button" onclick="alternarStatus('ok')" aria-pressed="{% if status_atual == 'ok' %}true{% else %}false{% endif %}"
+                class="filtro-situacao__opcao filtro-situacao__opcao--ok{% if status_atual == 'ok' %} filtro-situacao__opcao--ativa{% endif %}">
+            <span class="filtro-situacao__rotulo">Tudo certo</span>
+            <span class="filtro-situacao__valor"><span class="filtro-situacao__numero">{{ contagens.ok }}</span> em dia</span>
         </button>
-        <button type="button" onclick="alternarStatus('atencao')"
-                class="filtro-situacao__opcao{% if status_atual == 'atencao' %} filtro-situacao__opcao--ativa{% endif %}">
-            Atenção <span class="filtro-situacao__numero">{{ contagens.atencao }}</span>
+        <button type="button" onclick="alternarStatus('atencao')" aria-pressed="{% if status_atual == 'atencao' %}true{% else %}false{% endif %}"
+                class="filtro-situacao__opcao filtro-situacao__opcao--atencao{% if status_atual == 'atencao' %} filtro-situacao__opcao--ativa{% endif %}">
+            <span class="filtro-situacao__rotulo">Atenção</span>
+            <span class="filtro-situacao__valor"><span class="filtro-situacao__numero">{{ contagens.atencao }}</span> vencem logo ou estão baixos</span>
         </button>
-        <button type="button" onclick="alternarStatus('critico')"
-                class="filtro-situacao__opcao{% if status_atual == 'critico' %} filtro-situacao__opcao--ativa{% endif %}">
-            Crítico <span class="filtro-situacao__numero">{{ contagens.critico }}</span>
+        <button type="button" onclick="alternarStatus('critico')" aria-pressed="{% if status_atual == 'critico' %}true{% else %}false{% endif %}"
+                class="filtro-situacao__opcao filtro-situacao__opcao--critico{% if status_atual == 'critico' %} filtro-situacao__opcao--ativa{% endif %}">
+            <span class="filtro-situacao__rotulo">Crítico</span>
+            <span class="filtro-situacao__valor"><span class="filtro-situacao__numero">{{ contagens.critico }}</span> vencidos ou avariados</span>
         </button>
     </div>
 
