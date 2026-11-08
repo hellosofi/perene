@@ -8,6 +8,10 @@ class Funcionario(models.Model):
     iniciais = models.CharField(max_length=4)
     cargo = models.CharField(max_length=100)
     status = models.CharField(max_length=100)
+    mercado = models.ForeignKey(                                  
+        'perene.Mercado', on_delete=models.CASCADE,
+        null=True, blank=True, related_name='funcionarios',
+    )
 
     def __str__(self):
         return self.nome
@@ -23,6 +27,10 @@ class Tarefa(models.Model):
     
     horario = models.TimeField(null=True, blank=True)
     concluida = models.BooleanField(default=False) # < ------------ 
+    mercado = models.ForeignKey(                                  # NOVO
+        'perene.Mercado', on_delete=models.CASCADE,
+        null=True, blank=True, related_name='tarefas',
+    )
 
     def __str__(self):
         return self.titulo
