@@ -219,7 +219,7 @@ Bug Tracker:
 
 <div align="center">
 
-<a href="https://github.com/hellosofi/perene/blob/main/entregas/entrega-04/contributing.md"><img src="https://img.shields.io/badge/CONTRIBUTING-A?style=for-the-badge&logo=readme&logoColor=darkseagreen&labelColor=33473B&color=darkseagreen"></a>
+<a href="entregas/entrega-04/contributing.md"><img src="https://img.shields.io/badge/CONTRIBUTING-A?style=for-the-badge&logo=readme&logoColor=darkseagreen&labelColor=33473B&color=darkseagreen"></a>
 
 </div>
 
