@@ -215,7 +215,7 @@ Bug Tracker:
 
 </div>
 
-## Como contribuir
+## ୭ 🧾 ​Como contribuir
 
 <div align="center">
 
