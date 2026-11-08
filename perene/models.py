@@ -105,7 +105,10 @@ class Notificacao(models.Model):
         settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL,
         related_name='notificacoes_enviadas'
     )
-
+    mercado = models.ForeignKey(                                  
+        Mercado, on_delete=models.CASCADE,
+        null=True, blank=True, related_name='notificacoes',
+    )
     class Meta:
         ordering = ['-criada_em']
 

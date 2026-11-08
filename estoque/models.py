@@ -42,7 +42,10 @@ class Produto(models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='all_good')
     estoque_minimo = models.PositiveIntegerField(default=0)
     dias_alerta = models.PositiveIntegerField(default=7)    
-
+    mercado = models.ForeignKey(                                  
+        'perene.Mercado', on_delete=models.CASCADE,
+        null=True, blank=True, related_name='produtos',
+    )
     def __str__(self):
         return f'[{self.codigo}] {self.nome}'
 
