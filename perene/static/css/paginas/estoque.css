@@ -234,6 +234,11 @@
     color: var(--cor-texto);
 }
 
+.cartao-lote__nome a,
+.linha-lote__nome {
+    color: inherit;
+}
+
 .cartao-lote__meta {
     display: flex;
     flex-wrap: wrap;

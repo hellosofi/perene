@@ -1,0 +1,153 @@
+/*
+ * Detalhe do produto (pen.dev: tela 05).
+ *
+ *   .produto                   a página
+ *   .produto__trilha           "← Estoque / nome do produto"
+ *   .produto__cartao           o cartão ciano com nome, etiquetas e detalhes
+ *   .produto__indicadores      os 4 indicadores (componentes/indicador.css)
+ *   .lotes-produto             a tabela de lotes
+ */
+
+.produto {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-5);
+    padding: var(--espaco-4);
+}
+
+.produto__trilha {
+    display: flex;
+    gap: var(--espaco-2);
+    font-size: var(--texto-s);
+    color: var(--cor-texto-suave);
+}
+
+.produto__cartao {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-3);
+    padding: var(--espaco-5);
+    border-radius: var(--raio-l);
+    background: var(--cor-marca) url('../../images/marca/painel-login.svg') right center / cover no-repeat;
+    color: var(--cor-texto-invertido);
+}
+
+.produto__etiquetas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--espaco-2);
+}
+
+.produto__nome {
+    font-size: var(--titulo-l);
+    color: var(--cor-texto-invertido);
+}
+
+.produto__detalhes {
+    font-size: var(--texto-s);
+}
+
+.produto__indicadores {
+    display: grid;
+    gap: var(--espaco-4);
+}
+
+.produto__secao {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--espaco-3);
+}
+
+.produto__secao-texto {
+    font-size: var(--texto-s);
+    color: var(--cor-texto-suave);
+}
+
+/* ------------------------------------------------------------------
+ * Tabela de lotes
+ * ---------------------------------------------------------------- */
+
+.lotes-produto {
+    overflow: hidden;
+    border: var(--borda-fina) solid var(--cor-linha);
+    border-radius: var(--raio-l);
+    background: var(--cor-superficie);
+}
+
+.lotes-produto__cabecalho {
+    display: none;
+}
+
+.lotes-produto__linha {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: var(--espaco-1) var(--espaco-3);
+    padding: var(--espaco-3) var(--espaco-4);
+    border-top: var(--borda-fina) solid var(--cor-linha);
+    font-size: var(--texto-s);
+}
+
+.lotes-produto__linha:first-of-type {
+    border-top: none;
+}
+
+.lotes-produto__prazo {
+    display: block;
+    font-size: var(--texto-xs);
+    color: var(--cor-texto-suave);
+}
+
+.lotes-produto__so-desktop {
+    display: none;
+}
+
+.lotes-produto__vazio {
+    padding: var(--espaco-6);
+    text-align: center;
+    color: var(--cor-texto-suave);
+}
+
+/* ------------------------------------------------------------------
+ * Tablet e desktop
+ * ---------------------------------------------------------------- */
+
+@media (min-width: 768px) {
+    .produto__indicadores {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .produto__cartao {
+        padding: var(--espaco-6);
+    }
+}
+
+@media (min-width: 1024px) {
+    .produto {
+        padding: 0 var(--espaco-6) var(--espaco-6);
+    }
+
+    .lotes-produto__cabecalho,
+    .lotes-produto__linha {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1.4fr 1.6fr 2fr 1.2fr;
+        gap: var(--espaco-3);
+    }
+
+    .lotes-produto__cabecalho {
+        padding: var(--espaco-3) var(--espaco-4);
+        background: var(--cor-superficie-suave);
+        font-size: var(--texto-s);
+        font-weight: var(--peso-forte);
+    }
+
+    .lotes-produto__so-desktop {
+        display: block;
+    }
+
+    .lotes-produto__so-celular {
+        display: none;
+    }
+}

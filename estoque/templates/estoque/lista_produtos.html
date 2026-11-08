@@ -98,7 +98,7 @@
         {% for lote in lotes %}
         <div class="linha-lote">
             <span>
-                <span class="linha-lote__nome">{{ lote.produto.nome }}</span>
+                <a class="linha-lote__nome" href="{% url 'detalhe_produto' lote.produto.id %}">{{ lote.produto.nome }}</a>
                 <span class="linha-lote__detalhe">{{ lote.quantidade }} {{ lote.produto.unidade }} · {{ lote.local }} · {{ lote.prazo_texto }}</span>
             </span>
             <span class="linha-lote__extra linha-lote__so-desktop">{{ lote.produto.categoria|default:"—" }}</span>
@@ -127,7 +127,7 @@
             {% for lote in grupo.items %}
             <article class="cartao-lote">
                 {% if lote.produto.categoria %}<span class="etiqueta">{{ lote.produto.categoria }}</span>{% endif %}
-                <h3 class="cartao-lote__nome">{{ lote.produto.nome }}</h3>
+                <h3 class="cartao-lote__nome"><a href="{% url 'detalhe_produto' lote.produto.id %}">{{ lote.produto.nome }}</a></h3>
                 <span class="etiqueta etiqueta--{{ lote.situacao }}">{{ lote.situacao_label }} · {{ lote.prazo_texto }}</span>
                 <div class="cartao-lote__meta">
                     <span>{{ lote.quantidade }} {{ lote.produto.unidade|default:"un." }}</span>

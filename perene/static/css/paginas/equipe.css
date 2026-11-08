@@ -2,8 +2,7 @@
  * Equipe e tarefas (pen.dev: tela 08).
  *
  *   .equipe                   a página
- *   .equipe__resumo           os cartões do topo (progresso, pessoas, convite)
- *   .resumo-cartao            um cartão do topo (--destaque, --ciano, --amarelo)
+ *   .equipe__resumo           os cartões do topo (usam componentes/indicador.css)
  *   .progresso                barra de progresso (<progress> nativo, sem style="")
  *   .colunas-equipe           uma coluna por funcionário
  *   .coluna-pessoa            a coluna de um funcionário
@@ -40,46 +39,7 @@
     gap: var(--espaco-4);
 }
 
-.resumo-cartao {
-    display: flex;
-    flex-direction: column;
-    gap: var(--espaco-2);
-    padding: var(--espaco-5);
-    border-radius: var(--raio-l);
-    background: var(--cor-superficie-suave);
-    color: var(--cor-texto);
-}
-
-.resumo-cartao--destaque {
-    background: var(--cor-marca);
-    color: var(--cor-texto-invertido);
-}
-
-.resumo-cartao--ciano {
-    background: var(--cor-marca-suave);
-}
-
-.resumo-cartao--amarelo {
-    background: var(--cor-aviso-fundo);
-}
-
-.resumo-cartao__rotulo {
-    font-size: var(--texto-s);
-    font-weight: var(--peso-forte);
-}
-
-.resumo-cartao__numero {
-    font-family: var(--fonte-titulo);
-    font-size: var(--titulo-l);
-    font-weight: var(--peso-forte);
-    line-height: var(--altura-linha-titulo);
-}
-
-.resumo-cartao__detalhe {
-    font-size: var(--texto-xs);
-}
-
-.resumo-cartao__codigo {
+.equipe__codigo {
     align-self: flex-start;
     padding: var(--espaco-2) var(--espaco-4);
     border-radius: var(--raio-pilula);
@@ -118,11 +78,11 @@
     background: var(--cor-progresso);
 }
 
-.resumo-cartao--destaque .progresso::-webkit-progress-value {
+.indicador--destaque .progresso::-webkit-progress-value {
     background: var(--cor-aviso-borda);
 }
 
-.resumo-cartao--destaque .progresso::-moz-progress-bar {
+.indicador--destaque .progresso::-moz-progress-bar {
     background: var(--cor-aviso-borda);
 }
 

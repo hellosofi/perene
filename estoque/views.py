@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.db.models.functions import Coalesce
+from django.utils import timezone
 from .models import Produto, Lote
 
 def contexto_lista(request):
@@ -128,3 +129,24 @@ def adicionar_lote(request, produto_id):
         lote.save()
         return redirect('lista_produtos')
     return render(request, 'estoque/adicionar_lote.html', {'form': form, 'produto': produto})
+
+
+@login_required
+def detalhe_produto(request, produto_id):
+    # TODO: filtrar por mercado (História 9)
+    produto = get_object_or_404(Produto, pk=produto_id)
+    lotes = list(produto.lotes.order_by(F('validade').asc(nulls_last=True)))
+
+    # próximo vencimento: o lote com a validade mais próxima que ainda não venceu
+    hoje = timezone.localdate()
+    a_vencer = [l for l in lotes if l.validade and l.validade >= hoje and not l.avariado]
+    avariados = [l for l in lotes if l.avariado]
+
+    return render(request, 'estoque/detalhe_produto.html', {
+        'produto': produto,
+        'lotes': lotes,
+        'total': sum(l.quantidade for l in lotes),
+        'proximo': a_vencer[0] if a_vencer else None,
+        'avariados': avariados,
+        'pagina_atual': 'inventario',
+    })

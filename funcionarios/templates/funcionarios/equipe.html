@@ -5,6 +5,7 @@
 
 {% block estilos %}
 {% comment %} tokens.css e aviso.css já vêm do base.html {% endcomment %}
+<link rel="stylesheet" href="{% static 'css/componentes/indicador.css' %}">
 <link rel="stylesheet" href="{% static 'css/paginas/equipe.css' %}">
 {% endblock %}
 
@@ -17,24 +18,24 @@
     </header>
 
     <section class="equipe__resumo" aria-label="Resumo">
-        <div class="resumo-cartao resumo-cartao--destaque">
-            <span class="resumo-cartao__rotulo">Progresso de hoje</span>
-            <span class="resumo-cartao__numero">{{ tarefas_concluidas }} de {{ total_tarefas }}</span>
-            <span class="resumo-cartao__detalhe">tarefas feitas · {{ pct_conclusao }}%</span>
+        <div class="indicador indicador--destaque">
+            <span class="indicador__rotulo">Progresso de hoje</span>
+            <span class="indicador__numero">{{ tarefas_concluidas }} de {{ total_tarefas }}</span>
+            <span class="indicador__detalhe">tarefas feitas · {{ pct_conclusao }}%</span>
             <progress class="progresso" value="{{ tarefas_concluidas }}" max="{{ total_tarefas|default:1 }}">{{ pct_conclusao }}%</progress>
         </div>
 
-        <div class="resumo-cartao resumo-cartao--ciano">
-            <span class="resumo-cartao__rotulo">Equipe</span>
-            <span class="resumo-cartao__numero">{{ total_funcionarios }}</span>
-            <span class="resumo-cartao__detalhe">pessoa{{ total_funcionarios|pluralize }} cadastrada{{ total_funcionarios|pluralize }}</span>
+        <div class="indicador indicador--ciano">
+            <span class="indicador__rotulo">Equipe</span>
+            <span class="indicador__numero">{{ total_funcionarios }}</span>
+            <span class="indicador__detalhe">pessoa{{ total_funcionarios|pluralize }} cadastrada{{ total_funcionarios|pluralize }}</span>
         </div>
 
         {% if user.perfil.papel == 'gestor' %}
-        <div class="resumo-cartao resumo-cartao--amarelo">
-            <span class="resumo-cartao__rotulo">Convide a equipe</span>
-            <span class="resumo-cartao__codigo">{{ user.perfil.mercado.codigo_convite }}</span>
-            <span class="resumo-cartao__detalhe">Código para cadastro de funcionários. Passe para quem vai entrar no mercado.</span>
+        <div class="indicador indicador--amarelo">
+            <span class="indicador__rotulo">Convide a equipe</span>
+            <span class="equipe__codigo">{{ user.perfil.mercado.codigo_convite }}</span>
+            <span class="indicador__detalhe">Código para cadastro de funcionários. Passe para quem vai entrar no mercado.</span>
         </div>
         {% endif %}
     </section>

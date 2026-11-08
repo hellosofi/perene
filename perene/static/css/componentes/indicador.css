@@ -1,0 +1,54 @@
+/*
+ * Indicador: cartão tingido com um número em destaque (pen.dev: padrão v2).
+ *   .indicador                 o cartão (creme por padrão)
+ *   .indicador--destaque       ciano forte, texto branco
+ *   .indicador--ciano / --amarelo / --creme / --laranja   tons claros
+ *   .indicador__rotulo, __numero, __detalhe
+ */
+
+.indicador {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-2);
+    padding: var(--espaco-5);
+    border-radius: var(--raio-l);
+    background: var(--cor-superficie-suave);
+    color: var(--cor-texto);
+}
+
+.indicador--destaque {
+    background: var(--cor-marca);
+    color: var(--cor-texto-invertido);
+}
+
+.indicador--ciano {
+    background: var(--cor-marca-suave);
+}
+
+.indicador--amarelo {
+    background: var(--cor-aviso-fundo);
+}
+
+.indicador__rotulo {
+    font-size: var(--texto-s);
+    font-weight: var(--peso-forte);
+}
+
+.indicador__numero {
+    font-family: var(--fonte-titulo);
+    font-size: var(--titulo-l);
+    font-weight: var(--peso-forte);
+    line-height: var(--altura-linha-titulo);
+}
+
+.indicador__detalhe {
+    font-size: var(--texto-xs);
+}
+
+.indicador--creme {
+    background: var(--cor-superficie-suave);
+}
+
+.indicador--laranja {
+    background: var(--quadro-critico);
+}
