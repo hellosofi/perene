@@ -1,69 +1,82 @@
-from django.test import override_settings
-from django.utils import timezone
-from os import link
+"""Testes de sistema (ponta a ponta) do estoque.
 
-from django.contrib.staticfiles.testing import StaticLiveServerTestCase
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
+Como rodar só estes:   python manage.py test estoque.tests_selenium
+Como pular estes:      python manage.py test --exclude-tag=selenium
+"""
+from django.test import tag
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import Select
 
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from perene.fabricas import (
+    criar_funcionario, criar_gestor, criar_lote, criar_mercado,
+    criar_produto, dias_a_partir_de_hoje,
+)
+from perene.selenium_base import BaseTestCase
 
-from webdriver_manager.chrome import ChromeDriverManager
-
-import time
-
-# específico
-from estoque.models import Produto, Lote
-
-from datetime import date
-from unittest.mock import patch
-
-from django.contrib.auth import get_user_model
-from django.urls import reverse
+CARDS = '.card-produto'
 
 
+@tag('selenium')
+class FluxoDeEstoqueSeleniumTests(BaseTestCase):
 
-class BaseTestCase(StaticLiveServerTestCase):
-    """
-    Classe-base que inicializa e encerra o Chrome em modo headless
-    (sem interface gráfica) antes e depois de cada teste.
+    def setUp(self):
+        super().setUp()
+        self.mercado = criar_mercado()
+        criar_gestor(self.mercado, email='chefe@mercado.com')
 
-    StaticLiveServerTestCase sobe um servidor HTTP temporário em uma 
-    porta aleatória na própria máquina que está rodando os testes, usando 
-    um banco de dados de teste isolado, e disponibiliza self.live_server_url 
-    para que o Selenium possa acessá-lo.
+    def test_gestor_cadastra_um_produto_pelo_modal(self):
+        self.entrar_como_gestor('chefe@mercado.com')
+        self.clicar("section.titulo-pagina a[href$='/estoque/adicionar/']")
+        self.preencher('id_nome', 'Iogurte natural')
+        self.preencher('id_codigo', '7891000')
+        self.preencher('id_categoria', 'Frios')
+        self.preencher('id_unidade', 'un.')
+        self.preencher('id_estoque_minimo', '5')
+        self.preencher('id_dias_alerta', '7')
+        self.enviar('form.modal')
+        self.wait.until(lambda d: not self.existe('form.modal'))
+        opcoes = Select(self.driver.find_element(By.NAME, 'produto')).options
+        self.assertIn('Iogurte natural', [o.text.strip() for o in opcoes])
 
-    live_server_url aponta sempre para localhost. Ex: http://127.0.0.1:54321
-    Esse servidor existe apenas durante a execução dos testes e é destruído 
-    logo depois. 
+    def test_gestor_registra_um_lote_e_ve_o_card_no_estoque(self):
+        criar_produto(self.mercado, nome='Queijo minas', categoria='Frios')
+        self.entrar_como_gestor('chefe@mercado.com')
+        Select(self.driver.find_element(By.NAME, 'produto')).select_by_visible_text('Queijo minas')
+        self.clicar("a.botao-primario[href*='/lotes/adicionar/']")
+        self.preencher('id_quantidade', '12')
+        self.preencher('id_local', 'Câmara fria')
+        self.enviar('form.registrar-lote')
+        self.esperar_url('/estoque/')
+        self.assertEqual(self.texto_de(f'{CARDS} h4'), 'Queijo minas')
 
-    """
-     
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
+    def test_lote_vencido_aparece_na_coluna_critico(self):
+        produto = criar_produto(self.mercado, nome='Leite integral')
+        criar_lote(produto, validade=dias_a_partir_de_hoje(-3))
+        self.entrar_como_gestor('chefe@mercado.com')
+        coluna_critico = "//section[contains(@class,'coluna')][.//h3[normalize-space()='Crítico']]"
+        cards = self.driver.find_elements(By.XPATH, f"{coluna_critico}//article[contains(@class,'card-produto')]")
+        self.assertEqual(len(cards), 1)
 
-        opts = Options()
-        # opts.add_argument("--headless")
-        opts.add_argument("--no-sandbox")
-        opts.add_argument("--disable-dev-shm-usage")
-        opts.add_argument("--disable-gpu")
-        opts.add_argument("--window-size=1280,800")
+    def test_busca_mostra_so_o_produto_procurado(self):
+        criar_lote(criar_produto(self.mercado, nome='Leite integral'))
+        criar_lote(criar_produto(self.mercado, nome='Arroz branco'))
+        self.entrar_como_gestor('chefe@mercado.com')
+        campo = self.driver.find_element(By.NAME, 'q')
+        campo.send_keys('arroz\n')
+        self.wait.until(lambda d: len(d.find_elements(By.CSS_SELECTOR, CARDS)) == 1)
+        self.assertEqual(self.texto_de(f'{CARDS} h4'), 'Arroz branco')
 
-        service = Service(ChromeDriverManager().install())
-        cls.driver = webdriver.Chrome(service=service, options=opts)
+    def test_filtro_de_ocorrencia_critico_esconde_os_lotes_saudaveis(self):
+        produto = criar_produto(self.mercado, nome='Presunto')
+        criar_lote(produto, validade=dias_a_partir_de_hoje(90), local='Balcão')
+        criar_lote(produto, validade=dias_a_partir_de_hoje(-1), local='Câmara')
+        self.entrar_como_gestor('chefe@mercado.com')
+        self.driver.find_element(By.XPATH, "//div[@class='filtros']//button[normalize-space()='Crítico']").click()
+        self.wait.until(lambda d: len(d.find_elements(By.CSS_SELECTOR, CARDS)) == 1)
+        self.assertEqual(len(self.driver.find_elements(By.CSS_SELECTOR, CARDS)), 1)
 
-        cls.wait = WebDriverWait(cls.driver, 10)
-
-    @classmethod
-    def tearDownClass(cls):
-        if hasattr(cls, "driver"):
-            cls.driver.quit()
-        super().tearDownClass()
-
-    # -------------------------------------------------------------------------
-    # Inserção dos métodos aqui
-    # ---------------------------------------------
+    def test_funcionario_de_outro_mercado_nao_ve_os_produtos(self):
+        criar_lote(criar_produto(self.mercado, nome='Produto do mercado A'))
+        criar_funcionario(criar_mercado('Mercado B'), email='func@b.com')
+        self.entrar_como_funcionario('func@b.com')
+        self.assertFalse(self.existe(CARDS))
