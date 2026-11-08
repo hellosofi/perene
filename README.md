@@ -214,6 +214,7 @@ Bug Tracker:
 ![Quadro da Sprint 04 - Jira](entregas/entrega-04/media/Sprint04.png)
 
 </div>
+Explicação das novas Histórias de Usuário no Django: [Youtube](https://www.youtube.com/watch?v=PFTf4dLnlbo)
 
 ## ୭ 🧾 ​Como contribuir
 
