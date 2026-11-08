@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="{% static 'css/componentes/campo.css' %}">
 <link rel="stylesheet" href="{% static 'css/componentes/formulario.css' %}">
 <link rel="stylesheet" href="{% static 'css/paginas/registrar-lote.css' %}">
+<link rel="stylesheet" href="{% static 'css/componentes/etiqueta.css' %}">
 {% endblock %}
 
 {% block conteudo %}
@@ -60,5 +61,20 @@
             <button type="submit" class="botao">Salvar lote</button>
         </div>
     </form>
+
+    <aside class="previa-lote" aria-live="polite"
+           data-dias-alerta="{{ produto.dias_alerta }}" data-unidade="{{ produto.unidade|default:'un.' }}">
+        <p class="previa-lote__rotulo">Como este lote vai aparecer</p>
+        <div class="previa-lote__cartao">
+            <strong>{{ produto.nome }}</strong>
+            <span class="previa-lote__detalhe" data-previa-detalhe>Preencha a quantidade e a validade.</span>
+        </div>
+        <span class="etiqueta" data-previa-situacao>Sem validade</span>
+        <p class="previa-lote__nota">A situação é calculada sozinha pela validade e pela marcação de avariado.</p>
+    </aside>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/registrar-lote.js' %}"></script>
 {% endblock %}

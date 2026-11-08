@@ -27,8 +27,47 @@
     gap: var(--espaco-4);
 }
 
-.visao__saude .indicador__numero {
-    font-size: calc(var(--titulo-xl) * 2);
+/* Medidor em arco: o comprimento do arco amarelo vem do stroke-dasharray
+   (pathLength="100", então o valor é a própria porcentagem). */
+.medidor {
+    position: relative;
+    align-self: center;
+    width: 100%;
+    max-width: var(--largura-medidor);
+}
+
+.medidor__arco {
+    width: 100%;
+}
+
+.medidor__fundo,
+.medidor__valor {
+    fill: none;
+    stroke-width: 10;
+    stroke-linecap: round;
+}
+
+.medidor__fundo {
+    stroke: var(--cor-linha-escura);
+}
+
+.medidor__valor {
+    stroke: var(--cor-realce-escuro);
+}
+
+.medidor__numero {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    font-family: var(--fonte-titulo);
+    font-size: calc(var(--titulo-xl) * 1.6);
+    font-weight: var(--peso-forte);
+    line-height: var(--altura-linha-titulo);
+    transform: translateX(-50%);
+}
+
+.visao__saude-detalhe {
+    text-align: center;
 }
 
 .visao__indicador-rodape {

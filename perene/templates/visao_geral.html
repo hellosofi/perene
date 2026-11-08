@@ -21,11 +21,16 @@
     <section class="visao__grade" aria-label="Resumo do mercado">
         <a href="{% url 'lista_produtos' %}" class="indicador indicador--destaque visao__saude">
             <span class="indicador__rotulo">Saúde do estoque</span>
-            <span class="indicador__numero">{{ pct_em_dia }}%</span>
-            <span class="indicador__detalhe">
+            <div class="medidor" role="img" aria-label="{{ pct_em_dia }}% dos produtos em dia">
+                <svg class="medidor__arco" viewBox="0 0 100 56" aria-hidden="true">
+                    <path class="medidor__fundo" d="M8 50 A42 42 0 0 1 92 50" pathLength="100"/>
+                    <path class="medidor__valor" d="M8 50 A42 42 0 0 1 92 50" pathLength="100" stroke-dasharray="{{ pct_em_dia }} 100"/>
+                </svg>
+                <span class="medidor__numero">{{ pct_em_dia }}%</span>
+            </div>
+            <span class="indicador__detalhe visao__saude-detalhe">
                 {{ total_em_dia }} de {{ total_com_lotes }} produto{{ total_com_lotes|pluralize }} sem alerta de validade ou estoque
             </span>
-            <progress class="progresso" value="{{ total_em_dia }}" max="{{ total_com_lotes|default:1 }}">{{ pct_em_dia }}%</progress>
         </a>
 
         <div class="visao__indicadores">
