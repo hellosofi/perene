@@ -207,6 +207,8 @@ Bug Tracker:
 
 <a href="entregas/entrega-04/TESTES.md"><img src="https://img.shields.io/badge/TESTES-A?style=for-the-badge&logo=readme&logoColor=darkseagreen&labelColor=33473B&color=darkseagreen"></a>
 
+![Quadro da Sprint 04 - Jira](entregas/entrega-04/media/Sprint04.png)
+
 </div>
 
 <br/>
