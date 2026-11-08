@@ -219,7 +219,9 @@ Bug Tracker:
 
 <div align="center">
 
-<a href="entregas/entrega-04/contributing.md"><img src="https://img.shields.io/badge/CONTRIBUTING-A?style=for-the-badge&logo=readme&logoColor=darkseagreen&labelColor=33473B&color=darkseagreen"></a>
+Quer ajudar o Perene? Leia o guia de contribuição:
+
+<a href="entregas/entrega-04/CONTRIBUTING.md"><img src="https://img.shields.io/badge/CONTRIBUTING-A?style=for-the-badge&logo=readme&logoColor=darkseagreen&labelColor=33473B&color=darkseagreen"></a>
 
 </div>
 
