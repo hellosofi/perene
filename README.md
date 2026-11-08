@@ -150,6 +150,8 @@ http://127.0.0.1:8000/
 
 <br/>
 
+---
+
 ### ⭐┆ Entrega 02
 
 ![Quadro da Sprint 02 - Jira](entregas/entrega-01/media/Sprint02.png)
@@ -163,6 +165,8 @@ http://127.0.0.1:8000/
 Veja o projeto funcionando: [Acesse o vídeo no Youtube](https://youtu.be/EpsZ5v47rjs)
 <br/>
 Explicação do código inicial (W.I.P): [Youtube](https://youtu.be/7_4VonwUPlg?si=UQOuGa8QSrvDRjkZ)
+
+---
 
 ### ⭐┆ Entrega 03
 
@@ -210,6 +214,15 @@ Bug Tracker:
 ![Quadro da Sprint 04 - Jira](entregas/entrega-04/media/Sprint04.png)
 
 </div>
+
+## Como contribuir
+
+<div align="center">
+
+<a href="https://github.com/hellosofi/perene/blob/main/entregas/entrega-04/contributing.md"><img src="https://img.shields.io/badge/CONTRIBUTING-A?style=for-the-badge&logo=readme&logoColor=darkseagreen&labelColor=33473B&color=darkseagreen"></a>
+
+</div>
+
 
 <br/>
 
