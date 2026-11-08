@@ -59,6 +59,13 @@
                 Doações
                 <span class="menu-lateral__em-breve">em breve</span>
             </span>
+
+            <a href="{% url 'notificacoes' %}"
+               class="menu-lateral__item{% if pagina_atual == 'notificacoes' %} menu-lateral__item--ativo{% endif %}"
+               {% if pagina_atual == 'notificacoes' %}aria-current="page"{% endif %}>
+                <svg width="19" height="19" aria-hidden="true"><use href="#icon-bell"/></svg>
+                Notificações
+            </a>
         </nav>
 
         <div class="casca__rodape">
@@ -102,7 +109,7 @@
         {% if messages %}
         <div class="casca__mensagens">
             {% for mensagem in messages %}
-            <p class="aviso{% if mensagem.tags == 'error' %} aviso--erro{% endif %}" role="status">{{ mensagem }}</p>
+            <p class="aviso{% if mensagem.tags == 'error' %} aviso--erro{% elif mensagem.tags == 'success' %} aviso--sucesso{% endif %}" role="status">{{ mensagem }}</p>
             {% endfor %}
         </div>
         {% endif %}
@@ -126,6 +133,12 @@
             Equipe
         </a>
         {% endif %}
+
+        <a href="{% url 'notificacoes' %}"
+           class="menu-inferior__item{% if pagina_atual == 'notificacoes' %} menu-inferior__item--ativo{% endif %}">
+            <svg width="20" height="20" aria-hidden="true"><use href="#icon-bell"/></svg>
+            Avisos
+        </a>
 
         <form method="post" action="{% url 'sair' %}" class="menu-inferior__form">
             {% csrf_token %}

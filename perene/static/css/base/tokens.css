@@ -53,6 +53,7 @@
     --cor-primaria: var(--ciano-escuro);
     --cor-primaria-hover: var(--marinho);
     --cor-destaque: var(--laranja);
+    --cor-destaque-hover: var(--laranja-escuro);
     --cor-foco: var(--ciano-escuro);
     --cor-foco-anel: rgb(15 124 128 / 0.18);
 

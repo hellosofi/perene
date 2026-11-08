@@ -126,3 +126,84 @@ class CadastroGestor(AuthView):
             ('Convide a equipe', 'Compartilhe o código do mercado.'),
         ],
     }
+
+
+# ---------------------------------------------------------------------------
+# Notificações (tela 09)
+# ---------------------------------------------------------------------------
+
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.db.models import Q
+from django.views.decorators.http import require_POST
+
+from .decorators import gestor_required
+from .models import Notificacao
+
+GRUPOS_NOTIFICACAO = [
+    ('estoque', 'Estoque', 'icon-box'),
+    ('equipe', 'Equipe', 'icon-users'),
+    ('comunicado', 'Comunicados', 'icon-bell'),
+]
+
+
+def notificacoes_visiveis(user):
+    """As notificações para todos (sem destinatário) ou só para este usuário."""
+    # TODO: filtrar por mercado (História 9)
+    return Notificacao.objects.filter(Q(destinatario__isnull=True) | Q(destinatario=user))
+
+
+@login_required
+def notificacoes(request):
+    filtro = request.GET.get('categoria', '')
+    todas = list(notificacoes_visiveis(request.user).select_related('produto', 'autor'))
+    lidas = set(request.user.notificacoes_lidas.values_list('id', flat=True))
+
+    contagens = {'todas': len(todas)}
+    grupos = []
+    for chave, titulo, icone in GRUPOS_NOTIFICACAO:
+        itens = [n for n in todas if n.categoria == chave]
+        contagens[chave] = len(itens)
+        if itens and filtro in ('', chave):
+            grupos.append({'chave': chave, 'titulo': titulo, 'icone': icone, 'itens': itens})
+
+    return render(request, 'notificacoes.html', {
+        'grupos': grupos,
+        'contagens': contagens,
+        'filtro': filtro,
+        'lidas': lidas,
+        'novas': len([n for n in todas if n.id not in lidas]),
+        'publicos': Notificacao.PUBLICO_CHOICES,
+        'pagina_atual': 'notificacoes',
+    })
+
+
+@login_required
+@require_POST
+def marcar_notificacoes_lidas(request):
+    for n in notificacoes_visiveis(request.user):
+        n.lida_por.add(request.user)
+    return redirect('notificacoes')
+
+
+@gestor_required
+@require_POST
+def enviar_comunicado(request):
+    mensagem = request.POST.get('mensagem', '').strip()
+    publico = request.POST.get('publico', 'todos')
+    if publico not in dict(Notificacao.PUBLICO_CHOICES):
+        publico = 'todos'
+
+    if not mensagem:
+        messages.error(request, 'Escreva o comunicado antes de enviar.')
+    else:
+        nome = request.user.first_name or request.user.username
+        Notificacao.objects.create(
+            tipo='comunicado',
+            titulo=f'Comunicado de {nome}'[:120],
+            mensagem=mensagem,
+            publico=publico,
+            autor=request.user,
+        )
+        messages.success(request, 'Comunicado enviado para a equipe.')
+    return redirect('notificacoes')

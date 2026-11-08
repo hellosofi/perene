@@ -31,8 +31,6 @@
             {% endfor %}
         </div>
 
-        {% if user.perfil.papel == 'gestor' %}
-        <button type="button" class="botao botao--contorno">+ Emitir nova notificação</button>
-        {% endif %}
+        <a href="{% url 'notificacoes' %}" class="botao botao--contorno">Ver todas{% if user.perfil.papel == 'gestor' %} e enviar comunicado{% endif %}</a>
     </section>
 </details>
