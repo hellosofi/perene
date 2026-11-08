@@ -5,178 +5,363 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Perene | ESG para o varejo alimentar</title>
-    <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
+    <meta name="description" content="O Perene avisa antes de o alimento vencer, ajuda a doar o que sobra e organiza a equipe do seu mercado. ESG simples para mercados de bairro.">
+    <link rel="icon" type="image/svg+xml" href="{% static 'images/marca/favicon.svg' %}">
+    <link rel="alternate icon" type="image/png" href="{% static 'images/favicon.png' %}">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/legado/home.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Smooch+Sans:wght@700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/base/tokens.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base/tipografia.css' %}">
+    <link rel="stylesheet" href="{% static 'css/componentes/botao.css' %}">
+    <link rel="stylesheet" href="{% static 'css/paginas/home.css' %}">
 </head>
-<body>
-    <header class="topo">
-        <nav aria-label="Principal">
-            <a href="#sobre">Sobre</a>
-            <a href="#pilares">Pilares ESG</a>
-            <a href="#quem-somos">Quem somos</a>
-            <a href="#acesso" class="nav-destaque">Entrar</a>
-        </nav>
-    </header>
+<body class="home">
 
-    <main>
-        <section class="hero">
-            <h1><em>Perene</em></h1>
-            <p class="lema">Soluções ESG para pequenas e médias empresas do varejo alimentar.</p>
-            <p class="texto">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, ut enim ad minim veniam.</p>
-            <a class="btn btn-primario" href="#acesso">Acessar o sistema</a>
-        </section>
+{% include "icons.html" %}
 
-        <section class="secao" id="sobre">
-            <h2>Sobre o projeto</h2>
-            <div class="duas-colunas">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-            </div>
-        </section>
+<!-- ===================== Primeira dobra (pen.dev: Home · site Perene) ===================== -->
+<header class="home-dobra" id="inicio">
+    <div class="home-hero">
 
-        <section class="secao" id="pilares">
-            <h2>Ambiental, social e governança</h2>
-            <div class="pilares">
-                <article class="pilar pilar-a">
-                    <h3>Ambiental</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                </article>
-                <article class="pilar pilar-b">
-                    <h3>Social</h3>
-                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
-                </article>
-                <article class="pilar pilar-c">
-                    <h3>Governança</h3>
-                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.</p>
-                </article>
-            </div>
-        </section>
+        <!-- faixas de rio do fundo -->
+        <svg class="home-hero__faixas" viewBox="0 0 1400 820" preserveAspectRatio="none" aria-hidden="true">
+            <path class="home-hero__faixa home-hero__faixa--clara" d="M -60 600 C 260 540 330 790 640 780 C 930 770 1010 610 1460 650"/>
+            <path class="home-hero__faixa home-hero__faixa--escura" d="M 560 900 C 600 650 900 700 990 480 C 1080 260 1240 300 1480 110"/>
+        </svg>
 
-        <section class="secao" id="quem-somos">
-            <h2>Quem somos</h2>
-            <p class="intro">Acreditamos que sustentabilidade também se faz nos pequenos negócios. Por isso, criamos soluções ESG para o varejo alimentar: mais controle do estoque, menos desperdício e uma equipe mais organizada.</p>
-            <ul class="equipe">
-                <li class="membro">
-                    <img src="{% static 'images/equipe/flor-cerejeira.jpg' %}" alt="" width="88" height="88">
-                    <div>
-                        <strong>João Gustavo Vieira Fernandes Pedrosa</strong>
-                        <a href="mailto:jgvfp@cesar.school">jgvfp@cesar.school</a>
-                    </div>
-                </li>
-                <li class="membro">
-                    <img src="{% static 'images/equipe/flor-girassol.jpg' %}" alt="" width="88" height="88">
-                    <div>
-                        <strong>Kauã Cardoso de Melo</strong>
-                        <a href="mailto:kcm2@cesar.school">kcm2@cesar.school</a>
-                    </div>
-                </li>
-                <li class="membro">
-                    <img src="{% static 'images/equipe/flor-margarida.jpg' %}" alt="" width="88" height="88">
-                    <div>
-                        <strong>Lunna de Aguiar Mendonça Morelato Moreno</strong>
-                        <a href="mailto:lammm@cesar.school">lammm@cesar.school</a>
-                    </div>
-                </li>
-                <li class="membro">
-                    <img src="{% static 'images/equipe/flor-plumeria.jpg' %}" alt="" width="88" height="88">
-                    <div>
-                        <strong>Matheus Pinheiro Laurentino</strong>
-                        <a href="mailto:mpl2@cesar.school">mpl2@cesar.school</a>
-                    </div>
-                </li>
-                <li class="membro">
-                    <img src="{% static 'images/equipe/flor-hibisco-laranja.jpg' %}" alt="" width="88" height="88">
-                    <div>
-                        <strong>Nara de Melo Santos</strong>
-                        <a href="mailto:nms2@cesar.school">nms2@cesar.school</a>
-                    </div>
-                </li>
-                <li class="membro">
-                    <img src="{% static 'images/equipe/flor-hibisco-azul.jpg' %}" alt="" width="88" height="88">
-                    <div>
-                        <strong>Sofia Carolina Santos Bezerra</strong>
-                        <a href="mailto:scsb@cesar.school">scsb@cesar.school</a>
-                    </div>
-                </li>
-                <li class="membro">
-                    <img src="{% static 'images/equipe/flor-lirio.jpg' %}" alt="" width="88" height="88">
-                    <div>
-                        <strong>Sabrina Rayanne</strong>
-                        <a href="mailto:srso@cesar.school">srso@cesar.school</a>
-                    </div>
-                </li>
-                <li class="membro">
-                    <img src="{% static 'images/equipe/flor-hibisco-amarelo.jpg' %}" alt="" width="88" height="88">
-                    <div>
-                        <strong>Nadla Gabriele</strong>
-                        <a href="mailto:ngma@cesar.school">ngma@cesar.school</a>
-                    </div>
-                </li>
-                <li class="membro">
-                    <img src="{% static 'images/equipe/flor-hibisco-tropical.jpg' %}" alt="" width="88" height="88">
-                    <div>
-                        <strong>Maria Clara</strong>
-                        <a href="mailto:mcmt@cesar.school">mcmt@cesar.school</a>
-                    </div>
-                </li>
-                <li class="membro">
-                    <img src="{% static 'images/equipe/flor-gerbera.jpg' %}" alt="" width="88" height="88">
-                    <div>
-                        <strong>Beatriz Aciolli</strong>
-                        <a href="mailto:bam4@cesar.school">bam4@cesar.school</a>
-                    </div>
-                </li>
-                <li class="membro">
-                    <img src="{% static 'images/equipe/flor-rosa-amarela.jpg' %}" alt="" width="88" height="88">
-                    <div>
-                        <strong>Guilherme Lôbo</strong>
-                        <a href="mailto:glbm@cesar.school">glbm@cesar.school</a>
-                    </div>
-                </li>
+        <nav class="home-menu" aria-label="Principal">
+            <a href="#inicio" class="home-menu__logo" aria-label="Perene, início">
+                <img src="{% static 'images/marca/logo-branca.svg' %}" alt="Perene" width="116" height="74">
+            </a>
+
+            <ul class="home-menu__links">
+                <li><a href="#inicio" class="home-menu__link home-menu__link--ativo" aria-current="page">Início</a></li>
+                <li><a href="#como-funciona" class="home-menu__link">Como funciona</a></li>
+                <li><a href="#recursos" class="home-menu__link">Recursos</a></li>
+                <li><a href="#impacto" class="home-menu__link">Impacto</a></li>
+                <li><a href="#quem-somos" class="home-menu__link">Quem somos</a></li>
             </ul>
-        </section>
-
-        <section class="secao" id="acesso">
-            <h2>Acesse o sistema</h2>
 
             {% if user.is_authenticated %}
-            <div class="ja-logado">
-                <p>Você já está logado como <strong>{{ user.first_name|default:user.username }}</strong>.</p>
-                <a class="btn btn-primario" href="{% url 'lista_produtos' %}">Ir para o estoque</a>
+            <a href="{% url 'visao_geral' %}" class="home-menu__entrar">
+                <svg width="16" height="16" aria-hidden="true"><use href="#icon-home"/></svg>
+                Abrir o app
+            </a>
+            {% else %}
+            <a href="{% url 'login_gestor' %}" class="home-menu__entrar">
+                <svg width="16" height="16" aria-hidden="true"><use href="#icon-login"/></svg>
+                Entrar
+            </a>
+            {% endif %}
+        </nav>
+
+        <div class="home-hero__mensagem">
+            <p class="home-selo">
+                <svg width="15" height="15" aria-hidden="true"><use href="#icon-leaf"/></svg>
+                ESG simples para mercados de bairro
+            </p>
+
+            <h1 class="home-hero__titulo">
+                <span class="home-hero__titulo-menor">Seu mercado mais sustentável,</span>
+                <span class="home-hero__titulo-maior">um dia de<br>cada vez.</span>
+            </h1>
+
+            <p class="home-hero__apoio">
+                O Perene avisa antes de o alimento vencer, ajuda a doar o que sobra para instituições
+                do bairro e organiza as tarefas da equipe. Tudo vira indicador ESG, sem planilha.
+            </p>
+
+            <a href="#como-funciona" class="home-hero__ver">
+                <svg width="18" height="18" aria-hidden="true"><use href="#icon-play"/></svg>
+                Ver como funciona
+            </a>
+        </div>
+
+        <!-- cartões do app flutuando (ilustrativos) -->
+        <div class="home-hero__cartoes" aria-hidden="true">
+            <div class="home-flutuante home-flutuante--saude">
+                <svg class="home-medidor" viewBox="0 0 96 54">
+                    <path class="home-medidor__trilho" d="M 7 50 A 41 41 0 0 1 89 50"/>
+                    <path class="home-medidor__progresso" d="M 7 50 A 41 41 0 0 1 89 50" pathLength="100"/>
+                    <text x="48" y="48" text-anchor="middle">92%</text>
+                </svg>
+                <div>
+                    <strong>Saúde do estoque</strong>
+                    <span>46 de 50 produtos em dia</span>
+                </div>
+            </div>
+
+            <div class="home-flutuante home-flutuante--alerta">
+                <span class="home-gota home-gota--laranja">
+                    <svg width="20" height="20"><use href="#icon-calendar"/></svg>
+                </span>
+                <div>
+                    <strong>Iogurte vence em 3 dias</strong>
+                    <span>Doe ou faça promoção</span>
+                </div>
+            </div>
+
+            <div class="home-flutuante home-flutuante--doacao">
+                <span class="home-gota home-gota--amarela">
+                    <svg width="20" height="20"><use href="#icon-heart"/></svg>
+                </span>
+                <div>
+                    <strong class="home-flutuante__numero">≈ 420 refeições</strong>
+                    <span>doadas em novembro</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- recorte creme com o botão principal -->
+        <div class="home-hero__recorte">
+            {% if user.is_authenticated %}
+            <a href="{% url 'visao_geral' %}" class="home-botao-destaque">
+                <svg width="18" height="18" aria-hidden="true"><use href="#icon-arrow"/></svg>
+                Abrir o app
+            </a>
+            {% else %}
+            <a href="{% url 'cadastro_gestor' %}" class="home-botao-destaque">
+                <svg width="18" height="18" aria-hidden="true"><use href="#icon-arrow"/></svg>
+                Cadastrar meu mercado
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</header>
+
+<main>
+
+    <!-- ===================== Como funciona ===================== -->
+    <section class="home-secao home-secao--branca" id="como-funciona" aria-labelledby="titulo-como">
+        <div class="home-cabecalho home-cabecalho--centro">
+            <p class="home-chamada">Como funciona</p>
+            <h2 id="titulo-como" class="home-titulo">Três passos, nenhuma planilha</h2>
+            <p class="home-subtitulo">Você cadastra o mercado em 2 minutos. O Perene cuida de lembrar o que importa.</p>
+        </div>
+
+        <ol class="home-passos">
+            <li class="home-passo home-passo--ciano">
+                <div class="home-passo__topo">
+                    <span class="home-gota home-gota--branca"><svg width="26" height="26" aria-hidden="true"><use href="#icon-store"/></svg></span>
+                    <span class="home-passo__numero" aria-hidden="true">1</span>
+                </div>
+                <h3>Cadastre seu mercado</h3>
+                <p>Crie a conta de gestor e convide a equipe com um código. Cada pessoa entra pelo celular.</p>
+            </li>
+            <li class="home-passo home-passo--amarelo">
+                <div class="home-passo__topo">
+                    <span class="home-gota home-gota--branca"><svg width="26" height="26" aria-hidden="true"><use href="#icon-scan"/></svg></span>
+                    <span class="home-passo__numero" aria-hidden="true">2</span>
+                </div>
+                <h3>Registre os lotes</h3>
+                <p>Leia o código de barras, informe a validade e o local. A situação de cada lote é calculada sozinha.</p>
+            </li>
+            <li class="home-passo home-passo--laranja">
+                <div class="home-passo__topo">
+                    <span class="home-gota home-gota--branca"><svg width="26" height="26" aria-hidden="true"><use href="#icon-bell"/></svg></span>
+                    <span class="home-passo__numero" aria-hidden="true">3</span>
+                </div>
+                <h3>Aja a tempo</h3>
+                <p>Receba o aviso antes de vencer: faça promoção, doe para uma instituição parceira ou dê baixa.</p>
+            </li>
+        </ol>
+    </section>
+
+    <!-- ===================== Recursos ===================== -->
+    <section class="home-secao" id="recursos" aria-labelledby="titulo-recursos">
+        <div class="home-recursos__topo">
+            <div class="home-cabecalho">
+                <p class="home-chamada">Recursos</p>
+                <h2 id="titulo-recursos" class="home-titulo">Tudo o que o mercado precisa, num lugar só</h2>
+            </div>
+            <p class="home-subtitulo home-recursos__apoio">Feito para gestores e equipes que não têm tempo a perder. Telas simples, avisos claros.</p>
+        </div>
+
+        <div class="home-recursos">
+            <article class="home-recurso home-recurso--ciano home-recurso--largo">
+                <span class="home-gota home-gota--amarela"><svg width="24" height="24" aria-hidden="true"><use href="#icon-home"/></svg></span>
+                <div>
+                    <h3>Visão geral</h3>
+                    <p>A saúde do estoque, as prioridades do dia e as tarefas da equipe na primeira tela.</p>
+                </div>
+            </article>
+            <article class="home-recurso">
+                <span class="home-gota home-gota--ciano"><svg width="24" height="24" aria-hidden="true"><use href="#icon-box"/></svg></span>
+                <div>
+                    <h3>Estoque com validade</h3>
+                    <p>Cada lote com validade e local. Vencidos, avariados e estoque baixo aparecem antes de virar prejuízo.</p>
+                </div>
+            </article>
+            <article class="home-recurso">
+                <span class="home-gota home-gota--ciano"><svg width="24" height="24" aria-hidden="true"><use href="#icon-heart"/></svg></span>
+                <div>
+                    <h3>Doações para o bairro</h3>
+                    <p>Separe os lotes que vão vencer, escolha a instituição e avise pelo WhatsApp em um toque.</p>
+                </div>
+            </article>
+            <article class="home-recurso">
+                <span class="home-gota home-gota--ciano"><svg width="24" height="24" aria-hidden="true"><use href="#icon-list-check"/></svg></span>
+                <div>
+                    <h3>Equipe e tarefas</h3>
+                    <p>Distribua as tarefas por turno e acompanhe o que foi feito e o que está atrasado.</p>
+                </div>
+            </article>
+            <article class="home-recurso home-recurso--marinho home-recurso--largo">
+                <span class="home-gota home-gota--amarela"><svg width="24" height="24" aria-hidden="true"><use href="#icon-chart"/></svg></span>
+                <div>
+                    <h3>Indicadores ESG</h3>
+                    <p>Perdas, doações e refeições estimadas mês a mês, prontas para mostrar a clientes e parceiros.</p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- ===================== Impacto ===================== -->
+    <section class="home-impacto" id="impacto" aria-labelledby="titulo-impacto">
+        <div class="home-cabecalho">
+            <p class="home-chamada home-chamada--amarela">Impacto</p>
+            <h2 id="titulo-impacto" class="home-titulo home-titulo--branco">O que sobra na prateleira vira refeição no bairro</h2>
+            <p class="home-subtitulo home-subtitulo--branco">Cada decisão no Perene vira um número que você entende e pode mostrar.</p>
+        </div>
+
+        <ul class="home-numeros">
+            <li>
+                <strong>340 g</strong>
+                <span class="home-numeros__rotulo">de alimento doado</span>
+                <span>viram, em média, 1 refeição para quem precisa.</span>
+            </li>
+            <li>
+                <strong>7 dias</strong>
+                <span class="home-numeros__rotulo">de antecedência</span>
+                <span>para agir antes de o lote vencer: promoção ou doação.</span>
+            </li>
+            <li>
+                <strong>3 pilares</strong>
+                <span class="home-numeros__rotulo">ambiental, social e governança</span>
+                <span>medidos sem jargão, mês a mês.</span>
+            </li>
+        </ul>
+    </section>
+
+    <!-- ===================== Quem somos ===================== -->
+    <section class="home-secao" id="quem-somos" aria-labelledby="titulo-quem">
+        <div class="home-cabecalho">
+            <p class="home-chamada">Quem somos</p>
+            <h2 id="titulo-quem" class="home-titulo">Feito por estudantes, para o comércio do bairro</h2>
+            <p class="home-subtitulo">Acreditamos que sustentabilidade também se faz nos pequenos negócios. Por isso criamos o Perene: mais controle do estoque, menos desperdício e uma equipe mais organizada.</p>
+        </div>
+
+        <ul class="home-equipe">
+            <li class="home-membro">
+                <img src="{% static 'images/equipe/flor-cerejeira.jpg' %}" alt="" width="64" height="64">
+                <div><strong>João Gustavo Vieira Fernandes Pedrosa</strong><a href="mailto:jgvfp@cesar.school">jgvfp@cesar.school</a></div>
+            </li>
+            <li class="home-membro">
+                <img src="{% static 'images/equipe/flor-girassol.jpg' %}" alt="" width="64" height="64">
+                <div><strong>Kauã Cardoso de Melo</strong><a href="mailto:kcm2@cesar.school">kcm2@cesar.school</a></div>
+            </li>
+            <li class="home-membro">
+                <img src="{% static 'images/equipe/flor-margarida.jpg' %}" alt="" width="64" height="64">
+                <div><strong>Lunna de Aguiar Mendonça Morelato Moreno</strong><a href="mailto:lammm@cesar.school">lammm@cesar.school</a></div>
+            </li>
+            <li class="home-membro">
+                <img src="{% static 'images/equipe/flor-plumeria.jpg' %}" alt="" width="64" height="64">
+                <div><strong>Matheus Pinheiro Laurentino</strong><a href="mailto:mpl2@cesar.school">mpl2@cesar.school</a></div>
+            </li>
+            <li class="home-membro">
+                <img src="{% static 'images/equipe/flor-hibisco-laranja.jpg' %}" alt="" width="64" height="64">
+                <div><strong>Nara de Melo Santos</strong><a href="mailto:nms2@cesar.school">nms2@cesar.school</a></div>
+            </li>
+            <li class="home-membro">
+                <img src="{% static 'images/equipe/flor-hibisco-azul.jpg' %}" alt="" width="64" height="64">
+                <div><strong>Sofia Carolina Santos Bezerra</strong><a href="mailto:scsb@cesar.school">scsb@cesar.school</a></div>
+            </li>
+            <li class="home-membro">
+                <img src="{% static 'images/equipe/flor-lirio.jpg' %}" alt="" width="64" height="64">
+                <div><strong>Sabrina Rayanne</strong><a href="mailto:srso@cesar.school">srso@cesar.school</a></div>
+            </li>
+            <li class="home-membro">
+                <img src="{% static 'images/equipe/flor-hibisco-amarelo.jpg' %}" alt="" width="64" height="64">
+                <div><strong>Nadla Gabriele</strong><a href="mailto:ngma@cesar.school">ngma@cesar.school</a></div>
+            </li>
+            <li class="home-membro">
+                <img src="{% static 'images/equipe/flor-hibisco-tropical.jpg' %}" alt="" width="64" height="64">
+                <div><strong>Maria Clara</strong><a href="mailto:mcmt@cesar.school">mcmt@cesar.school</a></div>
+            </li>
+            <li class="home-membro">
+                <img src="{% static 'images/equipe/flor-gerbera.jpg' %}" alt="" width="64" height="64">
+                <div><strong>Beatriz Aciolli</strong><a href="mailto:bam4@cesar.school">bam4@cesar.school</a></div>
+            </li>
+            <li class="home-membro">
+                <img src="{% static 'images/equipe/flor-rosa-amarela.jpg' %}" alt="" width="64" height="64">
+                <div><strong>Guilherme Lôbo</strong><a href="mailto:glbm@cesar.school">glbm@cesar.school</a></div>
+            </li>
+        </ul>
+    </section>
+
+    <!-- ===================== Chamada final ===================== -->
+    <section class="home-secao home-secao--final" aria-labelledby="titulo-final">
+        <div class="home-final">
+            <div>
+                <h2 id="titulo-final" class="home-titulo">Pronto para deixar seu mercado perene?</h2>
+                <p class="home-subtitulo">Cadastre o mercado, convide a equipe e registre o primeiro lote ainda hoje.</p>
+            </div>
+            <div class="home-final__acoes">
+                {% if user.is_authenticated %}
+                <a href="{% url 'visao_geral' %}" class="botao">Abrir o app</a>
                 <form method="post" action="{% url 'sair' %}">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-contorno">Sair</button>
+                    <button type="submit" class="botao-texto">Sair da conta</button>
                 </form>
+                {% else %}
+                <a href="{% url 'cadastro_gestor' %}" class="botao">
+                    <svg width="18" height="18" aria-hidden="true"><use href="#icon-arrow"/></svg>
+                    Cadastrar meu mercado
+                </a>
+                <a href="{% url 'login_gestor' %}" class="home-final__entrar">Já tem conta? Entrar</a>
+                {% endif %}
             </div>
-            {% else %}
-            <div class="acessos">
-                <div class="painel painel-funcionario">
-                    <h3>Funcionário</h3>
-                    <p>Consulte e atualize o estoque do seu mercado com e-mail e senha.</p>
-                    <div class="acoes">
-                        <a class="btn btn-primario" href="{% url 'login_funcionario' %}">Entrar</a>
-                        <a class="btn btn-contorno" href="{% url 'cadastro_funcionario' %}">Cadastre-se</a>
-                    </div>
-                </div>
+        </div>
+    </section>
+</main>
 
-                <div class="painel painel-gestor">
-                    <h3>Gestor</h3>
-                    <p>Acesso com o mesmo usuário e senha do painel administrativo.</p>
-                    <div class="acoes">
-                        <a class="btn btn-primario" href="{% url 'login_gestor' %}">Entrar como gestor</a>
-                        <a class="btn btn-contorno" href="{% url 'cadastro_gestor' %}">Cadastrar gestor</a>
-                    </div>
-                </div>
+<!-- ===================== Rodapé ===================== -->
+<footer class="home-rodape">
+    <div class="home-rodape__topo">
+        <div class="home-rodape__marca">
+            <img src="{% static 'images/marca/logo-amarela.svg' %}" alt="Perene" width="254" height="161">
+            <p>Soluções ESG para pequenos e médios mercados do varejo alimentar.</p>
+        </div>
+
+        <nav class="home-rodape__colunas" aria-label="Rodapé">
+            <div>
+                <h2>Produto</h2>
+                <a href="#como-funciona">Como funciona</a>
+                <a href="#recursos">Recursos</a>
+                <a href="#impacto">Impacto</a>
             </div>
-            {% endif %}
-        </section>
-    </main>
+            <div>
+                <h2>Para você</h2>
+                <a href="{% url 'login_gestor' %}">Entrar</a>
+                <a href="{% url 'cadastro_gestor' %}">Cadastrar meu mercado</a>
+                <a href="{% url 'cadastro_funcionario' %}">Sou funcionário</a>
+            </div>
+            <div>
+                <h2>O projeto</h2>
+                <a href="#quem-somos">Quem somos</a>
+            </div>
+        </nav>
+    </div>
 
-    <footer class="rodape">
-        <p>Perene, 2026 - Aplicação de ESG nos Mercados.</p>
-    </footer>
+    <div class="home-rodape__base">
+        <p>© 2026 Perene · projeto da disciplina Fundamentos de Desenvolvimento de Software</p>
+        <p>Feito com cuidado para o comércio do bairro</p>
+    </div>
+</footer>
+
 </body>
 </html>

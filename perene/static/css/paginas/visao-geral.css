@@ -61,7 +61,7 @@
     left: 50%;
     font-family: var(--fonte-titulo);
     font-size: calc(var(--titulo-xl) * 1.6);
-    font-weight: var(--peso-forte);
+    font-weight: var(--peso-titulo);
     line-height: var(--altura-linha-titulo);
     transform: translateX(-50%);
 }
@@ -177,7 +177,7 @@
 .tarefas-equipe__numero {
     font-family: var(--fonte-titulo);
     font-size: var(--titulo-l);
-    font-weight: var(--peso-forte);
+    font-weight: var(--peso-titulo);
     color: var(--cor-realce-escuro);
 }
 

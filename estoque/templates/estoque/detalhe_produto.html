@@ -97,7 +97,7 @@
     </div>
 
     {% for lote in avariados|slice:":1" %}
-    <p class="aviso">
+    <p class="aviso aviso--critico">
         O lote #{{ lote.id }} está avariado. Separe para doação ou registre como perda para tirá-lo da prateleira.
     </p>
     {% endfor %}

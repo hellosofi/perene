@@ -42,7 +42,7 @@
 .registrar-lote__titulo {
     font-family: var(--fonte-titulo);
     font-size: var(--titulo-l);
-    font-weight: var(--peso-forte);
+    font-weight: var(--peso-titulo);
     line-height: var(--altura-linha-titulo);
     color: var(--cor-texto);
 }
@@ -100,7 +100,7 @@
     margin-top: var(--espaco-4);
     padding: var(--espaco-5);
     border-radius: var(--raio-l);
-    background: var(--cor-marca);
+    background: var(--cor-marca) url('../../images/marca/rio-textura.svg') right -30px bottom -20px / 80% auto no-repeat;
     color: var(--cor-texto-invertido);
 }
 

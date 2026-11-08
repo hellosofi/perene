@@ -2,6 +2,7 @@
  * Aviso: caixa de mensagem dentro de formulários e páginas.
  *   .aviso              informação importante (amarelo claro)
  *   .aviso--erro        erro geral do formulário (vermelho claro)
+ *   .aviso--critico     lote crítico (laranja claro)
  *   .aviso--sucesso     algo deu certo (verde claro)
  *   .aviso__titulo      primeira linha em negrito
  */
@@ -27,6 +28,14 @@
     border-color: var(--cor-erro);
     background: var(--cor-erro-fundo);
     color: var(--cor-erro-texto);
+}
+
+/* lote crítico (pen.dev 05 · Detalhe do produto): laranja claro, sem contorno */
+.aviso--critico {
+    border-color: transparent;
+    border-radius: var(--raio-l);
+    background: var(--quadro-critico);
+    color: var(--cor-texto);
 }
 
 .aviso--sucesso {
