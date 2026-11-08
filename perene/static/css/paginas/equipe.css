@@ -1,0 +1,180 @@
+/*
+ * Equipe e tarefas (pen.dev: tela 08).
+ *
+ *   .equipe                   a página
+ *   .equipe__resumo           os cartões do topo (usam componentes/indicador.css)
+ *   .colunas-equipe           uma coluna por funcionário
+ *   .coluna-pessoa            a coluna de um funcionário
+ *   .tarefa                   uma tarefa (--feita)
+ */
+
+.equipe {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-5);
+    padding: var(--espaco-4);
+}
+
+.equipe__cabecalho {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--espaco-3);
+}
+
+.equipe__titulo {
+    margin: 0;
+    font-family: var(--fonte-titulo);
+    font-size: var(--titulo-xl);
+    font-weight: var(--peso-forte);
+    line-height: var(--altura-linha-titulo);
+    color: var(--cor-texto);
+}
+
+.equipe__subtitulo {
+    margin: 0;
+    color: var(--cor-texto-suave);
+}
+
+/* ------------------------------------------------------------------
+ * Resumo
+ * ---------------------------------------------------------------- */
+
+.equipe__resumo {
+    display: grid;
+    gap: var(--espaco-4);
+}
+
+.equipe__codigo {
+    align-self: flex-start;
+    padding: var(--espaco-2) var(--espaco-4);
+    border-radius: var(--raio-pilula);
+    background: var(--cor-superficie);
+    font-family: var(--fonte-titulo);
+    font-size: var(--titulo-m);
+    font-weight: var(--peso-forte);
+    letter-spacing: var(--espaco-1);
+}
+
+/* ------------------------------------------------------------------
+ * Colunas por funcionário
+ * ---------------------------------------------------------------- */
+
+.colunas-equipe {
+    display: grid;
+    gap: var(--espaco-4);
+    align-items: start;
+}
+
+.coluna-pessoa {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-3);
+    padding: var(--espaco-4);
+    border: var(--borda-fina) solid var(--cor-linha);
+    border-radius: var(--raio-l);
+    background: var(--cor-superficie);
+}
+
+.coluna-pessoa__cabecalho {
+    display: flex;
+    align-items: center;
+    gap: var(--espaco-3);
+}
+
+.coluna-pessoa__nome {
+    display: block;
+    margin: 0;
+    font-family: var(--fonte-texto);
+    font-size: var(--texto-l);
+    font-weight: var(--peso-forte);
+    color: var(--cor-texto);
+}
+
+.coluna-pessoa__cargo {
+    font-size: var(--texto-xs);
+    color: var(--cor-texto-suave);
+}
+
+.coluna-pessoa__contagem {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--texto-s);
+    color: var(--cor-texto-suave);
+}
+
+.coluna-pessoa__contagem strong {
+    color: var(--cor-primaria);
+}
+
+.coluna-pessoa__vazio {
+    margin: 0;
+    font-size: var(--texto-s);
+    color: var(--cor-texto-suave);
+}
+
+.tarefas {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.tarefa {
+    display: flex;
+    align-items: center;
+    gap: var(--espaco-3);
+    padding: var(--espaco-3);
+    border: var(--borda-fina) solid var(--cor-linha);
+    border-radius: var(--raio-m);
+}
+
+.tarefa__marcador {
+    flex-shrink: 0;
+    width: var(--tamanho-marcador);
+    height: var(--tamanho-marcador);
+    border: var(--borda-media) solid var(--cor-texto-suave);
+    border-radius: var(--raio-pilula);
+}
+
+.tarefa--feita .tarefa__marcador {
+    display: grid;
+    place-items: center;
+    border-color: var(--cor-concluido);
+    background: var(--cor-concluido);
+    color: var(--cor-texto-invertido);
+}
+
+.tarefa__titulo {
+    display: block;
+    font-size: var(--texto-s);
+    font-weight: var(--peso-forte);
+}
+
+.tarefa__detalhe {
+    font-size: var(--texto-xs);
+    color: var(--cor-texto-suave);
+}
+
+/* ------------------------------------------------------------------
+ * Tablet e desktop
+ * ---------------------------------------------------------------- */
+
+@media (min-width: 768px) {
+    .equipe__resumo {
+        grid-template-columns: 2fr 1fr 2fr;
+    }
+
+    .colunas-equipe {
+        grid-template-columns: repeat(auto-fill, minmax(var(--largura-coluna-equipe), 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    .equipe {
+        padding: 0 var(--espaco-6) var(--espaco-6);
+    }
+}

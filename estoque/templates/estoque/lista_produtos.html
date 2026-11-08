@@ -1,250 +1,148 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block titulo %}Inventário — Perene{% endblock %}
-{% block titulo_pagina %}Inventário{% endblock %}
+{% block titulo %}Estoque — Perene{% endblock %}
 
 {% block estilos %}
+{% comment %} tokens.css e aviso.css já vêm do base.html {% endcomment %}
+<link rel="stylesheet" href="{% static 'css/componentes/etiqueta.css' %}">
+<link rel="stylesheet" href="{% static 'css/paginas/estoque.css' %}">
 {% if mostrar_modal %}
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Smooch+Sans:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{% static 'css/base/tokens.css' %}">
-<link rel="stylesheet" href="{% static 'css/componentes/botao.css' %}">
 <link rel="stylesheet" href="{% static 'css/componentes/campo.css' %}">
-<link rel="stylesheet" href="{% static 'css/componentes/aviso.css' %}">
 <link rel="stylesheet" href="{% static 'css/componentes/formulario.css' %}">
 <link rel="stylesheet" href="{% static 'css/componentes/modal.css' %}">
 {% endif %}
 {% endblock %}
 
 {% block conteudo %}
-<div class="conteudo-pagina">
-    
-    <section class="titulo-pagina compacto">
-        <div>
-            <p class="etiqueta-topo">Saiba o que está nas prateleiras</p>
-            <h1>Inventário</h1>
-            <p>Identifique o que precisa de atenção antes que vire desperdício.</p>
-        </div>
-        <a href="{% url 'adicionar_produto' %}" class="botao-primario">
-            <svg width="18" height="18"><use href="#icon-plus"/></svg>
-            Adicionar item
-        </a>
-    </section>
+<div class="estoque">
 
-    
-    {% comment %} atualizar condições aqui {% endcomment %}
-    {% comment %} xxxxxxxxxxxxxxxxxxxx {% endcomment %}
-    <div class="estatisticas">
-        <div>
-            <span>Todos os itens</span>
-            <strong>{{ total }}</strong>
-        </div>
+    <header class="estoque__cabecalho">
+        <h1 class="estoque__titulo">Estoque</h1>
+        <p class="estoque__subtitulo">
+            {{ total }} produto{{ total|pluralize }} cadastrado{{ total|pluralize }} ·
+            {{ atencao }} pede{{ atencao|pluralize:"m" }} atenção.
+        </p>
+    </header>
 
-        <div>
-            <span>Precisam de atenção</span>
-            <strong>{{ atencao }}</strong>
-        </div>
-
-        <div>
-            <span>Estoque saudável</span>
-            <strong>{{ pct_saudavel }}%</strong>
-            <small>Tudo certo</small>
-        </div>
-
-        <div class="destaque-estoque">
-            <svg width="18" height="18"><use href="#icon-leaf"/></svg>
-            <span>Menos desperdício esta semana</span>
-            <strong>−14%</strong>
-        </div>
-    </div>
-    {% comment %} xxxxxxxxxxxxxxxxxxxx {% endcomment %}
-
-    <form method="get" id="form-filtros">
+    <form method="get" id="form-filtros" class="estoque__ferramentas">
         <input type="hidden" name="visao" id="campo-visao" value="{{ visao }}">
         <input type="hidden" name="status" id="campo-status" value="{{ status_atual }}">
-        {% if categoria_atual %}
-            <input type="hidden" name="categoria" value="{{ categoria_atual }}">
-        {% endif %}
 
-        <div class="barra-ferramentas">
-            <label class="campo-busca">
-                <svg width="19" height="19"><use href="#icon-search"/></svg>
-                <input
-                    type="text"
-                    name="q"
-                    value="{{ query }}"
-                    placeholder="Buscar por nome, código ou categoria..."
-                >
-            </label>
-            <label class="campo-selecao">
-    <svg width="17" height="17"><use href="#icon-filter"/></svg>
-    <select name="produto" onchange="this.form.submit()">
-        <option value="">Todos os produtos</option>
-        {% for p in produtos_filtro %}
-            <option value="{{ p.id }}" {% if p.id|stringformat:"s" == produto_atual %}selected{% endif %}>
-                {{ p.nome }}
-            </option>
-        {% endfor %}
-    </select>
-</label>
+        <label class="estoque__busca">
+            <svg width="18" height="18" aria-hidden="true"><use href="#icon-search"/></svg>
+            <input type="search" name="q" value="{{ query }}" aria-label="Buscar" placeholder="Buscar por nome, código ou local">
+        </label>
 
-            <div class="divisor"></div>
+        <select name="categoria" class="estoque__selecao" aria-label="Categoria" onchange="this.form.submit()">
+            <option value="">Categoria: todas</option>
+            {% for cat in categorias %}
+            <option value="{{ cat }}" {% if cat == categoria_atual %}selected{% endif %}>{{ cat }}</option>
+            {% endfor %}
+        </select>
 
-            <label class="campo-selecao">
-                <svg width="17" height="17"><use href="#icon-filter"/></svg>
-                <select name="categoria" onchange="this.form.submit()">
-                    <option value="">Todas as categorias</option>
-                    {% for cat in categorias %}
-                        <option value="{{ cat }}" {% if cat == categoria_atual %}selected{% endif %}>
-                            {{ cat }}
-                        </option>
-                    {% endfor %}
-                </select>
-            </label>
+        <select name="produto" class="estoque__selecao" aria-label="Produto" onchange="this.form.submit()">
+            <option value="">Produto: todos</option>
+            {% for p in produtos_filtro %}
+            <option value="{{ p.id }}" {% if p.id|stringformat:"s" == produto_atual %}selected{% endif %}>{{ p.nome }}</option>
+            {% endfor %}
+        </select>
 
-            <div class="alternar-visao">
-                <button
-                    type="button"
-                    class="{% if visao == 'quadro' %}selecionado{% endif %}"
-                    onclick="alternarVisao('quadro')"
-                    aria-label="Visualização em quadro"
-                >
-                    <svg width="17" height="17"><use href="#icon-grid"/></svg>
-                </button>
-                <button
-                    type="button"
-                    class="{% if visao == 'lista' %}selecionado{% endif %}"
-                    onclick="alternarVisao('lista')"
-                    aria-label="Visualização em lista"
-                >
-                    <svg width="18" height="18"><use href="#icon-list"/></svg>
-                </button>
-            </div>
+        <div class="seletor-visao" role="group" aria-label="Visualização">
+            <button type="button" onclick="alternarVisao('lista')"
+                    class="seletor-visao__opcao{% if visao == 'lista' %} seletor-visao__opcao--ativa{% endif %}"
+                    aria-pressed="{% if visao == 'lista' %}true{% else %}false{% endif %}">Lista</button>
+            <button type="button" onclick="alternarVisao('quadro')"
+                    class="seletor-visao__opcao{% if visao != 'lista' %} seletor-visao__opcao--ativa{% endif %}"
+                    aria-pressed="{% if visao != 'lista' %}true{% else %}false{% endif %}">Quadro</button>
+        </div>
+
+        <div class="estoque__acoes">
+            <a href="{% url 'adicionar_produto' %}" class="botao botao--contorno">+ Novo produto</a>
+            {% if produto_selecionado %}
+            <a href="{% url 'adicionar_lote' produto_selecionado.id %}" class="botao">+ Registrar lote de {{ produto_selecionado.nome }}</a>
+            {% endif %}
         </div>
     </form>
-    {% if produto_selecionado %}
-    <a href="{% url 'adicionar_lote' produto_selecionado.id %}" class="botao-primario">
-        + Registrar lote de {{ produto_selecionado.nome }}
-    </a>
-{% endif %}
 
-    <div class="filtros">
-        <strong>Ocorrências</strong>
-
-        <button
-            type="button"
-            class="{% if status_atual == 'atencao' %}selecionado{% endif %}"
-            onclick="alternarStatus('atencao')"
-        >
-            Atenção
+    <div class="filtro-situacao" role="group" aria-label="Filtrar por situação">
+        <button type="button" onclick="alternarStatus('')"
+                class="filtro-situacao__opcao{% if not status_atual %} filtro-situacao__opcao--ativa{% endif %}">
+            Todos <span class="filtro-situacao__numero">{{ contagens.todos }}</span>
         </button>
-
-        <button
-            type="button"
-            class="{% if status_atual == 'critico' %}selecionado{% endif %}"
-            onclick="alternarStatus('critico')"
-        >
-            Crítico
+        <button type="button" onclick="alternarStatus('ok')"
+                class="filtro-situacao__opcao{% if status_atual == 'ok' %} filtro-situacao__opcao--ativa{% endif %}">
+            Tudo certo <span class="filtro-situacao__numero">{{ contagens.ok }}</span>
         </button>
-
-        <a href="{% url 'adicionar_produto' %}" class="nova-etiqueta">
-            <svg width="15" height="15"><use href="#icon-plus"/></svg>
-            Novo item
-        </a>
+        <button type="button" onclick="alternarStatus('atencao')"
+                class="filtro-situacao__opcao{% if status_atual == 'atencao' %} filtro-situacao__opcao--ativa{% endif %}">
+            Atenção <span class="filtro-situacao__numero">{{ contagens.atencao }}</span>
+        </button>
+        <button type="button" onclick="alternarStatus('critico')"
+                class="filtro-situacao__opcao{% if status_atual == 'critico' %} filtro-situacao__opcao--ativa{% endif %}">
+            Crítico <span class="filtro-situacao__numero">{{ contagens.critico }}</span>
+        </button>
     </div>
-    
+
     {% if visao == 'lista' %}
 
-        <div class="painel-lista">
-            <div class="cabecalho-lista">
-                <span>Item</span>
-                <span>Categoria</span>
-                <span>Ocorrência</span>
-                <span>Estoque</span>
-                <span></span>
-            </div>
-
-            {% for lote in lotes %}
-    <div class="linha-lista">
-        <span>
-            <b>{{ lote.produto.nome }}</b>
-            <small>{{ lote.produto.codigo }} · vence {{ lote.validade|date:"d/m/Y"|default:"—" }} · {{ lote.local }}</small>
-        </span>
-        <span>{{ lote.produto.categoria }}</span>
-        <span>
-            <i class="etiqueta-status situacao-{{ lote.situacao }}">
-                {{ lote.situacao_label }}
-            </i>
-        </span>
-        <span>{{ lote.quantidade }} {{ lote.produto.unidade }}</span>
-        <button aria-label="Ver detalhes do lote de {{ lote.produto.nome }}">
-            <svg width="17" height="17"><use href="#icon-chevron"/></svg>
-        </button>
-    </div>
-            {% empty %}
-                <div class="lista-vazia">Nenhum item corresponde à sua busca.</div>
-            {% endfor %}
+    <div class="tabela-lotes">
+        <div class="tabela-lotes__cabecalho" aria-hidden="true">
+            <span>Lote</span>
+            <span>Categoria</span>
+            <span>Código</span>
+            <span>Quantidade</span>
+            <span>Situação</span>
         </div>
+
+        {% for lote in lotes %}
+        <div class="linha-lote">
+            <span>
+                <a class="linha-lote__nome" href="{% url 'detalhe_produto' lote.produto.id %}">{{ lote.produto.nome }}</a>
+                <span class="linha-lote__detalhe">{{ lote.quantidade }} {{ lote.produto.unidade }} · {{ lote.local }} · {{ lote.prazo_texto }}</span>
+            </span>
+            <span class="linha-lote__extra linha-lote__so-desktop">{{ lote.produto.categoria|default:"—" }}</span>
+            <span class="linha-lote__extra linha-lote__so-desktop">{{ lote.produto.codigo|default:"—" }}</span>
+            <span class="linha-lote__extra linha-lote__so-desktop">{{ lote.quantidade }} {{ lote.produto.unidade }}</span>
+            <span><span class="etiqueta etiqueta--{{ lote.situacao }}">{{ lote.situacao_label }}</span></span>
+        </div>
+        {% empty %}
+        <p class="estoque__vazio">Nenhum lote corresponde à sua busca.</p>
+        {% endfor %}
+    </div>
 
     {% else %}
 
-        <div class="quadro">
-            {% for grupo in grupos %}
-                <section class="coluna">
-                    <header>
-                        <h3>{{ grupo.titulo }}</h3>
-                        <span>{{ grupo.items|length|stringformat:"02d" }}</span>
-                    </header>
+    <div class="quadro-estoque">
+        {% for grupo in grupos %}
+        <section class="coluna-estoque coluna-estoque--{{ grupo.chave }}" aria-label="{{ grupo.titulo }}">
+            <header class="coluna-estoque__cabecalho">
+                <h2 class="coluna-estoque__titulo">
+                    {{ grupo.titulo }}
+                    <span class="etiqueta">{{ grupo.items|length }}</span>
+                </h2>
+                <p class="coluna-estoque__descricao">{{ grupo.descricao }}</p>
+            </header>
 
-                    <div class="lista-cards">
-                        {% for lote in grupo.items %}
-    <article class="card-produto">
-        <div class="card-principal">
-            <span class="icone-card">
-                <svg width="20" height="20"><use href="#icon-box"/></svg>
-            </span>
-            <div class="info-card">
-                <div class="titulo-card">
-                    <h4>{{ lote.produto.nome }}</h4>
+            {% for lote in grupo.items %}
+            <article class="cartao-lote">
+                {% if lote.produto.categoria %}<span class="etiqueta">{{ lote.produto.categoria }}</span>{% endif %}
+                <h3 class="cartao-lote__nome"><a href="{% url 'detalhe_produto' lote.produto.id %}">{{ lote.produto.nome }}</a></h3>
+                <span class="etiqueta etiqueta--{{ lote.situacao }}">{{ lote.situacao_label }} · {{ lote.prazo_texto }}</span>
+                <div class="cartao-lote__meta">
+                    <span>{{ lote.quantidade }} {{ lote.produto.unidade|default:"un." }}</span>
+                    <span>{{ lote.local }}</span>
+                    {% if lote.validade %}<span>validade {{ lote.validade|date:"d/m/Y" }}</span>{% endif %}
+                    {% if lote.observacao %}<span>{{ lote.observacao }}</span>{% endif %}
                 </div>
-                <p>Código {{ lote.produto.codigo }} · {{ lote.produto.categoria }}</p>
-                {% if lote.situacao != 'ok' %}
-                    <span class="etiqueta-status situacao-{{ lote.situacao }}">
-                        {{ lote.situacao_label }}
-                    </span>
-                {% else %}
-                    <span class="sem-ocorrencias">Sem ocorrências</span>
-                {% endif %}
-            </div>
-        </div>
-        <div class="rodape-card">
-            <span>
-                <b>Qtd. {{ lote.quantidade }}</b> · {{ lote.produto.unidade }}
-                · vence {{ lote.validade|date:"d/m/Y"|default:"—" }}
-                · {{ lote.local }}
-                {% if lote.observacao %} · {{ lote.observacao }}{% endif %}
-            </span>
-            <a href="{% url 'adicionar_lote' lote.produto.id %}"
-               aria-label="Registrar outro lote de {{ lote.produto.nome }}">
-                <svg width="15" height="15"><use href="#icon-plus"/></svg>
-            </a>
-        </div>
-    </article>
-       
-                        {% empty %}
-                            <div class="lista-vazia">Nenhum item aqui.</div>
-                        {% endfor %}
-                    </div>
-
-                    <a href="{% url 'adicionar_produto' %}" class="adicionar-na-coluna">
-                        <svg width="16" height="16"><use href="#icon-plus"/></svg>
-                        Adicionar item
-                    </a>
-                </section>
+                <a href="{% url 'adicionar_lote' lote.produto.id %}" class="cartao-lote__mais">+ Registrar outro lote</a>
+            </article>
+            {% empty %}
+            <p class="coluna-estoque__vazio">Nenhum lote aqui.</p>
             {% endfor %}
-        </div>
+        </section>
+        {% endfor %}
+    </div>
 
     {% endif %}
 

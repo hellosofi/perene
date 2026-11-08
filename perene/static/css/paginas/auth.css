@@ -87,6 +87,16 @@
     gap: var(--espaco-4);
 }
 
+.auth-formulario__secao {
+    margin-top: var(--espaco-2);
+    font-family: var(--fonte-texto);
+    font-size: var(--texto-xs);
+    font-weight: var(--peso-forte);
+    letter-spacing: var(--espacamento-rotulo);
+    text-transform: uppercase;
+    color: var(--cor-texto-suave);
+}
+
 .auth-formulario__acoes {
     display: flex;
     flex-direction: column;
@@ -228,6 +238,21 @@
 /* ------------------------------------------------------------------
  * Desktop: formulário + painel da marca lado a lado
  * ---------------------------------------------------------------- */
+
+@media (min-width: 768px) {
+    .auth-cartao--cadastro .auth-formulario__campos {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .auth-cartao--cadastro .auth-formulario__campos > * {
+        grid-column: 1 / -1;
+    }
+
+    .auth-cartao--cadastro .auth-formulario__campos > .campo--metade {
+        grid-column: auto;
+    }
+}
 
 @media (min-width: 1024px) {
     .auth-cartao {

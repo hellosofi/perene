@@ -13,9 +13,21 @@ from .models import Mercado, Perfil
 User = get_user_model()
 
 
-def campo_senha(label='Senha', autocomplete='current-password'):
+# exemplos que aparecem dentro dos campos das telas de entrada
+EXEMPLOS = {
+    'nome': 'Ex.: Sônia Oliveira',
+    'email': 'seuemail@exemplo.com',
+    'usuario': 'seuemail@exemplo.com',
+    'nome_mercado': 'Ex.: Mercadinho São José',
+    'cidade_mercado': 'Ex.: Recife – PE',
+    'codigo_mercado': 'Ex.: A1B2C3D4',
+}
+
+
+def campo_senha(label='Senha', autocomplete='current-password', help_text=''):
     return forms.CharField(
         label=label,
+        help_text=help_text,
         strip=False,
         widget=forms.PasswordInput(attrs={'autocomplete': autocomplete}),
     )
@@ -27,6 +39,9 @@ class _ComRequest:
     def __init__(self, *args, request=None, **kwargs):
         super().__init__(*args, **kwargs)
         self.request = request
+        for nome, campo in self.fields.items():
+            if nome in EXEMPLOS:
+                campo.widget.attrs.setdefault('placeholder', EXEMPLOS[nome])
         self.user = None
 
     def finalizar(self):
@@ -93,7 +108,7 @@ class _CadastroBase(_ComRequest, forms.Form):
         label='E-mail',
         widget=forms.EmailInput(attrs={'autocomplete': 'email'}),
     )
-    senha = campo_senha('Senha', 'new-password')
+    senha = campo_senha('Senha', 'new-password', 'Mínimo de 8 caracteres.')
     confirmar_senha = campo_senha('Confirmar senha', 'new-password')
 
     def clean_email(self):
@@ -152,6 +167,7 @@ class CadastroFuncionarioForm(_CadastroBase):
 
 class CadastroGestorForm(_CadastroBase):
     is_staff = True
+    field_order = ['nome', 'email', 'senha', 'confirmar_senha', 'nome_mercado', 'cidade_mercado', 'codigo']
 
     codigo = forms.CharField(
         label='Código de acesso',

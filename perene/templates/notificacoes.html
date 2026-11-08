@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}Notificações — Perene{% endblock %}
+
+{% block estilos %}
+<link rel="stylesheet" href="{% static 'css/componentes/etiqueta.css' %}">
+<link rel="stylesheet" href="{% static 'css/paginas/notificacoes.css' %}">
+{% endblock %}
+
+{% block conteudo %}
+<div class="avisos">
+
+    <header class="avisos__cabecalho">
+        <div>
+            <h1>Notificações</h1>
+            <p class="avisos__subtitulo">{{ novas }} nova{{ novas|pluralize }}</p>
+        </div>
+        {% if novas %}
+        <form method="post" action="{% url 'marcar_notificacoes_lidas' %}">
+            {% csrf_token %}
+            <button type="submit" class="botao-texto">✓ Marcar todas como lidas</button>
+        </form>
+        {% endif %}
+    </header>
+
+    <nav class="avisos__abas" aria-label="Filtrar notificações">
+        <a href="{% url 'notificacoes' %}" class="avisos__aba{% if not filtro %} avisos__aba--ativa{% endif %}">
+            Todas <span>{{ contagens.todas }}</span>
+        </a>
+        <a href="?categoria=estoque" class="avisos__aba{% if filtro == 'estoque' %} avisos__aba--ativa{% endif %}">
+            Estoque <span>{{ contagens.estoque }}</span>
+        </a>
+        <a href="?categoria=equipe" class="avisos__aba{% if filtro == 'equipe' %} avisos__aba--ativa{% endif %}">
+            Equipe <span>{{ contagens.equipe }}</span>
+        </a>
+        <a href="?categoria=comunicado" class="avisos__aba{% if filtro == 'comunicado' %} avisos__aba--ativa{% endif %}">
+            Comunicados <span>{{ contagens.comunicado }}</span>
+        </a>
+    </nav>
+
+    {% if user.perfil.papel == 'gestor' %}
+    <form method="post" action="{% url 'enviar_comunicado' %}" class="comunicado">
+        {% csrf_token %}
+        <input type="text" name="mensagem" class="comunicado__campo" maxlength="500"
+               aria-label="Comunicado" placeholder="Escreva um comunicado para a equipe…">
+        <select name="publico" class="comunicado__publico" aria-label="Para quem">
+            {% for valor, rotulo in publicos %}
+            <option value="{{ valor }}">{{ rotulo }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="botao comunicado__enviar">Enviar</button>
+    </form>
+    {% endif %}
+
+    {% for grupo in grupos %}
+    <section class="grupo-avisos" aria-label="{{ grupo.titulo }}">
+        <h2 class="grupo-avisos__titulo">
+            <svg width="18" height="18" aria-hidden="true"><use href="#{{ grupo.icone }}"/></svg>
+            {{ grupo.titulo }}
+            <span class="grupo-avisos__numero">· {{ grupo.itens|length }}</span>
+        </h2>
+
+        {% for n in grupo.itens %}
+        <article class="aviso-item">
+            <span class="aviso-item__icone{% if n.tipo == 'damaged' or n.tipo == 'expired' %} aviso-item__icone--critico{% elif n.tipo == 'use_soon' or n.tipo == 'low_stock' %} aviso-item__icone--atencao{% elif grupo.chave == 'equipe' %} aviso-item__icone--equipe{% endif %}" aria-hidden="true">
+                <svg width="18" height="18"><use href="#{{ grupo.icone }}"/></svg>
+            </span>
+
+            <div class="aviso-item__corpo">
+                <p class="aviso-item__titulo">
+                    {{ n.titulo }}
+                    {% if n.tipo == 'damaged' or n.tipo == 'expired' %}
+                    <span class="etiqueta etiqueta--critico">Crítico</span>
+                    {% elif n.tipo == 'use_soon' or n.tipo == 'low_stock' %}
+                    <span class="etiqueta etiqueta--atencao">Atenção</span>
+                    {% endif %}
+                </p>
+                <p class="aviso-item__texto">
+                    {{ n.mensagem }}{% if n.tipo == 'comunicado' %} · para {{ n.get_publico_display|lower }}{% endif %}
+                </p>
+                {% if n.produto_id %}
+                <a href="{% url 'detalhe_produto' n.produto_id %}" class="aviso-item__link">→ Ver produto</a>
+                {% elif n.tarefa_id and user.perfil.papel == 'gestor' %}
+                <a href="{% url 'funcionarios' %}" class="aviso-item__link">→ Ver tarefas</a>
+                {% endif %}
+            </div>
+
+            <span class="aviso-item__quando">
+                há {{ n.criada_em|timesince }}
+                {% if n.id not in lidas %}<span class="aviso-item__nova" title="Não lida"></span>{% endif %}
+            </span>
+        </article>
+        {% endfor %}
+    </section>
+    {% empty %}
+    <p class="avisos__vazio">Nenhuma notificação por aqui.</p>
+    {% endfor %}
+
+</div>
+{% endblock %}

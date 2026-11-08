@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}{{ produto.nome }} — Perene{% endblock %}
+
+{% block estilos %}
+<link rel="stylesheet" href="{% static 'css/componentes/etiqueta.css' %}">
+<link rel="stylesheet" href="{% static 'css/componentes/indicador.css' %}">
+<link rel="stylesheet" href="{% static 'css/paginas/produto.css' %}">
+{% endblock %}
+
+{% block conteudo %}
+<div class="produto">
+
+    <nav class="produto__trilha" aria-label="Caminho">
+        <a href="{% url 'lista_produtos' %}">← Estoque</a>
+        <span>/</span>
+        <span>{{ produto.nome }}</span>
+    </nav>
+
+    <section class="produto__cartao">
+        <div class="produto__etiquetas">
+            {% if produto.categoria %}<span class="etiqueta">{{ produto.categoria }}</span>{% endif %}
+            <span class="etiqueta etiqueta--{{ produto.situacao }}">
+                {{ produto.situacao_label }}{% if avariados %} · {{ avariados|length }} lote{{ avariados|length|pluralize }} avariado{{ avariados|length|pluralize }}{% endif %}
+            </span>
+        </div>
+        <h1 class="produto__nome">{{ produto.nome }}</h1>
+        <p class="produto__detalhes">
+            {% if produto.codigo %}Código {{ produto.codigo }} · {% endif %}vendido em {{ produto.unidade|default:"un." }}
+            {% if produto.estoque_minimo %} · mínimo de {{ produto.estoque_minimo }} {{ produto.unidade|default:"un." }}{% endif %}
+            · avisa {{ produto.dias_alerta }} dia{{ produto.dias_alerta|pluralize }} antes de vencer
+        </p>
+    </section>
+
+    <section class="produto__indicadores" aria-label="Resumo do produto">
+        <div class="indicador indicador--ciano">
+            <span class="indicador__rotulo">Quantidade total</span>
+            <span class="indicador__numero">{{ total }}</span>
+            <span class="indicador__detalhe">{{ produto.unidade|default:"un." }} em {{ lotes|length }} lote{{ lotes|length|pluralize }}</span>
+        </div>
+        <div class="indicador indicador--amarelo">
+            <span class="indicador__rotulo">Próximo vencimento</span>
+            <span class="indicador__numero">{% if proximo %}{{ proximo.validade|date:"d/m" }}{% else %}—{% endif %}</span>
+            <span class="indicador__detalhe">{% if proximo %}lote #{{ proximo.id }} · {{ proximo.prazo_texto }}{% else %}nenhum lote a vencer{% endif %}</span>
+        </div>
+        <div class="indicador indicador--creme">
+            <span class="indicador__rotulo">Estoque mínimo</span>
+            <span class="indicador__numero">{{ produto.estoque_minimo }}</span>
+            <span class="indicador__detalhe">
+                {% if not produto.estoque_minimo %}sem mínimo definido{% elif total < produto.estoque_minimo %}abaixo do mínimo{% else %}acima do mínimo{% endif %}
+            </span>
+        </div>
+        <div class="indicador indicador--laranja">
+            <span class="indicador__rotulo">Avariados</span>
+            <span class="indicador__numero">{{ avariados|length }}</span>
+            <span class="indicador__detalhe">lote{{ avariados|length|pluralize }} para doar ou dar baixa</span>
+        </div>
+    </section>
+
+    <div class="produto__secao">
+        <div>
+            <h2>Lotes deste produto</h2>
+            <p class="produto__secao-texto">Cada lote tem sua própria validade. Use primeiro o que vence antes.</p>
+        </div>
+        <a href="{% url 'adicionar_lote' produto.id %}" class="botao">+ Registrar lote</a>
+    </div>
+
+    <div class="lotes-produto">
+        <div class="lotes-produto__cabecalho" aria-hidden="true">
+            <span>Lote</span>
+            <span>Quantidade</span>
+            <span>Validade</span>
+            <span>Local</span>
+            <span>Observação</span>
+            <span>Situação</span>
+        </div>
+
+        {% for lote in lotes %}
+        <div class="lotes-produto__linha">
+            <span>
+                <strong>#{{ lote.id }}</strong>
+                <span class="lotes-produto__prazo lotes-produto__so-celular">{{ lote.quantidade }} {{ produto.unidade }} · {{ lote.local }} · {{ lote.prazo_texto }}</span>
+            </span>
+            <span class="lotes-produto__so-desktop">{{ lote.quantidade }} {{ produto.unidade }}</span>
+            <span class="lotes-produto__so-desktop">
+                {{ lote.validade|date:"d/m/Y"|default:"—" }}
+                <span class="lotes-produto__prazo">{{ lote.prazo_texto }}</span>
+            </span>
+            <span class="lotes-produto__so-desktop">{{ lote.local }}</span>
+            <span class="lotes-produto__so-desktop">{{ lote.observacao|default:"—" }}</span>
+            <span><span class="etiqueta etiqueta--{{ lote.situacao }}">{{ lote.situacao_label }}</span></span>
+        </div>
+        {% empty %}
+        <p class="lotes-produto__vazio">Este produto ainda não tem lotes.</p>
+        {% endfor %}
+    </div>
+
+    {% for lote in avariados|slice:":1" %}
+    <p class="aviso">
+        O lote #{{ lote.id }} está avariado. Separe para doação ou registre como perda para tirá-lo da prateleira.
+    </p>
+    {% endfor %}
+
+</div>
+{% endblock %}

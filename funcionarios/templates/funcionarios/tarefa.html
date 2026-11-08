@@ -1,0 +1,12 @@
+{% comment %} Uma tarefa da tela Equipe. Recebe a variável "t" (Tarefa). {% endcomment %}
+<li class="tarefa{% if t.concluida %} tarefa--feita{% endif %}">
+    <span class="tarefa__marcador" aria-hidden="true">
+        {% if t.concluida %}<svg width="14" height="14"><use href="#icon-check"/></svg>{% endif %}
+    </span>
+    <span>
+        <span class="tarefa__titulo">{{ t.titulo }}</span>
+        <span class="tarefa__detalhe">
+            {% if t.concluida %}Feita{% else %}A fazer{% endif %}{% if t.horario %} · até {{ t.horario|time:"H:i" }}{% endif %}{% if t.area %} · {{ t.area }}{% endif %}
+        </span>
+    </span>
+</li>

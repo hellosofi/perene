@@ -37,7 +37,12 @@ class AuthView(View):
     def post(self, request):
         form = self.form_class(request.POST, request=request)
         if form.is_valid():
-            login(request, form.finalizar())
+            user = form.finalizar()
+            login(request, user)
+            # gestor começa pela Visão geral; funcionário, pelo estoque
+            perfil = getattr(user, 'perfil', None)
+            if perfil is not None and perfil.papel == 'gestor':
+                return redirect('visao_geral')
             return redirect('lista_produtos')
         return self.render_form(request, form)
 
@@ -126,3 +131,172 @@ class CadastroGestor(AuthView):
             ('Convide a equipe', 'Compartilhe o código do mercado.'),
         ],
     }
+
+
+# ---------------------------------------------------------------------------
+# Notificações (tela 09)
+# ---------------------------------------------------------------------------
+
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.db.models import Q
+from django.views.decorators.http import require_POST
+
+from .decorators import gestor_required
+from .models import Notificacao
+
+GRUPOS_NOTIFICACAO = [
+    ('estoque', 'Estoque', 'icon-box'),
+    ('equipe', 'Equipe', 'icon-users'),
+    ('comunicado', 'Comunicados', 'icon-bell'),
+]
+
+
+def notificacoes_visiveis(user):
+    """As notificações para todos (sem destinatário) ou só para este usuário."""
+    # TODO: filtrar por mercado (História 9)
+    return Notificacao.objects.filter(Q(destinatario__isnull=True) | Q(destinatario=user))
+
+
+@login_required
+def notificacoes(request):
+    filtro = request.GET.get('categoria', '')
+    todas = list(notificacoes_visiveis(request.user).select_related('produto', 'autor'))
+    lidas = set(request.user.notificacoes_lidas.values_list('id', flat=True))
+
+    contagens = {'todas': len(todas)}
+    grupos = []
+    for chave, titulo, icone in GRUPOS_NOTIFICACAO:
+        itens = [n for n in todas if n.categoria == chave]
+        contagens[chave] = len(itens)
+        if itens and filtro in ('', chave):
+            grupos.append({'chave': chave, 'titulo': titulo, 'icone': icone, 'itens': itens})
+
+    return render(request, 'notificacoes.html', {
+        'grupos': grupos,
+        'contagens': contagens,
+        'filtro': filtro,
+        'lidas': lidas,
+        'novas': len([n for n in todas if n.id not in lidas]),
+        'publicos': Notificacao.PUBLICO_CHOICES,
+        'pagina_atual': 'notificacoes',
+    })
+
+
+@login_required
+@require_POST
+def marcar_notificacoes_lidas(request):
+    for n in notificacoes_visiveis(request.user):
+        n.lida_por.add(request.user)
+    return redirect('notificacoes')
+
+
+@gestor_required
+@require_POST
+def enviar_comunicado(request):
+    mensagem = request.POST.get('mensagem', '').strip()
+    publico = request.POST.get('publico', 'todos')
+    if publico not in dict(Notificacao.PUBLICO_CHOICES):
+        publico = 'todos'
+
+    if not mensagem:
+        messages.error(request, 'Escreva o comunicado antes de enviar.')
+    else:
+        nome = request.user.first_name or request.user.username
+        Notificacao.objects.create(
+            tipo='comunicado',
+            titulo=f'Comunicado de {nome}'[:120],
+            mensagem=mensagem,
+            publico=publico,
+            autor=request.user,
+        )
+        messages.success(request, 'Comunicado enviado para a equipe.')
+    return redirect('notificacoes')
+
+
+# ---------------------------------------------------------------------------
+# Visão geral (tela 03)
+# ---------------------------------------------------------------------------
+
+from django.utils import timezone
+
+from estoque.models import Lote, Produto
+from funcionarios.models import Tarefa
+
+
+def saudacao():
+    hora = timezone.localtime().hour
+    if hora < 12:
+        return 'Bom dia'
+    if hora < 18:
+        return 'Boa tarde'
+    return 'Boa noite'
+
+
+@login_required
+def visao_geral(request):
+    # TODO: filtrar por mercado (História 9)
+    agora = timezone.localtime()
+
+    produtos = list(Produto.objects.prefetch_related('lotes'))
+    com_lotes = [p for p in produtos if p.situacao != 'sem_lotes']
+    em_dia = [p for p in com_lotes if p.situacao == 'ok']
+    pct_em_dia = round(len(em_dia) / len(com_lotes) * 100) if com_lotes else 0
+
+    lotes = list(Lote.objects.select_related('produto'))
+    criticos = [l for l in lotes if l.situacao == 'critico']
+    atencao = [l for l in lotes if l.situacao == 'atencao']
+    abaixo_minimo = [p for p in produtos if p.estoque_minimo and p.quantidade_total < p.estoque_minimo]
+    registrados_mes = [l for l in lotes
+                       if l.criado_em.year == agora.year and l.criado_em.month == agora.month]
+
+    tarefas = list(Tarefa.objects.select_related('responsavel').order_by('horario'))
+    pendentes = [t for t in tarefas if not t.concluida]
+    # sem campo de data, "atrasada" = horário de hoje já passou e não foi feita
+    atrasadas = [t for t in pendentes if t.horario and t.horario < agora.time()]
+
+    prioridades = []
+    if criticos:
+        prioridades.append({
+            'tom': 'critico', 'icone': 'icon-box',
+            'titulo': f'{len(criticos)} lote(s) vencido(s) ou avariado(s)',
+            'texto': ', '.join(sorted({l.produto.nome for l in criticos})[:3]),
+            'acao': 'Ver lotes', 'url': reverse('lista_produtos') + '?status=critico',
+        })
+    if atencao:
+        prioridades.append({
+            'tom': 'atencao', 'icone': 'icon-clock',
+            'titulo': f'{len(atencao)} lote(s) pedem atenção',
+            'texto': 'Vencem logo ou o produto está com estoque baixo.',
+            'acao': 'Ver lotes', 'url': reverse('lista_produtos') + '?status=atencao',
+        })
+    for p in abaixo_minimo[:2]:
+        prioridades.append({
+            'tom': 'atencao', 'icone': 'icon-box',
+            'titulo': f'{p.nome} abaixo do mínimo',
+            'texto': f'Restam {p.quantidade_total} {p.unidade or "un."} · mínimo {p.estoque_minimo}',
+            'acao': 'Registrar lote', 'url': reverse('adicionar_lote', args=[p.id]),
+        })
+    if atrasadas:
+        prioridades.append({
+            'tom': 'equipe', 'icone': 'icon-clock',
+            'titulo': f'{len(atrasadas)} tarefa(s) atrasada(s)',
+            'texto': 'Passaram do horário e não foram concluídas.',
+            'acao': 'Ver tarefas', 'url': reverse('funcionarios'),
+        })
+
+    return render(request, 'visao_geral.html', {
+        'saudacao': saudacao(),
+        'pct_em_dia': pct_em_dia,
+        'total_em_dia': len(em_dia),
+        'total_com_lotes': len(com_lotes),
+        'criticos': len(criticos),
+        'atencao': len(atencao),
+        'abaixo_minimo': len(abaixo_minimo),
+        'registrados_mes': len(registrados_mes),
+        'prioridades': prioridades,
+        'tarefas_total': len(tarefas),
+        'tarefas_feitas': len(tarefas) - len(pendentes),
+        'proximas_tarefas': pendentes[:3],
+        'pagina_atual': 'visao_geral',
+    })

@@ -1,0 +1,119 @@
+/*
+ * Notificações: o sino no topo e o painel que abre embaixo dele.
+ * Usa <details>/<summary>, então abre e fecha sem JS.
+ * O notificacoes.js só fecha o painel ao clicar fora.
+ *
+ *   .notificacoes              o <details>
+ *   .notificacoes__botao       o sino (<summary>)
+ *   .notificacoes__ponto       a bolinha laranja de "tem novidade"
+ *   .notificacoes__painel      a caixa que abre
+ *   .notificacao               um aviso da lista
+ */
+
+.notificacoes {
+    position: relative;
+}
+
+.notificacoes__botao {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: var(--area-toque);
+    height: var(--area-toque);
+    border: var(--borda-fina) solid var(--cor-linha);
+    border-radius: var(--raio-pilula);
+    background: var(--cor-superficie);
+    color: var(--cor-texto);
+    list-style: none;
+    cursor: pointer;
+}
+
+.notificacoes__botao::-webkit-details-marker {
+    display: none;
+}
+
+.notificacoes__ponto {
+    position: absolute;
+    top: var(--espaco-2);
+    right: var(--espaco-2);
+    width: var(--espaco-2);
+    height: var(--espaco-2);
+    border-radius: var(--raio-pilula);
+    background: var(--cor-destaque);
+}
+
+.notificacoes__painel {
+    position: absolute;
+    top: calc(100% + var(--espaco-2));
+    right: 0;
+    z-index: var(--camada-modal);
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-3);
+    width: min(var(--largura-formulario), calc(100vw - 2 * var(--espaco-4)));
+    padding: var(--espaco-4);
+    border: var(--borda-fina) solid var(--cor-linha);
+    border-radius: var(--raio-m);
+    background: var(--cor-superficie);
+    box-shadow: var(--sombra-suave);
+}
+
+.notificacoes__cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--espaco-3);
+}
+
+.notificacoes__titulo {
+    font-size: var(--texto-l);
+    font-weight: var(--peso-forte);
+}
+
+.notificacoes__novas {
+    font-size: var(--texto-xs);
+    color: var(--cor-texto-suave);
+}
+
+.notificacoes__lista {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-2);
+    max-height: var(--altura-cartao-app);
+    overflow-y: auto;
+}
+
+.notificacao {
+    display: flex;
+    gap: var(--espaco-3);
+    padding: var(--espaco-3);
+    border-radius: var(--raio-s);
+    background: var(--cor-superficie-suave);
+}
+
+.notificacao__icone {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: var(--espaco-6);
+    height: var(--espaco-6);
+    border-radius: var(--raio-pilula);
+    background: var(--cor-marca-suave);
+    color: var(--cor-primaria);
+}
+
+.notificacao__titulo {
+    display: block;
+    font-size: var(--texto-s);
+    font-weight: var(--peso-forte);
+}
+
+.notificacao__texto {
+    font-size: var(--texto-xs);
+    color: var(--cor-texto-suave);
+}
+
+.notificacoes__vazio {
+    font-size: var(--texto-s);
+    color: var(--cor-texto-suave);
+}

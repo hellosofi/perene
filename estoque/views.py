@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.db.models.functions import Coalesce
+from django.utils import timezone
 from .models import Produto, Lote
 from perene.utils import mercado_do_usuario
 
@@ -62,18 +63,29 @@ def contexto_lista(request):
     )
 
     lista = list(lotes)
+
+    # quantos lotes há em cada situação (antes do filtro de situação)
+    contagens = {'todos': len(lista), 'ok': 0, 'atencao': 0, 'critico': 0}
+    for l in lista:
+        contagens[l.situacao] += 1
+
     if status_filtro:
         lista = [l for l in lista if l.situacao == status_filtro]
 
+    # colunas do quadro, da mais urgente para a menos urgente
     grupos = [
-        {'titulo': 'Tudo certo', 'items': [l for l in lista if l.situacao == 'ok']},
-        {'titulo': 'Atenção', 'items': [l for l in lista if l.situacao == 'atencao']},
-        {'titulo': 'Crítico', 'items': [l for l in lista if l.situacao == 'critico']},
+        {'chave': 'critico', 'titulo': 'Crítico', 'descricao': 'Vencidos ou avariados',
+         'items': [l for l in lista if l.situacao == 'critico']},
+        {'chave': 'atencao', 'titulo': 'Atenção', 'descricao': 'Vencem logo ou estoque baixo',
+         'items': [l for l in lista if l.situacao == 'atencao']},
+        {'chave': 'ok', 'titulo': 'Tudo certo', 'descricao': 'Dentro da validade',
+         'items': [l for l in lista if l.situacao == 'ok']},
     ]
 
     return {
         'lotes': lista,
         'grupos': grupos,
+        'contagens': contagens,
         'total': total,
         'atencao': atencao,
         'pct_saudavel': pct_saudavel,
@@ -124,3 +136,25 @@ def adicionar_lote(request, produto_id):
         lote.save()
         return redirect('lista_produtos')
     return render(request, 'estoque/adicionar_lote.html', {'form': form, 'produto': produto})
+
+
+@login_required
+def detalhe_produto(request, produto_id):
+    produto = get_object_or_404(                                 # 9.6
+        Produto, pk=produto_id, mercado=mercado_do_usuario(request.user)
+    )
+    lotes = list(produto.lotes.order_by(F('validade').asc(nulls_last=True)))
+
+    # próximo vencimento: o lote com a validade mais próxima que ainda não venceu
+    hoje = timezone.localdate()
+    a_vencer = [l for l in lotes if l.validade and l.validade >= hoje and not l.avariado]
+    avariados = [l for l in lotes if l.avariado]
+
+    return render(request, 'estoque/detalhe_produto.html', {
+        'produto': produto,
+        'lotes': lotes,
+        'total': sum(l.quantidade for l in lotes),
+        'proximo': a_vencer[0] if a_vencer else None,
+        'avariados': avariados,
+        'pagina_atual': 'inventario',
+    })

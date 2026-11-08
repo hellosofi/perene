@@ -1,0 +1,230 @@
+/*
+ * Notificações em página própria (pen.dev: tela 09).
+ *
+ *   .avisos                    a página
+ *   .avisos__abas              as pílulas Todas / Estoque / Equipe / Comunicados
+ *   .comunicado                o cartão ciano para o gestor escrever um comunicado
+ *   .grupo-avisos              um grupo (Estoque, Equipe ou Comunicados)
+ *   .aviso-item                uma notificação (--nova quando não foi lida)
+ *   .aviso-item__icone--{tom}  gota tingida: critico, atencao, equipe, neutro
+ */
+
+.avisos {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-5);
+    padding: var(--espaco-4);
+}
+
+.avisos__cabecalho {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--espaco-3);
+}
+
+.avisos__subtitulo {
+    color: var(--cor-texto-suave);
+}
+
+.avisos__abas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--espaco-1);
+    align-self: flex-start;
+    padding: var(--espaco-1);
+    border-radius: var(--raio-pilula);
+    background: var(--cor-superficie-suave);
+}
+
+.avisos__aba {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--espaco-2);
+    min-height: var(--area-toque);
+    padding: 0 var(--espaco-4);
+    border-radius: var(--raio-pilula);
+    color: var(--cor-texto);
+    font-size: var(--texto-s);
+    text-decoration: none;
+}
+
+.avisos__aba:hover {
+    text-decoration: none;
+}
+
+.avisos__aba--ativa {
+    background: var(--cor-selecionado);
+    color: var(--cor-texto-invertido);
+}
+
+/* ------------------------------------------------------------------
+ * Escrever comunicado (só gestor)
+ * ---------------------------------------------------------------- */
+
+.comunicado {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--espaco-3);
+    padding: var(--espaco-3);
+    border-radius: var(--raio-l);
+    background: var(--cor-marca);
+}
+
+.comunicado__campo {
+    flex: 1 1 100%;
+    min-height: var(--altura-campo);
+    padding: 0 var(--espaco-4);
+    border: none;
+    border-radius: var(--raio-pilula);
+    background: var(--cor-superficie);
+    color: var(--cor-texto);
+    font-size: var(--texto-m);
+}
+
+.comunicado__publico {
+    min-height: var(--altura-campo);
+    padding: 0 var(--espaco-4);
+    border: none;
+    border-radius: var(--raio-pilula);
+    background: var(--cor-marca-suave);
+    color: var(--cor-texto);
+    font-size: var(--texto-s);
+}
+
+.comunicado__enviar {
+    background: var(--cor-destaque);
+    color: var(--cor-texto);
+}
+
+.comunicado__enviar:hover {
+    background: var(--cor-destaque-hover);
+    color: var(--cor-texto-invertido);
+}
+
+/* ------------------------------------------------------------------
+ * Grupos e itens
+ * ---------------------------------------------------------------- */
+
+.grupo-avisos {
+    overflow: hidden;
+    border: var(--borda-fina) solid var(--cor-linha);
+    border-radius: var(--raio-l);
+    background: var(--cor-superficie);
+}
+
+.grupo-avisos__titulo {
+    display: flex;
+    align-items: center;
+    gap: var(--espaco-2);
+    padding: var(--espaco-4) var(--espaco-5);
+    border-bottom: var(--borda-fina) solid var(--cor-linha);
+    font-size: var(--titulo-m);
+    color: var(--cor-primaria);
+}
+
+.grupo-avisos__numero {
+    font-family: var(--fonte-texto);
+    font-size: var(--texto-s);
+    color: var(--cor-texto-suave);
+}
+
+.aviso-item {
+    display: flex;
+    gap: var(--espaco-3);
+    padding: var(--espaco-4) var(--espaco-5);
+    border-top: var(--borda-fina) solid var(--cor-linha);
+}
+
+.aviso-item:first-of-type {
+    border-top: none;
+}
+
+.aviso-item__icone {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: var(--area-toque);
+    height: var(--area-toque);
+    border-radius: var(--raio-pilula);
+    background: var(--cor-superficie-suave);
+    color: var(--cor-texto);
+}
+
+.aviso-item__icone--critico {
+    background: var(--quadro-critico);
+}
+
+.aviso-item__icone--atencao {
+    background: var(--quadro-atencao);
+}
+
+.aviso-item__icone--equipe {
+    background: var(--cor-marca-suave);
+}
+
+.aviso-item__corpo {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: var(--espaco-1);
+    min-width: 0;
+}
+
+.aviso-item__titulo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--espaco-2);
+    font-weight: var(--peso-forte);
+}
+
+.aviso-item__texto {
+    font-size: var(--texto-s);
+    color: var(--cor-texto-suave);
+}
+
+.aviso-item__link {
+    font-size: var(--texto-s);
+}
+
+.aviso-item__quando {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--espaco-2);
+    flex-shrink: 0;
+    font-size: var(--texto-xs);
+    color: var(--cor-texto-suave);
+}
+
+.aviso-item__nova {
+    width: var(--espaco-2);
+    height: var(--espaco-2);
+    margin-top: var(--espaco-1);
+    border-radius: var(--raio-pilula);
+    background: var(--cor-destaque);
+}
+
+.avisos__vazio {
+    padding: var(--espaco-6);
+    text-align: center;
+    color: var(--cor-texto-suave);
+}
+
+/* ------------------------------------------------------------------
+ * Tablet e desktop
+ * ---------------------------------------------------------------- */
+
+@media (min-width: 768px) {
+    .comunicado__campo {
+        flex-basis: auto;
+    }
+}
+
+@media (min-width: 1024px) {
+    .avisos {
+        padding: 0 var(--espaco-6) var(--espaco-6);
+    }
+}

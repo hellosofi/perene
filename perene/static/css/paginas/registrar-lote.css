@@ -1,13 +1,17 @@
 /*
  * Registrar lote (pen.dev: tela 06).
- * Por enquanto só o cartão do formulário. O painel lateral (prévia do lote
- * e leitura pela câmera) fica para depois, porque precisa de JS.
+ * O cartão do formulário e, ao lado, a prévia do lote (.previa-lote).
+ * A leitura pela câmera fica para depois.
  * A grade dos campos vem de componentes/formulario.css.
  *
  *   .registrar-lote                o cartão
  *   .registrar-lote__trilha        "← Estoque / Registrar lote"
  *   .opcao-avariado                a caixa do "Lote avariado"
  */
+
+.registrar-lote-pagina {
+    padding: var(--espaco-4);
+}
 
 .registrar-lote {
     display: flex;
@@ -68,8 +72,67 @@
     color: var(--cor-texto-suave);
 }
 
+@media (min-width: 1024px) {
+    .registrar-lote-pagina {
+        display: grid;
+        grid-template-columns: minmax(0, var(--largura-cartao-formulario)) minmax(0, 1fr);
+        align-items: start;
+        gap: var(--espaco-5);
+        padding: 0 var(--espaco-6) var(--espaco-6);
+    }
+}
+
 @media (min-width: 768px) {
     .registrar-lote {
         padding: var(--espaco-6);
+    }
+}
+
+/* ------------------------------------------------------------------
+ * Prévia do lote (atualizada pelo registrar-lote.js)
+ * ---------------------------------------------------------------- */
+
+.previa-lote {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--espaco-3);
+    margin-top: var(--espaco-4);
+    padding: var(--espaco-5);
+    border-radius: var(--raio-l);
+    background: var(--cor-marca);
+    color: var(--cor-texto-invertido);
+}
+
+.previa-lote__rotulo {
+    font-size: var(--texto-xs);
+    font-weight: var(--peso-forte);
+    letter-spacing: var(--espacamento-rotulo);
+    text-transform: uppercase;
+}
+
+.previa-lote__cartao {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-1);
+    align-self: stretch;
+    padding: var(--espaco-4);
+    border-radius: var(--raio-m);
+    background: var(--cor-superficie);
+    color: var(--cor-texto);
+}
+
+.previa-lote__detalhe {
+    font-size: var(--texto-xs);
+    color: var(--cor-texto-suave);
+}
+
+.previa-lote__nota {
+    font-size: var(--texto-xs);
+}
+
+@media (min-width: 1024px) {
+    .previa-lote {
+        margin-top: 0;
     }
 }

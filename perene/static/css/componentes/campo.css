@@ -2,6 +2,8 @@
  * Campo de formulário (pen.dev: App/Campo e "Estados do campo")
  *   .campo              rótulo + controle + ajuda + erros
  *   .campo--erro        estado de erro (vem do form do Django)
+ *   .campo--valido      preenchido e aceito (ligado pelo campos.js ao sair do campo)
+ *   .campo__caixa       envolve o input quando há ícone (.campo__icone) e olho (.campo__olho)
  *   .campo__ajuda       texto de ajuda
  *   .campo__erro        mensagem de erro
  *
@@ -69,4 +71,54 @@
 .campo--erro textarea {
     border-color: var(--cor-erro);
     background: var(--cor-erro-fundo);
+}
+
+.campo--valido input {
+    border-color: var(--cor-marca);
+    background: var(--cor-marca-suave);
+}
+
+/* ------------------------------------------------------------------
+ * Ícone à esquerda e botão de mostrar senha à direita
+ * ---------------------------------------------------------------- */
+
+.campo__caixa {
+    position: relative;
+}
+
+.campo__icone {
+    position: absolute;
+    top: 50%;
+    left: var(--espaco-4);
+    color: var(--cor-texto-suave);
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.campo__caixa input {
+    padding-left: calc(var(--espaco-4) + var(--tamanho-icone) + var(--espaco-3));
+}
+
+.campo--senha .campo__caixa input {
+    padding-right: calc(var(--area-toque) + var(--espaco-2));
+}
+
+.campo__olho {
+    position: absolute;
+    top: 50%;
+    right: var(--espaco-1);
+    display: grid;
+    place-items: center;
+    width: var(--area-toque);
+    height: var(--area-toque);
+    border: none;
+    border-radius: var(--raio-pilula);
+    background: none;
+    color: var(--cor-texto-suave);
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.campo__olho[aria-pressed="true"] {
+    color: var(--cor-primaria);
 }

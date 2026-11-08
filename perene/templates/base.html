@@ -6,123 +6,159 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block titulo %}Perene{% endblock %}</title>
     <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
-    <link rel="stylesheet" href="{% static 'css/legado/estilo.css' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Smooch+Sans:wght@700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/base/tokens.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base/tipografia.css' %}">
+    <link rel="stylesheet" href="{% static 'css/componentes/aviso.css' %}">
+    <link rel="stylesheet" href="{% static 'css/componentes/botao.css' %}">
+    <link rel="stylesheet" href="{% static 'css/componentes/notificacoes.css' %}">
+    <link rel="stylesheet" href="{% static 'css/layout/casca.css' %}">
     {% block estilos %}{% endblock %}
 </head>
-<body>
+<body class="app">
 
 {% include "icons.html" %}
 
-<div class="estrutura-app">
+<div class="casca">
 
-    <aside class="barra-lateral">
-        <a href="{% url 'home' %}" class="marca">
-            <span class="simbolo-marca"><i></i><i></i><i></i></span>
-            <span>perene</span>
+    <aside class="casca__lateral">
+        <a href="{% url 'home' %}" class="casca__logo" aria-label="Perene, página inicial">
+            <img src="{% static 'images/marca/logo.svg' %}" alt="Perene">
         </a>
 
-         <nav class="pilha-nav" aria-label="Navegação principal">
-            <p class="legenda-nav">Área de trabalho</p>
-
-            {% comment %} home {% endcomment %}
-            <a href="" class="item-nav">
-                <svg width="19" height="19"><use href="#icon-home"/></svg>
-                <span>Visão geral</span>
-                <span class="em-breve">Em breve</span>
+        <nav class="menu-lateral" aria-label="Navegação principal">
+            <a href="{% url 'visao_geral' %}"
+               class="menu-lateral__item{% if pagina_atual == 'visao_geral' %} menu-lateral__item--ativo{% endif %}"
+               {% if pagina_atual == 'visao_geral' %}aria-current="page"{% endif %}>
+                <svg width="19" height="19" aria-hidden="true"><use href="#icon-home"/></svg>
+                Visão geral
             </a>
 
-            {% comment %} estoque {% endcomment %}
-            <a href="{% url 'lista_produtos' %}" class="item-nav {% if pagina_atual == 'inventario' %}ativo{% endif %}">
-                <svg width="19" height="19"><use href="#icon-box"/></svg>
-                <span>Inventário</span>
+            <a href="{% url 'lista_produtos' %}"
+               class="menu-lateral__item{% if pagina_atual == 'inventario' %} menu-lateral__item--ativo{% endif %}"
+               {% if pagina_atual == 'inventario' %}aria-current="page"{% endif %}>
+                <svg width="19" height="19" aria-hidden="true"><use href="#icon-box"/></svg>
+                Estoque
             </a>
 
-            {% comment %} EQUIPE | funcionários: só gestor (História 10) {% endcomment %}
             {% if user.perfil.papel == 'gestor' %}
-                <a href="{% url 'funcionarios' %}" class="item-nav {% if pagina_atual == 'equipe' %}ativo{% endif %}">
-                    <svg width="19" height="19"><use href="#icon-box"/></svg>
-                    <span>Equipe</span>
-                    <span class="em-breve">Ajustes</span>
-                </a>
+            <a href="{% url 'funcionarios' %}"
+               class="menu-lateral__item{% if pagina_atual == 'equipe' %} menu-lateral__item--ativo{% endif %}"
+               {% if pagina_atual == 'equipe' %}aria-current="page"{% endif %}>
+                <svg width="19" height="19" aria-hidden="true"><use href="#icon-users"/></svg>
+                Equipe
+            </a>
             {% endif %}
 
-            {% comment %} impacto {% endcomment %}
-            <span class="item-nav">
-                <svg width="19" height="19"><use href="#icon-chart"/></svg>
-                <span>Impacto</span>
-                <span class="em-breve">Em breve</span>
+            <span class="menu-lateral__item menu-lateral__item--inativo" aria-disabled="true">
+                <svg width="19" height="19" aria-hidden="true"><use href="#icon-leaf"/></svg>
+                Doações
+                <span class="menu-lateral__em-breve">em breve</span>
             </span>
+
+            <a href="{% url 'notificacoes' %}"
+               class="menu-lateral__item{% if pagina_atual == 'notificacoes' %} menu-lateral__item--ativo{% endif %}"
+               {% if pagina_atual == 'notificacoes' %}aria-current="page"{% endif %}>
+                <svg width="19" height="19" aria-hidden="true"><use href="#icon-bell"/></svg>
+                Notificações
+            </a>
         </nav>
 
-        <div class="espacador"></div>
+        <div class="casca__rodape">
+            {% if user.perfil.papel == 'gestor' %}
+            <a href="{% url 'admin:index' %}" class="menu-lateral__item">
+                <svg width="19" height="19" aria-hidden="true"><use href="#icon-settings"/></svg>
+                Configurações
+            </a>
+            {% endif %}
 
-        <div class="card-planeta">
-            <div class="orbita">
-                <svg width="21" height="21"><use href="#icon-leaf"/></svg>
+            <form method="post" action="{% url 'sair' %}">
+                {% csrf_token %}
+                <button type="submit" class="menu-lateral__item">
+                    <svg width="19" height="19" aria-hidden="true"><use href="#icon-arrow"/></svg>
+                    Sair
+                </button>
+            </form>
+
+            <div class="cartao-mercado">
+                <span class="casca__avatar" aria-hidden="true">{{ user.first_name|default:user.username|slice:":2"|upper }}</span>
+                <span>
+                    <strong class="cartao-mercado__nome">{{ user.perfil.mercado.nome|default:"Sem mercado" }}</strong>
+                    <span class="cartao-mercado__papel">{{ user.perfil.get_papel_display|default:"Sem perfil" }} · {{ user.first_name|default:user.username }}</span>
+                </span>
             </div>
-            <strong>Escolhas melhores,<br>uma prateleira por vez.</strong>
-            <span>O impacto deste mês está crescendo</span>
-        </div>
-
-       {% if user.perfil.papel == 'gestor' %}
-    <a href="{% url 'admin:index' %}" class="item-nav">
-        <svg width="19" height="19"><use href="#icon-settings"/></svg>
-        <span>Configurações</span>
-    </a>
-{% endif %}
-
-        <form method="post" action="{% url 'sair' %}">
-            {% csrf_token %}
-            <button type="submit" class="item-nav">
-            <svg width="19" height="19"><use href="#icon-arrow"/></svg>
-            <span>Sair</span>
-            </button>
-        </form>
-
-        <div class="perfil-loja">
-
-            {% comment %} Isso é pra o avatar ser as iniciais do usuário {% endcomment %}
-            <div class="avatar">{{ user.first_name|default:user.username|slice:":2"|upper }}</div>
-            <div>
-                <strong>Sustainable Market</strong>
-                {% comment %} Mostra se o perfil eh de funcionário ou gestor {% endcomment %}
-                <span>{{ user.perfil.get_papel_display|default:"Sem perfil" }}</span>
-            </div>
-            <svg width="17" height="17"><use href="#icon-more"/></svg>
         </div>
     </aside>
 
-    {% comment %} História implementar notificação {% endcomment %}
-    <main class="shell-principal">
-        <header class="barra-topo">
-            <div>
-                <span class="caminho">Sustainable Market /</span>
-                <strong>{% block titulo_pagina %}{% endblock %}</strong>
-            </div>
+    <div class="casca__principal">
+        <header class="casca__topo">
+            <a href="{% url 'home' %}" class="casca__marca-mobile" aria-label="Perene, página inicial">
+                <img src="{% static 'images/marca/imagotipo.svg' %}" alt="Perene">
+            </a>
 
-            {% comment %} linkar aqui: {% endcomment %}
-            <div class="acoes-topo">
+            <div class="casca__acoes">
                 {% include "notificacao.html" %}
-                <div class="chip-data">
-                    <span>{% now "D, d M" %}</span>
-                </div>
-
-                {% comment %} Isso é pra o avatar ser as iniciais do usuário {% endcomment %}
-                <div class="avatar">{{ user.first_name|default:user.username|slice:":2"|upper }}</div>
+                <span class="casca__avatar" title="{{ user.first_name|default:user.username }}">{{ user.first_name|default:user.username|slice:":2"|upper }}</span>
             </div>
         </header>
- {% if messages %}
-            <div class="mensagens">
-                {% for mensagem in messages %}
-                    <p class="mensagem mensagem-{{ mensagem.tags }}">{{ mensagem }}</p>
-                {% endfor %}
-            </div>
+
+        {% if messages %}
+        <div class="casca__mensagens">
+            {% for mensagem in messages %}
+            <p class="aviso{% if mensagem.tags == 'error' %} aviso--erro{% elif mensagem.tags == 'success' %} aviso--sucesso{% endif %}" role="status">{{ mensagem }}</p>
+            {% endfor %}
+        </div>
         {% endif %}
-        {% block conteudo %}{% endblock %}
-    </main>
+
+        <main class="casca__conteudo">
+            {% block conteudo %}{% endblock %}
+        </main>
+    </div>
+
+    <nav class="menu-inferior" aria-label="Navegação principal no celular">
+        <a href="{% url 'visao_geral' %}"
+           class="menu-inferior__item{% if pagina_atual == 'visao_geral' %} menu-inferior__item--ativo{% endif %}">
+            <svg width="20" height="20" aria-hidden="true"><use href="#icon-home"/></svg>
+            Início
+        </a>
+
+        <a href="{% url 'lista_produtos' %}"
+           class="menu-inferior__item{% if pagina_atual == 'inventario' %} menu-inferior__item--ativo{% endif %}">
+            <svg width="20" height="20" aria-hidden="true"><use href="#icon-box"/></svg>
+            Estoque
+        </a>
+
+        {% if user.perfil.papel == 'gestor' %}
+        <a href="{% url 'funcionarios' %}"
+           class="menu-inferior__item{% if pagina_atual == 'equipe' %} menu-inferior__item--ativo{% endif %}">
+            <svg width="20" height="20" aria-hidden="true"><use href="#icon-users"/></svg>
+            Equipe
+        </a>
+        {% endif %}
+
+        <a href="{% url 'notificacoes' %}"
+           class="menu-inferior__item{% if pagina_atual == 'notificacoes' %} menu-inferior__item--ativo{% endif %}">
+            <svg width="20" height="20" aria-hidden="true"><use href="#icon-bell"/></svg>
+            Avisos
+        </a>
+
+        <form method="post" action="{% url 'sair' %}" class="menu-inferior__form">
+            {% csrf_token %}
+            <button type="submit" class="menu-inferior__item menu-inferior__botao">
+                <svg width="20" height="20" aria-hidden="true"><use href="#icon-arrow"/></svg>
+                Sair
+            </button>
+        </form>
+    </nav>
 
 </div>
 
+<script src="{% static 'js/notificacoes.js' %}"></script>
 {% block scripts %}{% endblock %}
 </body>
 </html>

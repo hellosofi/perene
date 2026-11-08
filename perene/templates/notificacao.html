@@ -1,49 +1,36 @@
-<details class="ancora-notificacao">
-    <summary class="botao-icone" aria-label="Notificações">
-        <svg width="19" height="19"><use href="#icon-bell"/></svg>
-        {% if notificacoes_novas %}
-            <span class="ponto-notificacao"></span>
-        {% endif %}
+{% comment %} O sino do topo (base.html). Estilo em componentes/notificacoes.css. {% endcomment %}
+<details class="notificacoes">
+    <summary class="notificacoes__botao" aria-label="Notificações{% if notificacoes_novas %}: {{ notificacoes_novas }} nova{{ notificacoes_novas|pluralize }}{% endif %}">
+        <svg width="19" height="19" aria-hidden="true"><use href="#icon-bell"/></svg>
+        {% if notificacoes_novas %}<span class="notificacoes__ponto"></span>{% endif %}
     </summary>
 
-    <section class="painel-notificacoes" aria-label="Notificações">
-        <div class="cabecalho-notificacoes">
-            <div>
-                <span>Atualizações</span>
-                <strong>Notificações</strong>
-            </div>
-            <small>{{ notificacoes_novas }} nova{{ notificacoes_novas|pluralize }}</small>
+    <section class="notificacoes__painel" aria-label="Notificações">
+        <div class="notificacoes__cabecalho">
+            <strong class="notificacoes__titulo">Notificações</strong>
+            <span class="notificacoes__novas">{{ notificacoes_novas }} nova{{ notificacoes_novas|pluralize }}</span>
         </div>
 
-        <div class="lista-notificacoes">
+        <div class="notificacoes__lista">
             {% for n in notificacoes %}
-                <article class="item-notificacao">
-                    <span class="icone-notificacao">
-                        <svg width="17" height="17">
-                            {% if n.categoria == 'estoque' %}
-                                <use href="#icon-box"/>
-                            {% elif n.categoria == 'equipe' %}
-                                <use href="#icon-users"/>
-                            {% else %}
-                                <use href="#icon-bell"/>
-                            {% endif %}
-                        </svg>
-                    </span>
-                    <div>
-                        <strong>{{ n.titulo }}</strong>
-                        <p>{{ n.mensagem }}</p>
-                    </div>
-                </article>
+            <article class="notificacao">
+                <span class="notificacao__icone" aria-hidden="true">
+                    <svg width="16" height="16">
+                        {% if n.categoria == 'estoque' %}<use href="#icon-box"/>
+                        {% elif n.categoria == 'equipe' %}<use href="#icon-users"/>
+                        {% else %}<use href="#icon-bell"/>{% endif %}
+                    </svg>
+                </span>
+                <div>
+                    <strong class="notificacao__titulo">{{ n.titulo }}</strong>
+                    <p class="notificacao__texto">{{ n.mensagem }}</p>
+                </div>
+            </article>
             {% empty %}
-                <p class="notificacoes-vazio">Nenhuma notificação por aqui.</p>
+            <p class="notificacoes__vazio">Nenhuma notificação por aqui.</p>
             {% endfor %}
         </div>
 
-        {% if user.is_staff %}
-            <button type="button" class="criar-notificacao">
-                <svg width="16" height="16"><use href="#icon-plus"/></svg>
-                Emitir nova notificação
-            </button>
-        {% endif %}
+        <a href="{% url 'notificacoes' %}" class="botao botao--contorno">Ver todas{% if user.perfil.papel == 'gestor' %} e enviar comunicado{% endif %}</a>
     </section>
 </details>

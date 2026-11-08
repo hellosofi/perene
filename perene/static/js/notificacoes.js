@@ -1,6 +1,7 @@
+// Fecha o painel de notificações ao clicar fora dele.
 document.addEventListener('click', (evento) => {
-    const ancora = document.querySelector('.ancora-notificacao');
-    if (ancora && ancora.open && !ancora.contains(evento.target)) {
-        ancora.open = false;
+    const painel = document.querySelector('.notificacoes');
+    if (painel && painel.open && !painel.contains(evento.target)) {
+        painel.open = false;
     }
 });

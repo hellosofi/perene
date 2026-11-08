@@ -1,0 +1,39 @@
+/*
+ * Barra de progresso: o elemento <progress> do HTML, estilizado.
+ * Assim a largura vem do value/max, sem style="" no template.
+ *   .progresso                         a barra (ciano escuro sobre creme)
+ *   .indicador--destaque .progresso    amarela, sobre o cartão ciano
+ */
+
+.progresso {
+    width: 100%;
+    height: var(--altura-progresso);
+    border: none;
+    border-radius: var(--raio-pilula);
+    background: var(--cor-progresso-fundo);
+    overflow: hidden;
+    appearance: none;
+}
+
+.progresso::-webkit-progress-bar {
+    background: var(--cor-progresso-fundo);
+}
+
+.progresso::-webkit-progress-value {
+    border-radius: var(--raio-pilula);
+    background: var(--cor-progresso);
+}
+
+.progresso::-moz-progress-bar {
+    border-radius: var(--raio-pilula);
+    background: var(--cor-progresso);
+}
+
+.indicador--destaque .progresso::-webkit-progress-value {
+    background: var(--cor-aviso-borda);
+}
+
+.indicador--destaque .progresso::-moz-progress-bar {
+    background: var(--cor-aviso-borda);
+}
+

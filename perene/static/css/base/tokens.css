@@ -27,6 +27,7 @@
     --borda: #E9DDBE;
     --sucesso: #2E9B6A;
     --erro: #D2493A;
+    --placeholder-texto: #6F6B63;
 
     --ok-fundo: #DDF1E6;
     --ok-texto: #1D6B47;
@@ -43,13 +44,16 @@
     --cor-superficie-suave: var(--creme);
     --cor-texto: var(--marinho);
     --cor-texto-suave: var(--marinho-suave);
+    --cor-texto-desativado: var(--placeholder-texto);
     --cor-texto-invertido: var(--branco-puro);
     --cor-linha: var(--linha);
 
     --cor-marca: var(--ciano);
+    --cor-marca-suave: var(--ciano-claro);
     --cor-primaria: var(--ciano-escuro);
     --cor-primaria-hover: var(--marinho);
     --cor-destaque: var(--laranja);
+    --cor-destaque-hover: var(--laranja-escuro);
     --cor-foco: var(--ciano-escuro);
     --cor-foco-anel: rgb(15 124 128 / 0.18);
 
@@ -71,6 +75,17 @@
     --situacao-critico-fundo: var(--critico-fundo);
     --situacao-critico-texto: var(--critico-texto);
 
+    --quadro-critico: var(--laranja-claro);
+    --quadro-atencao: var(--amarelo-claro);
+    --quadro-ok: var(--ciano-claro);
+    --cor-selecionado: var(--marinho);
+    --cor-cartao-escuro: var(--marinho);
+    --cor-realce-escuro: var(--amarelo);
+    --cor-linha-escura: rgb(255 255 255 / 0.12);
+    --cor-progresso: var(--ciano-escuro);
+    --cor-progresso-fundo: var(--creme-escuro);
+    --cor-concluido: var(--ciano-escuro);
+
     /* ---------------------------------------------------------------
      * Tipografia
      * ------------------------------------------------------------- */
@@ -90,6 +105,7 @@
 
     --altura-linha: 1.45;
     --altura-linha-titulo: 1.05;
+    --espacamento-rotulo: 0.08em;
 
     /* ---------------------------------------------------------------
      * Espaçamentos (base 4)
@@ -123,6 +139,7 @@
      * Tamanhos de componentes
      * ------------------------------------------------------------- */
     --altura-campo: 48px;
+    --tamanho-icone: 18px;
     --altura-texto-longo: 96px;
     --altura-botao: 52px;
     --altura-seletor: 44px;
@@ -131,11 +148,18 @@
     --largura-formulario-largo: 576px;
     --largura-cartao-formulario: 712px;
     --largura-modal: 640px;
+    --largura-menu-lateral: 256px;
+    --largura-medidor: 320px;
+    --largura-logo-menu: 116px;
+    --altura-menu-inferior: 64px;
     --largura-cartao-app: 1280px;
     --altura-cartao-app: 780px;
     --largura-imagotipo: 68px;
     --largura-logo: 214px;
     --espessura-barra: 5px;
+    --altura-progresso: 8px;
+    --tamanho-marcador: 24px;
+    --largura-coluna-equipe: 300px;
 
     /* ---------------------------------------------------------------
      * Movimento
@@ -144,5 +168,6 @@
 
     /* Camadas e fundos de sobreposição */
     --camada-modal: 100;
+    --camada-menu: 50;
     --cor-fundo-modal: rgb(45 54 78 / 0.45);
 }
