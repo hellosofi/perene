@@ -162,7 +162,7 @@ Correções pequenas e focadas são melhores que mudanças grandes misturando v�
 
 ## Como sugerir uma melhoria
 
-Abra uma issue com o modelo abaixo. Se a ideia nasceu de uma história de usuário, cite qual (veja [historias.md](entregas/entrega-03/historias.md)).
+Abra uma issue com o modelo abaixo. Se a ideia nasceu de uma história de usuário, cite qual (veja [historias.md](https://github.com/hellosofi/perene/blob/main/entregas/entrega-03/historias.md).
 
 ```markdown
 **Qual problema isso resolve**
