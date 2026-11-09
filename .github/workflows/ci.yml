@@ -1,0 +1,59 @@
+# Pipeline de CI/CD do Perene.
+# A cada mudança na main: faz o build, roda os testes e, se tudo passar, publica no Render.
+
+name: CI/CD
+
+# QUANDO a pipeline roda
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch: # permite rodar pelo botão "Run workflow" na aba Actions
+
+jobs:
+  build-e-testes:
+    name: Build e testes
+    runs-on: ubuntu-latest # computador temporário do GitHub; já vem com o Chrome
+
+    # Substituem o .env, que não vai para o Git. São valores só de teste.
+    env:
+      SECRET_KEY: chave-usada-apenas-na-pipeline
+      ENVIRONMENT: development # usa SQLite, sem precisar de banco online
+      GESTOR_CODIGO_CONVITE: codigo-da-pipeline
+      SELENIUM_HEADLESS: 1 # roda o Chrome sem abrir janela
+
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v5
+
+      - name: Instalar o Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.14"
+          cache: pip
+
+      - name: Build (mesmo script usado no Render)
+        run: bash build.sh
+
+      - name: Verificar a configuração do Django
+        run: python manage.py check
+
+      - name: Testes de unidade e integração
+        run: python manage.py test --exclude-tag=selenium
+
+      - name: Testes de sistema (Selenium)
+        if: success() || failure() # roda mesmo que os testes acima falhem
+        run: python manage.py test --tag=selenium
+
+  deploy:
+    name: Deploy no Render
+    needs: build-e-testes # só roda se o job acima passar por inteiro
+    if: github.ref == 'refs/heads/main' # pull requests testam, mas não publicam
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Acionar o deploy
+        env:
+          RENDER_DEPLOY_HOOK_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        run: curl --fail --silent --show-error -X POST "$RENDER_DEPLOY_HOOK_URL"
