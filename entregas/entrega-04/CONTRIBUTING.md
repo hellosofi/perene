@@ -32,7 +32,7 @@ Links úteis:
 | Código-fonte | <https://github.com/hellosofi/perene> |
 | Site publicado | <https://perene.onrender.com> |
 | Backlog e sprints (Jira) | <https://grupo-perene.atlassian.net> |
-| Descrição do projeto e instalação | [README.md](README.md) |
+| Descrição do projeto e instalação | [README.md](https://github.com/hellosofi/perene#fundamentos-de-desenvolvimento-de-software) |
 | Documento de análise (Entrega 01) | [documento-analise.md](entregas/entrega-01/documento-analise.md) |
 | Histórias de usuário (Entrega 03) | [historias.md](entregas/entrega-03/historias.md) |
 | Guia dos testes | [TESTES.md](TESTES.md) |
@@ -41,7 +41,7 @@ Se você quer pegar uma tarefa, olhe o backlog no Jira ou as [issues abertas](ht
 
 ## Como configurar o ambiente
 
-O passo a passo completo está no [README](README.md). Em resumo, na pasta do projeto (onde fica o `manage.py`):
+O passo a passo completo está no [README]([README.md](https://github.com/hellosofi/perene#fundamentos-de-desenvolvimento-de-software). Em resumo, na pasta do projeto (onde fica o `manage.py`):
 
 ```bash
 git clone https://github.com/hellosofi/perene.git
