@@ -41,7 +41,7 @@ Se você quer pegar uma tarefa, olhe o backlog no Jira ou as [issues abertas](ht
 
 ## Como configurar o ambiente
 
-O passo a passo completo está no [README]([README.md](https://github.com/hellosofi/perene#fundamentos-de-desenvolvimento-de-software). Em resumo, na pasta do projeto (onde fica o `manage.py`):
+O passo a passo completo está no [README](https://github.com/hellosofi/perene#fundamentos-de-desenvolvimento-de-software). Em resumo, na pasta do projeto (onde fica o `manage.py`):
 
 ```bash
 git clone https://github.com/hellosofi/perene.git
