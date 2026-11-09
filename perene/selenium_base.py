@@ -102,7 +102,7 @@ class BaseTestCase(StaticLiveServerTestCase):
         self.preencher('id_usuario', email)
         self.preencher('id_senha', SENHA)
         self.enviar('form.auth-formulario__conteudo')
-        self.esperar_url('/estoque/')
+        self.esperar_url('/visao-geral/')
 
     def entrar_como_funcionario(self, email):
         self.abrir('login_funcionario')
