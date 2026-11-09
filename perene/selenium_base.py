@@ -5,8 +5,10 @@ Mantém o BaseTestCase do modelo da disciplina e acrescenta métodos de apoio
 tests_selenium.py de cada app herdam desta classe.
 
 Para rodar sem abrir a janela do Chrome:  SELENIUM_HEADLESS=1
+Para ver o navegador mais devagar:         SELENIUM_PAUSA=1   (segundos entre os passos)
 """
 import os
+import time
 
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.test import override_settings
@@ -20,6 +22,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
 
 from perene.fabricas import HASH_RAPIDO, SENHA
+
+PAUSA = float(os.environ.get('SELENIUM_PAUSA', '0'))
 
 
 @override_settings(PASSWORD_HASHERS=HASH_RAPIDO)
@@ -60,19 +64,25 @@ class BaseTestCase(StaticLiveServerTestCase):
         # cada teste começa sem sessão aberta no navegador
         self.driver.delete_all_cookies()
 
-
     # Métodos de apoio
+   
 
+    def pausa(self):
+        """Espera um pouco entre os passos (só se SELENIUM_PAUSA estiver definida)."""
+        time.sleep(PAUSA)
 
     def abrir(self, nome_da_rota, *args):
+        self.pausa()
         self.driver.get(self.live_server_url + reverse(nome_da_rota, args=args))
 
     def preencher(self, id_do_campo, valor):
         campo = self.wait.until(EC.visibility_of_element_located((By.ID, id_do_campo)))
+        self.pausa()
         campo.clear()
         campo.send_keys(valor)
 
     def clicar(self, seletor_css):
+        self.pausa()
         self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, seletor_css))).click()
 
     def enviar(self, seletor_do_formulario):
