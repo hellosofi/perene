@@ -190,12 +190,7 @@ Explicação do código inicial (W.I.P): [Youtube](https://youtu.be/7_4VonwUPlg?
 
 Explicação do código Django: [Youtube](https://www.youtube.com/watch?v=sAK3rgWsdeo)
 <br/>
-
-
 Demonstração das Histórias de Usuário: [Youtube](https://www.youtube.com/watch?v=W3mO9d5cqSs)
-<br/>
-
-
 
 Bug Tracker:
 <br/>
@@ -211,14 +206,16 @@ Bug Tracker:
 
 <a href="entregas/entrega-04/TESTES.md"><img src="https://img.shields.io/badge/TESTES-A?style=for-the-badge&logo=readme&logoColor=darkseagreen&labelColor=33473B&color=darkseagreen"></a>
 
+</div>
+
 ![Quadro da Sprint 04 - Jira](entregas/entrega-04/media/Sprint04.png)
 
 Demonstração dos testes funcionando: [Youtube](https://youtu.be/4_ZjcAPhYnU)
-
+<br/>
 Explicação do código de testes: [Youtube](https://youtu.be/25dNDACrEQI)
-
-</div>
+<br/>
 Explicação das novas Histórias de Usuário no Django: [Youtube](https://www.youtube.com/watch?v=PFTf4dLnlbo)
+
 
 ## ୭ 🧾 ​Como contribuir
 
