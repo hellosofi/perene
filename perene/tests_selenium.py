@@ -15,6 +15,7 @@ from perene.selenium_base import BaseTestCase
 from unittest import mock
 from datetime import datetime, timezone as dt_timezone
 from zoneinfo import ZoneInfo
+from selenium.webdriver.support import expected_conditions as EC
 
 CODIGO_GESTOR = 'codigo-selenium'
 FORMULARIO = 'form.auth-formulario__conteudo'
@@ -80,6 +81,6 @@ class FluxoDeAcessoSeleniumTests(BaseTestCase):
         criar_gestor(criar_mercado(), email='chefe@mercado.com')
         self.entrar_como_gestor('chefe@mercado.com')
         self.clicar("form[action$='/perene/sair/'] button")
-        self.esperar_url('/perene/')
+        self.wait.until(EC.url_to_be(self.live_server_url + '/perene/'))
         self.abrir('lista_produtos')
-        self.esperar_url('next=')
+        self.esperar_url('?next=/estoque/')
