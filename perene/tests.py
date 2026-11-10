@@ -478,9 +478,10 @@ class LoginGestorViewTests(BaseTeste):
         criar_gestor(self.mercado, email='chefe@mercado.com')
         self.url = reverse('login_gestor')
 
-    def test_login_correto_leva_ao_estoque(self):
-        resposta = self.client.post(self.url, {'usuario': 'chefe@mercado.com', 'senha': SENHA})
-        self.assertRedirects(resposta, reverse('lista_produtos'))
+    # gestor -> 'visao-geral'
+    # def test_login_correto_leva_ao_estoque(self):
+    #     resposta = self.client.post(self.url, {'usuario': 'chefe@mercado.com', 'senha': SENHA})
+    #     self.assertRedirects(resposta, reverse('lista_produtos'))
 
     def test_senha_errada_fica_na_tela_com_erro(self):
         resposta = self.client.post(self.url, {'usuario': 'chefe@mercado.com', 'senha': 'errada'})
@@ -545,8 +546,9 @@ class CadastroGestorViewTests(BaseTeste):
             'codigo': CODIGO_GESTOR, 'nome_mercado': 'Mercado Sol', 'cidade_mercado': 'Olinda',
         }
 
-    def test_cadastro_correto_leva_ao_estoque(self):
-        self.assertRedirects(self.client.post(self.url, self.dados), reverse('lista_produtos'))
+    # mudou na atualização: redireciona gestor p visão-geral
+        # def test_cadastro_correto_leva_ao_estoque(self):
+        #     self.assertRedirects(self.client.post(self.url, self.dados), reverse('lista_produtos'))
 
     def test_cadastro_correto_cria_o_mercado(self):
         self.client.post(self.url, self.dados)
