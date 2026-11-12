@@ -217,7 +217,8 @@ Demonstração dos testes funcionando: [Youtube](https://youtu.be/4_ZjcAPhYnU)
 Explicação do código de testes: [Youtube](https://youtu.be/25dNDACrEQI)
 <br/>
 Explicação das novas Histórias de Usuário no Django: [Youtube](https://www.youtube.com/watch?v=PFTf4dLnlbo)
-
+<br/>
+Demonstração das novas Histórias de Usuário no site: [Youtube](https://www.youtube.com/watch?v=H2Ux8ta9yok)
 
 ## ୭ 🧾 ​Como contribuir
 
