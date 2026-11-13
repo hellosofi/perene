@@ -268,5 +268,5 @@ Os e-mails de contato estão no [README](https://github.com/hellosofi/perene#col
 
 - **Dúvida sobre o código ou o projeto:** abra uma [issue](https://github.com/hellosofi/perene/issues) com a etiqueta de dúvida ou pergunte no grupo da equipe.
 - **Dúvida sobre as tarefas e o backlog:** [Jira do grupo](https://grupo-perene.atlassian.net).
-- **Entender o código:** veja os vídeos de explicação linkados na seção Entregas do [README](README.md).
+- **Entender o código:** veja os vídeos de explicação linkados na seção Entregas do [README](https://github.com/hellosofi/perene/tree/main#-entrega-04).
 - **Algo não funcionou na instalação:** mande a mensagem de erro completa na issue ou no grupo, que a gente ajuda.
