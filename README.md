@@ -214,7 +214,7 @@ Bug Tracker:
 
 Demonstração dos testes funcionando: [Youtube](https://youtu.be/4_ZjcAPhYnU)
 <br/>
-Explicação do código de testes: [Youtube](https://youtu.be/25dNDACrEQI)
+Explicação do código de testes: [Youtube](https://youtu.be/_dZU2IAFj5c)
 <br/>
 Explicação das novas Histórias de Usuário no Django: [Youtube](https://www.youtube.com/watch?v=PFTf4dLnlbo)
 <br/>
