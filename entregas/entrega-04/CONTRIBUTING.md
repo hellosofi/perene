@@ -254,7 +254,7 @@ Comportamentos desrespeitosos podem levar à remoção de comentários, issues o
 
 ## Reconhecimento
 
-Toda contribuição conta, de uma vírgula corrigida a uma funcionalidade nova. Quem contribui aparece na seção "Nossa equipe" do [README](README.md) e no histórico do GitHub. Se você enviou uma contribuição e não foi citada, é só avisar.
+Toda contribuição conta, de uma vírgula corrigida a uma funcionalidade nova. Quem contribui aparece na seção "Nossa equipe" do [README](https://github.com/hellosofi/perene#colordarkseagreennossa-space-equipe-space-) e no histórico do GitHub.
 
 ## Quem mantém o projeto
 
