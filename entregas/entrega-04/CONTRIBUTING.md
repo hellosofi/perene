@@ -240,7 +240,7 @@ atualiza README com o código de convite do gestor
 
 - **Nunca** coloque no commit o `.env`, o `db.sqlite3`, a pasta `venv`/`.venv` ou a pasta `staticfiles` (já estão no `.gitignore`). Confira o `git status` antes de commitar.
 - Se uma senha, chave ou `DATABASE_URL` for enviada por engano, avise o grupo na hora: ela precisa ser trocada.
-- Se achar uma falha de segurança, **não abra issue pública**. Avise um mantenedor diretamente (contatos na seção "Nossa equipe" do [README](README.md)).
+- Se achar uma falha de segurança, **não abra issue pública**. Avise um mantenedor diretamente (contatos na seção "Nossa equipe" do [README](https://github.com/hellosofi/perene#colordarkseagreennossa-space-equipe-space-).
 
 ## Código de conduta
 
@@ -262,7 +262,7 @@ O Perene é feito por estudantes da CESAR School, na disciplina de Fundamentos d
 
 João Gustavo Vieira Fernandes Pedrosa, Kauã Cardoso de Melo, Lunna de Aguiar Mendonça Morelato Moreno, Matheus Pinheiro Laurentino, Nara de Melo Santos, Sofia Carolina Santos Bezerra, Sabrina Rayanne, Nadla Gabriele, Maria Clara, Beatriz Aciolli e Guilherme Lôbo.
 
-Os e-mails de contato estão no [README](README.md).
+Os e-mails de contato estão no [README](https://github.com/hellosofi/perene#colordarkseagreennossa-space-equipe-space-).
 
 ## Onde pedir ajuda
 
