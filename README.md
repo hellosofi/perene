@@ -212,8 +212,7 @@ Bug Tracker:
 
 ![Quadro da Sprint 04 - Jira](entregas/entrega-04/media/Sprint04.png)
 
-Demonstração dos testes funcionando: [Youtube](https://youtu.be/4_ZjcAPhYnU) (desatualizado)
-<br/>
+
 Explicação do código de testes: [Youtube](https://youtu.be/_dZU2IAFj5c) (com demonstração atualizada)
 <br/>
 Explicação das novas Histórias de Usuário no Django: [Youtube](https://www.youtube.com/watch?v=PFTf4dLnlbo)
